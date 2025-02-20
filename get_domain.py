@@ -53,6 +53,7 @@ def get_domain(config):
         end=end,
         dataset=forcing_ds,
         write_dir=forcing_dir,
+        dataset_version="1.0"
     )
     os.chdir(static_write_dir)
     file_name = "pf_indicator.pfb"
