@@ -1,11 +1,13 @@
 import numpy as np
 import os
 from parflow import Run
+
 from parflow.tools.io import read_pfb, read_clm
 from parflow.tools.fs import mkdir
 from parflow.tools.settings import set_working_directory
 import subsettools as st
 import hf_hydrodata as hf
+
 # import config
 
 def get_domain(config):
@@ -59,9 +61,6 @@ def get_domain(config):
     data = read_pfb(file_name)[7] 
     print(data.shape)
 
-    plt.imshow(data, cmap="Reds", origin="lower")
-    plt.colorbar()
-    plt.title(file_name, fontsize = 14)
     runscript_path = st.edit_runscript_for_subset(
         ij_bounds,
         runscript_path=reference_run,
@@ -84,18 +83,27 @@ def get_domain(config):
         dist_clim_forcing=True,
     )
     set_working_directory(f"{pf_out_dir}")
+    
+
     print(pf_out_dir)
 
     # load the specified run script
     run = Run.from_definition(runscript_path)
+    run.TimingInfo.StopTime = 8760
+    run.TimingInfo.DumpInterval = 24
+    run.Solver.CLM.MetFileName = "CW3E"
+    os.remove(runscript_path)
+    runscript_path = runscript_path.replace(".yaml", "")
+    
+    # run.name = runname.replace(".yaml", "")
+    run.write(runscript_path, file_format='yaml')
+    print(runscript_path)
+
     print(f"Loaded run with runname: {run.get_name()}")
 
     # The following line is setting the run just for 10 hours for testing purposes
-    run.TimingInfo.StopTime = 8760*2-1
-    run.TimingInfo.DumpInterval = 24
+   
+    # run.run()
 
-    # The following line updates the root name of your climate forcing. You can comment it out if using NLDAS datasets. 
-    run.Solver.CLM.MetFileName = 'CW3E'
-    run.write(file_format="yaml")
-    run.run(working_directory=pf_out_dir)
+
 
