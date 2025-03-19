@@ -7,7 +7,7 @@ import os
 
 
 '''rate should be in m^3/day and at the grid cell level'''
-def add_pumping(run, pumping_rate, run_dir, pumping_fraction=1.,irrigation=False):
+def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,irrigation=False):
     data_accessor = run.data_accessor
     shutil.copyfile(f"{run_dir}/mask.pfb", f"{run_dir}/{run.get_name()}.out.mask.pfb")
     domain_mask = np.where(data_accessor.mask > 0, 1, 0)
@@ -35,7 +35,8 @@ def add_pumping(run, pumping_rate, run_dir, pumping_fraction=1.,irrigation=False
         fluxes[4,:,:] = -.7/dz[4]
 
     fluxes = fluxes * irrigation_mask
-    fluxes = fluxes * pumping_rate * pumping_fraction
+    pumped_area_fraction = calculate_pumped_area_fraction(run_dir)
+    fluxes = fluxes * pumping_rate * pumping_rate_fraction/pumped_area_fraction
     # print(wells[5,20:30,20:30])
     pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
     pf.write_pfb(f"{run_dir}/fluxes_off.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
@@ -52,4 +53,20 @@ def add_pumping(run, pumping_rate, run_dir, pumping_fraction=1.,irrigation=False
     run.Solver.EvapTransFileTransient = True
     run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes.pfb"
     run.write("run", file_format="yaml")
+    return run
     # run.run(working_directory=run_dir)
+
+def calculate_pumped_area_fraction(run_dir):
+    domain_mask = pf.read_pfb(f'{run_dir}/mask.pfb')
+    landcover_type = pd.read_csv(f"{run_dir}/drv_vegm.dat", sep=' ', skiprows=1)
+    landcover_type.rename(columns={'Unnamed: 0': 'x', 'Unnamed: 1': 'y',}, inplace=True)
+    landcover_type["is_cropland"] = landcover_type["12"]+landcover_type["14"]
+    irrigation_mask = np.zeros(domain_mask.shape)
+    for _, row in landcover_type.iterrows():
+        if row["is_cropland"] > 0:
+            irrigation_mask[0, int(row["y"])-1, int(row["x"])-1] = 1
+    irrigation_mask = irrigation_mask * domain_mask
+    pumped_area = irrigation_mask.sum()
+    total_area = domain_mask[0].sum()
+    pumped_area_fraction = pumped_area/total_area
+    return pumped_area_fraction
