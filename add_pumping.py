@@ -28,7 +28,7 @@ def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,irrigation=
     # generate a random number between 0 and 2
     #to add wells ~30 meters down we need to add them to the third from the bottom layer
     if irrigation:
-        fluxes[9,:,:] = .3/dz[9]
+        # fluxes[9,:,:] = .3/dz[9]
         fluxes[4,:,:] = -1/dz[4]
     else:
         # if we don't do irrigation estimate the effective pumping rate as 70% of the total
@@ -36,7 +36,10 @@ def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,irrigation=
 
     fluxes = fluxes * irrigation_mask
     pumped_area_fraction = calculate_pumped_area_fraction(run_dir, cropland_index)
-    fluxes = fluxes * pumping_rate * pumping_rate_fraction/pumped_area_fraction
+    actual_pumping_rate = pumping_rate * pumped_area_fraction / pumped_area_fraction
+    fluxes = fluxes * pumping_rate * actual_pumping_rate
+    if irrigation:
+        run = add_irrigation(run, actual_pumping_rate)
     # print(wells[5,20:30,20:30])
     pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
     pf.write_pfb(f"{run_dir}/fluxes_off.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
@@ -51,7 +54,7 @@ def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,irrigation=
             os.symlink(f"{run_dir}/fluxes_on.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
         else:
             os.symlink(f"{run_dir}/fluxes_off.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
-            os.symlink(f"{run_dir}/fluxes_on.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
+            os.symlink(f"{run_dir}/fluxes_off.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
     run.Solver.EvapTransFileTransient = True
     run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes"
     run.write("run", file_format="yaml")
@@ -75,3 +78,19 @@ def calculate_pumped_area_fraction(run_dir, cropland_index):
     print(f"pumped area: {pumped_area}")
     print(f"pumped area fraction: {pumped_area_fraction}")
     return pumped_area_fraction
+
+def add_irrigation(run, pumping_rate):
+    # convert pumping rate from m^3/day to mm/s, grid cells are 1000m x 1000m
+    # go from m/h to mm/s  = 1/1000/3600
+    MM_PER_M = 1000.0
+    SECONDS_PER_HOUR = 3600.0
+    RETURN_FLOW_FRACTION = 0.3
+    FRACTION_OF_DAY_IRRIGATING = 0.5
+    CONVERSION_FACTOR = SECONDS_PER_HOUR/MM_PER_M*RETURN_FLOW_FRACTION/FRACTION_OF_DAY_IRRIGATING
+    irrigation_rate = pumping_rate*CONVERSION_FACTOR
+    run.Solver.CLM.IrrigationTypes = "Drip"
+    run.Solver.CLM.IrrigationCycle = "Constant"
+    run.Solver.CLM.IrrigationRate = irrigation_rate
+    run.Solver.CLM.IrrigationStart = 800
+    run.Solver.CLM.IrrigationStop = 2000
+    return run
