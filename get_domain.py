@@ -16,6 +16,7 @@ def get_domain(config):
     start_year = config.CURRENT_START_YEAR
     end_year = config.CURRENT_END_YEAR
     runname = f"{config.CURRENT_RUN_NAME}_{start_year}_to_{end_year}"
+    print(runname)
 
     # provide a way to create a subset from the conus domain (huc, lat/lon bbox currently supported)
     hucs = [config.CURRENT_HUC_ID]
