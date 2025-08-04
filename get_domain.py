@@ -15,7 +15,7 @@ def get_domain(config):
     hf.register_api_pin("benjaminwest@arizona.edu", "7343")
     start_year = config.CURRENT_START_YEAR
     end_year = config.CURRENT_END_YEAR
-    runname = f"{config.CURRENT_RUN_NAME}_{start_year}_to_{end_year}"
+    runname = f"{config.DOMAIN_NAME}"
     print(runname)
 
     # provide a way to create a subset from the conus domain (huc, lat/lon bbox currently supported)

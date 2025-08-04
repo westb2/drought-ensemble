@@ -1,17 +1,19 @@
 
 DRY_YEAR = 2006
 AVERAGE_YEAR = 2007
-CURRENT_START_YEAR = DRY_YEAR
+CURRENT_START_YEAR = AVERAGE_YEAR
 
 CURRENT_REFERENCE_GAGE = '07030500'
 CURRENT_HUC_ID = '08010210'
 CURRENT_END_YEAR = CURRENT_START_YEAR + 1
 CURRENT_START_DATE = f"{CURRENT_START_YEAR}-10-01"
 CURRENT_END_DATE = f"{CURRENT_END_YEAR}-10-01"
+# CURRENT_END_DATE = f"{CURRENT_START_YEAR}-10-02"
 CURRENT_OUTLET_YX = (32,0)
 CURRENT_RUN_NAME = "WOLF" 
 
 DOMAIN_NAME = f"WOLF_{CURRENT_START_YEAR}_to_{CURRENT_END_YEAR}"
+# DOMAIN_NAME = "WOLF_ONE_DAY"
 # This is the grid cell pumping rate if we pumped from every grid cell. 
 # Divide by the fraction of grid cells for this domain that are irrigated to 
 # get the adjusted pumping rate.

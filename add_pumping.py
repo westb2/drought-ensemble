@@ -9,7 +9,8 @@ import os
 '''rate should be in m^3/day and at the grid cell level'''
 def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,
                 irrigation=False, cropland_index="12", 
-                flux_cycling=False, pumping_layer=2, flux_time_series=False):
+                flux_cycling=False, pumping_layer=2, flux_time_series=False,
+                start_time=0, end_time=8760):
     data_accessor = run.data_accessor
     shutil.copyfile(f"{run_dir}/mask.pfb", f"{run_dir}/{run.get_name()}.out.mask.pfb")
     domain_mask = np.where(data_accessor.mask > 0, 1, 0)
@@ -45,37 +46,40 @@ def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,
         run = add_irrigation(run, actual_pumping_rate)
     # print(wells[5,20:30,20:30])
     # pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*1.0, p=config.P, q=config.Q, dist=True)
-    if not flux_cycling:
-        if flux_time_series:
-            for timestep, _ in enumerate(range(0, int(run.TimingInfo.StopTime)+2, int(run.TimeStep.Value))):
-                timestep_string = str(timestep).zfill(5)
-                pf.write_pfb(f"{run_dir}/fluxes.{timestep_string}.pfb", fluxes*1.0, p=config.P, q=config.Q, dist=True)
-            run.Solver.EvapTransFileTransient = True
-            run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes"
-        else:
-            pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*1.0, p=config.P, q=config.Q, dist=True)
-            run.Solver.EvapTransFile = True
-            run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes_on.pfb"
-    else:
-        pf.write_pfb(f"{run_dir}/fluxes_off.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
-        fluxes_are_on = True
-        pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
-        for timestep, _ in enumerate(range(0, int(run.TimingInfo.StopTime)+2, int(run.TimeStep.Value))):
-            # We apply the pumping for half the day
-            if timestep%12 == 0:
-                fluxes_are_on = not fluxes_are_on
-            timestep_string = str(timestep).zfill(5)
-            if fluxes_are_on:
-                pf.write_pfb(f"{run_dir}/fluxes.{timestep_string}.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
-                # os.symlink(f"{run_dir}/fluxes_on.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
-                # os.symlink(f"{run_dir}/fluxes_on.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
-            else:
-                pf.write_pfb(f"{run_dir}/fluxes.{timestep_string}.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
-                # os.symlink(f"{run_dir}/fluxes_off.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
-                # os.symlink(f"{run_dir}/fluxes_off.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
-        run.Solver.EvapTransFileTransient = True
-        run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes"
-    run.write("run", file_format="yaml")
+    # if not flux_cycling:
+        # if flux_time_series:
+        #     print("WHOOPS NONONONONONONON\n")
+        #     pf.write_pfb(f"{run_dir}/fluxes.pfb", fluxes*1.0, p=config.P, q=config.Q, dist=True)
+        #     for timestep, _ in enumerate(range(start_time, end_time, int(run.TimeStep.Value))):
+        #         timestep_string = str(timestep).zfill(5)
+        #         os.symlink(f"{run_dir}/fluxes.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
+        #         os.symlink(f"{run_dir}/fluxes.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
+        #     run.Solver.EvapTransFileTransient = True
+        #     run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes"
+        # else:
+    pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*1.0, p=config.P, q=config.Q, dist=True)
+    run.Solver.EvapTransFile = True
+    run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes_on.pfb"
+    # else:
+    #     pf.write_pfb(f"{run_dir}/fluxes_off.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
+    #     fluxes_are_on = True
+    #     pf.write_pfb(f"{run_dir}/fluxes_on.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
+    #     for timestep, _ in enumerate(range(0, int(run.TimingInfo.StopTime)+2, int(run.TimeStep.Value))):
+    #         # We apply the pumping for half the day
+    #         if timestep%12 == 0:
+    #             fluxes_are_on = not fluxes_are_on
+    #         timestep_string = str(timestep).zfill(5)
+    #         if fluxes_are_on:
+    #             pf.write_pfb(f"{run_dir}/fluxes.{timestep_string}.pfb", fluxes*2.0, p=config.P, q=config.Q, dist=True)
+    #             # os.symlink(f"{run_dir}/fluxes_on.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
+    #             # os.symlink(f"{run_dir}/fluxes_on.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
+    #         else:
+    #             pf.write_pfb(f"{run_dir}/fluxes.{timestep_string}.pfb", fluxes*0.0, p=config.P, q=config.Q, dist=True)
+    #             # os.symlink(f"{run_dir}/fluxes_off.pfb", f"{run_dir}/fluxes.{timestep_string}.pfb")
+    #             # os.symlink(f"{run_dir}/fluxes_off.pfb.dist", f"{run_dir}/fluxes.{timestep_string}.pfb.dist")
+    #     run.Solver.EvapTransFileTransient = True
+    #     run.Solver.EvapTrans.FileName = f"{run_dir}/fluxes"
+    run.write("run_with_pumping", file_format="yaml")
     return run
     # run.run(working_directory=run_dir)
 

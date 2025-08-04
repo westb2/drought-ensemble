@@ -13,7 +13,7 @@ def load_run(data_accessor, outlet_yx, num_timesteps=8760, read_interval=4):
     (outlet_y, outlet_x) = outlet_yx
     run_def = {}
     run_def["mask"] = np.where(data_accessor.mask > 0, 1, np.nan)
-    run_def["porosity"] = data_accessor.computed_porosity
+    # run_def["porosity"] = data_accessor.computed_porosity
     run_def["dx"] = data_accessor.dx
     run_def["dy"] = data_accessor.dy
     dz_vals = [1.0,0.5,0.25,0.125,0.05,0.025,0.005,0.003,0.0015, 0.0005]
@@ -35,9 +35,22 @@ def load_run(data_accessor, outlet_yx, num_timesteps=8760, read_interval=4):
     run_data["outlet_flow"] = np.array(load_variable(lambda x: data_accessor.overland_flow_grid()[outlet_y, outlet_x], time, data_accessor) for time in run_data.time)
     run_data["saturation"] = np.array(load_variable(lambda x: data_accessor.pressure, time, data_accessor)*run_def["mask"] for time in run_data.time)
     run_data["subsurface_storage"] = np.array(load_variable(lambda x: data_accessor.subsurface_storage, time, data_accessor)*dz for time in run_data.time)
-    run_data["surface_storage"] = np.array(load_variable(lambda x: data_accessor.surface_storage, time, data_accessor)*run_def["mask"][0]*dz_vals[9] for time in run_data.time)
+    root_zone_mask = np.zeros(run_def["mask"].shape)
+    root_zone_mask[6:,:,:] = run_def["mask"][6:,:,:]
+    run_data["root_zone_storage"] = np.array(np.nansum((load_variable(lambda x: data_accessor.subsurface_storage, time, data_accessor)*dz*root_zone_mask)) for time in run_data.time)
+    shallow_storage_mask = np.zeros(run_def["mask"].shape)
+    shallow_storage_mask[4:6,:,:] = run_def["mask"][4:6,:,:]
+    run_data["shallow_storage"] = np.array(np.nansum((load_variable(lambda x: data_accessor.subsurface_storage, time, data_accessor)*dz*shallow_storage_mask)) for time in run_data.time)
+    deep_storage_mask = np.zeros(run_def["mask"].shape)
+    deep_storage_mask[:4,:,:] = run_def["mask"][:4,:,:]
+    run_data["deep_storage"] = np.array(np.nansum((load_variable(lambda x: data_accessor.subsurface_storage, time, data_accessor)*dz*deep_storage_mask)) for time in run_data.time)
+    run_data["surface_storage"] = np.array(load_variable(lambda x: data_accessor.surface_storage, time, data_accessor)*run_def["mask"][0]*dz[9] for time in run_data.time)
     run_data["wtd"] = np.array(load_variable(lambda x: data_accessor.wtd, time, data_accessor)*run_def["mask"][0] for time in run_data.time)
     # TODO uncomment second half of below line
+    # run_data["root_zone_storage"] = np.array(load_variable(lambda x: data_accessor.subsurface_storage, time, data_accessor)*dz for time in run_data.time)
+
+    # run_data["root_zone_storage"] = run_data["subsurface_storage"][7:,:,:].apply(np.nansum) #+ run_data["surface_storage"].apply(np.nansum)
+
     run_data["subsurface_storage"] = run_data["subsurface_storage"].apply(np.nansum) #+ run_data["surface_storage"].apply(np.nansum)
     run_data["surface_storage"] = run_data["surface_storage"].apply(np.nansum) #+ run_data["surface_storage"].apply(np.nansum)
     run_data["total_storage"] = run_data["subsurface_storage"] + run_data["surface_storage"]
