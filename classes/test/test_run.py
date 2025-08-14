@@ -13,5 +13,5 @@ except ImportError:
 
 domain = Domain(config_file="/Users/ben/Documents/GitHub/drought-ensemble/domains/wolf_test/config.ini", TESTING=True)
 
-run = Run(domain=domain, sequence="domains/wolf_test/run_sequences/simple_test.json")
+run = Run(domain=domain, sequence="simple_test.json")
 run.run_full_sequence()

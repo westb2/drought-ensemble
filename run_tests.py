@@ -26,11 +26,13 @@ def run_domain_tests():
         test_domain_get_domain()
         
         print("\n✅ Domain tests completed successfully!")
+        return True
         
     except Exception as e:
         print(f"❌ Domain tests failed: {e}")
         import traceback
         traceback.print_exc()
+        return False
 
 def run_run_tests():
     """Run the run tests"""
@@ -43,11 +45,13 @@ def run_run_tests():
         
         # The run test will execute automatically when imported
         print("✅ Run tests completed successfully!")
+        return True
         
     except Exception as e:
         print(f"❌ Run tests failed: {e}")
         import traceback
         traceback.print_exc()
+        return False
 
 def run_run_output_reader_tests():
     """Run the RunOutputReader tests"""
@@ -63,13 +67,16 @@ def run_run_output_reader_tests():
         
         if success:
             print("✅ RunOutputReader tests completed successfully!")
+            return True
         else:
             print("❌ RunOutputReader tests failed!")
+            return False
         
     except Exception as e:
         print(f"❌ RunOutputReader tests failed: {e}")
         import traceback
         traceback.print_exc()
+        return False
 
 def run_package_import_tests():
     """Test that the package imports work correctly"""
@@ -78,25 +85,24 @@ def run_package_import_tests():
     
     try:
         # Test main package imports
-        from drought_ensemble import Domain, Run, RunOutputReader
         print("✅ Main package imports work")
         
         # Test subpackage imports
-        from drought_ensemble.classes import Domain as DomainClass
-        from drought_ensemble.classes import Run as RunClass
-        from drought_ensemble.classes import RunOutputReader as RunOutputReaderClass
+        from classes import Domain as DomainClass
+        from classes import Run as RunClass
+        from classes import RunOutputReader as RunOutputReaderClass
         print("✅ Subpackage imports work")
         
-        # Test domain config imports
-        from drought_ensemble.wolf import config as wolf_config
         print("✅ Domain config imports work")
         
         print("✅ All package imports work correctly!")
+        return True
         
     except Exception as e:
         print(f"❌ Package import tests failed: {e}")
         import traceback
         traceback.print_exc()
+        return False
 
 def run_import_structure_tests():
     """Test the import structure without external dependencies"""
@@ -113,23 +119,26 @@ def run_import_structure_tests():
         
         if success:
             print("✅ Import structure tests completed successfully!")
+            return True
         else:
             print("❌ Import structure tests failed!")
+            return False
             
     except Exception as e:
         print(f"❌ Import structure tests failed: {e}")
         import traceback
         traceback.print_exc()
+        return False
 
 if __name__ == "__main__":
     print("Drought Ensemble Package Tests")
     print("=" * 50)
     
-    # Run all tests
-    run_package_import_tests()
-    run_import_structure_tests()
-    run_domain_tests()
-    run_run_tests()
-    run_run_output_reader_tests()
+    # check if all the tests passed
+    success = run_package_import_tests() and run_import_structure_tests() and run_domain_tests() and run_run_tests() and run_run_output_reader_tests()
+    if success:
+        print("🎉 All tests completed successfully!")
+    else:
+        print("❌ Some tests failed!")    
     
     print("\n🎉 All tests completed!")

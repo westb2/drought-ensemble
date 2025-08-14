@@ -24,7 +24,7 @@ class TestRunOutputReader(unittest.TestCase):
         self.domain = Domain(config_file="domains/wolf_test/config.ini", TESTING=True)
         
         # Create a test run
-        self.run = Run(sequence_file="domains/wolf_test/run_sequences/simple_test.json", domain=self.domain)
+        self.run = Run(sequence="simple_test.json", domain=self.domain)
         
         # Create a mock data accessor for testing
         self.mock_data_accessor = Mock()
@@ -103,9 +103,11 @@ class TestRunOutputReader(unittest.TestCase):
         with patch.object(RunOutputReader, 'get_data_accessor', return_value=self.mock_data_accessor):
             reader = RunOutputReader(self.run)
             
-            # Mock the file reading
-            mock_pressure = np.random.random((120, 10, 41, 78))  # 120 timesteps
-            mock_saturation = np.random.random((120, 10, 41, 78))
+            # Mock the file reading - use actual data size from the domain
+            # The data size should match the coordinate system calculation
+            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            mock_pressure = np.random.random((actual_timesteps, 10, 41, 78))
+            mock_saturation = np.random.random((actual_timesteps, 10, 41, 78))
             
             with patch('parflow.read_pfb_sequence') as mock_read_pfb:
                 mock_read_pfb.side_effect = [mock_pressure, mock_saturation]
@@ -123,8 +125,9 @@ class TestRunOutputReader(unittest.TestCase):
                         self.assertIn(var, result.data_vars)
                     
                     # Test data shapes
-                    self.assertEqual(result['pressure'].shape, (120, 10, 41, 78))
-                    self.assertEqual(result['saturation'].shape, (120, 10, 41, 78))
+                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    self.assertEqual(result['pressure'].shape, (actual_timesteps, 10, 41, 78))
+                    self.assertEqual(result['saturation'].shape, (actual_timesteps, 10, 41, 78))
                     self.assertEqual(result['mask'].shape, (10, 41, 78))
                     self.assertEqual(result['mannings'].shape, (10, 41, 78))
                     
@@ -137,15 +140,18 @@ class TestRunOutputReader(unittest.TestCase):
         with patch.object(RunOutputReader, 'get_data_accessor', return_value=self.mock_data_accessor):
             reader = RunOutputReader(self.run)
             
-            # Create test data with known values
-            test_pressure = np.ones((120, 10, 41, 78)) * 1000.0  # 1000 Pa everywhere
-            test_saturation = np.ones((120, 10, 41, 78)) * 0.5   # 50% saturation everywhere
+            # Create test data with known values - use actual data size from the domain
+            # The data size should match the coordinate system calculation
+            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            test_pressure = np.ones((actual_timesteps, 10, 41, 78)) * 1000.0  # 1000 Pa everywhere
+            test_saturation = np.ones((actual_timesteps, 10, 41, 78)) * 0.5   # 50% saturation everywhere
             
             with patch('parflow.read_pfb_sequence') as mock_read_pfb:
                 mock_read_pfb.side_effect = [test_pressure, test_saturation]
                 
                 with patch.object(xr.DataArray, 'map_blocks') as mock_map_blocks:
-                    mock_map_blocks.return_value = xr.DataArray(np.ones((120, 10, 41, 78)) * 0.1)
+                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    mock_map_blocks.return_value = xr.DataArray(np.ones((actual_timesteps, 10, 41, 78)) * 0.1)
                     
                     result = reader.read_output()
                     
@@ -171,8 +177,9 @@ class TestRunOutputReader(unittest.TestCase):
         with patch.object(RunOutputReader, 'get_data_accessor', return_value=self.mock_data_accessor):
             reader = RunOutputReader(self.run)
             
-            mock_pressure = np.random.random((120, 10, 41, 78))
-            mock_saturation = np.random.random((120, 10, 41, 78))
+            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            mock_pressure = np.random.random((actual_timesteps, 10, 41, 78))
+            mock_saturation = np.random.random((actual_timesteps, 10, 41, 78))
             
             with patch('parflow.read_pfb_sequence') as mock_read_pfb:
                 mock_read_pfb.side_effect = [mock_pressure, mock_saturation]
@@ -187,7 +194,8 @@ class TestRunOutputReader(unittest.TestCase):
                     self.assertIn('x', result.coords)
                     
                     # Test coordinate dimensions
-                    self.assertEqual(len(result.coords['time']), 120)
+                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    self.assertEqual(len(result.coords['time']), actual_timesteps)
                     self.assertEqual(len(result.coords['z']), 10)
                     self.assertEqual(len(result.coords['y']), 41)
                     self.assertEqual(len(result.coords['x']), 78)
@@ -352,7 +360,7 @@ if __name__ == "__main__":
     print("🧪 Running original simple test...")
     try:
         domain = Domain(config_file="domains/wolf_test/config.ini", TESTING=True)
-        run = Run(sequence_file="domains/wolf_test/run_sequences/simple_test.json", domain=domain)
+        run = Run(sequence="simple_test.json", domain=domain)
         run_output_reader = RunOutputReader(run)
         result = run_output_reader.read_output()
         print("✅ Original simple test passed")

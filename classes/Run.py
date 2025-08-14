@@ -8,21 +8,24 @@ import json
 
 # define a class called Run
 class Run:
-    def __init__(self, sequence_file=None, sequence=None, domain=None):
+    def __init__(self, sequence=None, domain=None):
+        self.domain = domain
         self.TESTING = domain.TESTING if domain else False
-        if sequence_file:
-            self.sequence = self.get_sequence_from_file(sequence_file)
-        elif sequence:
+        self.sequence = sequence
+        if sequence:
             if isinstance(sequence, str):
-                self.sequence = self.get_sequence_from_file(sequence)
+                self.sequence = self.get_sequence_from_file(self.get_sequence_file_path())
             else:
                 self.sequence = sequence
         else:
             raise ValueError("Either sequence_file or sequence must be provided")
         self.number_of_years = len(self.sequence)
-        self.domain = domain
         self.run_dir = self.get_run_folder()
         # Don't call get_output_folders() during initialization to avoid recursion
+
+
+    def get_sequence_file_path(self):
+        return os.path.join(self.domain.project_root, "run_sequences", self.sequence)
 
 
     def get_output_folders(self):

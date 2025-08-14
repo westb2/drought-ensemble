@@ -9,7 +9,7 @@ from Domain import Domain
 
 # delete the testing directory
 import shutil
-shutil.rmtree("domains/wolf_test/testing", ignore_errors=True)
+# shutil.rmtree("./domains/wolf_test/testing", ignore_errors=True)
 
 domain = Domain(config_file="domains/wolf_test/config.ini", TESTING=True)
 domain.get_domain()
