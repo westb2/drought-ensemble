@@ -1,7 +1,7 @@
 import os
 import shutil
 import parflow as pf
-from add_pumping import add_pumping
+from .add_pumping import add_pumping
 
 def do_run(domain_name, run_name, pumping_rate_fraction, run_dir, config, 
            irrigation=False, flux_cycling=False, pumping_layer=2, flux_time_series=False, 

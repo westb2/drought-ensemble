@@ -65,7 +65,7 @@ def get_domain(config):
     runscript_path = st.edit_runscript_for_subset(
         ij_bounds,
         runscript_path=reference_run,
-        runname=runname,
+        runname="run",
         forcing_dir=forcing_dir,
     )
     st.copy_files(read_dir=static_write_dir, write_dir=pf_out_dir)
