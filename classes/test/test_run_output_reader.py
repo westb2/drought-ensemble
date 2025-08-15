@@ -105,7 +105,7 @@ class TestRunOutputReader(unittest.TestCase):
             
             # Mock the file reading - use actual data size from the domain
             # The data size should match the coordinate system calculation
-            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
             mock_pressure = np.random.random((actual_timesteps, 10, 41, 78))
             mock_saturation = np.random.random((actual_timesteps, 10, 41, 78))
             
@@ -125,7 +125,7 @@ class TestRunOutputReader(unittest.TestCase):
                         self.assertIn(var, result.data_vars)
                     
                     # Test data shapes
-                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
                     self.assertEqual(result['pressure'].shape, (actual_timesteps, 10, 41, 78))
                     self.assertEqual(result['saturation'].shape, (actual_timesteps, 10, 41, 78))
                     self.assertEqual(result['mask'].shape, (10, 41, 78))
@@ -142,7 +142,7 @@ class TestRunOutputReader(unittest.TestCase):
             
             # Create test data with known values - use actual data size from the domain
             # The data size should match the coordinate system calculation
-            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
             test_pressure = np.ones((actual_timesteps, 10, 41, 78)) * 1000.0  # 1000 Pa everywhere
             test_saturation = np.ones((actual_timesteps, 10, 41, 78)) * 0.5   # 50% saturation everywhere
             
@@ -150,7 +150,7 @@ class TestRunOutputReader(unittest.TestCase):
                 mock_read_pfb.side_effect = [test_pressure, test_saturation]
                 
                 with patch.object(xr.DataArray, 'map_blocks') as mock_map_blocks:
-                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
                     mock_map_blocks.return_value = xr.DataArray(np.ones((actual_timesteps, 10, 41, 78)) * 0.1)
                     
                     result = reader.read_output()
@@ -177,7 +177,7 @@ class TestRunOutputReader(unittest.TestCase):
         with patch.object(RunOutputReader, 'get_data_accessor', return_value=self.mock_data_accessor):
             reader = RunOutputReader(self.run)
             
-            actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+            actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
             mock_pressure = np.random.random((actual_timesteps, 10, 41, 78))
             mock_saturation = np.random.random((actual_timesteps, 10, 41, 78))
             
@@ -194,7 +194,7 @@ class TestRunOutputReader(unittest.TestCase):
                     self.assertIn('x', result.coords)
                     
                     # Test coordinate dimensions
-                    actual_timesteps = self.run.domain.stop_time * self.run.number_of_years // self.run.domain.dump_interval
+                    actual_timesteps = self.run.domain.num_output_files * self.run.number_of_years
                     self.assertEqual(len(result.coords['time']), actual_timesteps)
                     self.assertEqual(len(result.coords['z']), 10)
                     self.assertEqual(len(result.coords['y']), 41)
@@ -202,7 +202,7 @@ class TestRunOutputReader(unittest.TestCase):
                     
                     # Test that time coordinates are properly spaced
                     time_coords = result.coords['time'].values
-                    expected_times = range(0, self.run.domain.stop_time * self.run.number_of_years, self.run.domain.dump_interval)
+                    expected_times = range(0, self.run.domain.num_output_files * self.run.number_of_years, 1)
                     np.testing.assert_array_equal(time_coords, expected_times)
                     
                     print("✅ read_output coordinate system test passed")

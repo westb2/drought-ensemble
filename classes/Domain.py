@@ -48,7 +48,7 @@ class Domain:
             self.directory = os.path.join(self.project_root, "domains", self.name)
             self.dump_interval = 24*5
             self.stop_time = 8760
-        self.num_output_files = self.stop_time // self.dump_interval
+        self.num_output_files = (self.stop_time // self.dump_interval)
         self.inputs_directory = os.path.join(self.directory, "inputs")
 
     def get_config(self):

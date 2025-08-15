@@ -19,9 +19,8 @@ class Run:
                 self.sequence = sequence
         else:
             raise ValueError("Either sequence_file or sequence must be provided")
-        self.number_of_years = len(self.sequence)
+        self.number_of_years = len(self.sequence["years"])
         self.run_dir = self.get_run_folder()
-        # Don't call get_output_folders() during initialization to avoid recursion
 
 
     def get_sequence_file_path(self):
@@ -31,27 +30,33 @@ class Run:
     def get_output_folders(self):
         output_folders = []
         for year in range(self.number_of_years):
-            sub_sequence = self.sequence[:year+1]
-            # Calculate run folder directly without creating a new Run object
+            sub_sequence = {
+                "name": self.sequence["name"],
+                "years": self.sequence["years"][:year+1]
+            }
             run_folder = self.get_run_folder_from_sequence(sub_sequence)
             output_folders.append(run_folder)
         return output_folders
 
+
     def get_sequence_from_file(self, sequence_file):
         with open(sequence_file, 'r') as file:
-            sequence = json.load(file)["years"]
+            sequence = json.load(file)
         return sequence
 
 
     def sequence2string(self, sequence):
-        return "_".join([f"{year['wetness']}_{year['pumping_rate_fraction']}_{year['irrigation']}" for year in sequence])
+        years = sequence["years"]
+        return "_".join([f"{year['wetness']}_{year['pumping_rate_fraction']}_{year['irrigation']}" for year in years])
 
 
     def hash_sequence(self, sequence):
         return hashlib.sha256(self.sequence2string(sequence).encode()).hexdigest()
 
+
     def get_run_folder_from_sequence(self, sequence):
-        return os.path.join(self.domain.directory, "runs", self.hash_sequence(sequence))
+        return os.path.join(self.domain.directory, "raw_runs", self.hash_sequence(sequence))
+
 
     def get_run_folder(self):
         return self.get_run_folder_from_sequence(self.sequence)
@@ -60,7 +65,12 @@ class Run:
         return os.path.exists(self.get_run_folder_from_sequence(self.sequence))   
 
     def get_initial_pressure_file(self):
-        previous_run = Run(sequence=self.sequence[:-1], domain=self.domain)
+        # Create a sub-sequence with all years except the last one
+        previous_sequence = {
+            "name": self.sequence["name"],
+            "years": self.sequence["years"][:-1]
+        }
+        previous_run = Run(sequence=previous_sequence, domain=self.domain)
         # left justify to get the last timestamp with up to 4 0s
         ending_timestamp = str(int(self.domain.num_output_files)).zfill(5)
         return os.path.join(previous_run.run_dir, f"run.out.press.{ending_timestamp}.pfb")
@@ -68,22 +78,31 @@ class Run:
 
     def run_full_sequence(self):
         self.domain.get_domain()
-        for year in range(len(self.sequence)):
-            sub_run = Run(sequence=self.sequence[:year+1], domain=self.domain)
+        for year in range(self.number_of_years):
+            # Create a sub-sequence with only the years up to the current year
+            sub_sequence = {
+                "name": self.sequence["name"],
+                "years": self.sequence["years"][:year+1]
+            }
+            sub_run = Run(sequence=sub_sequence, domain=self.domain)
             if not sub_run.run_exists():
+                print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
                 if year>0:
                     sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
                 else:
                     sub_run.run_year()
+            else:
+                print(f"Year {year} of the run already exists in {sub_run.get_run_folder()}")
         print(f"Running {self.sequence2string(self.sequence)}")
+        
 
-    
+
     def run_year(self, flux_cycling=False, pumping_layer=4, flux_time_series=False, 
             years = 1, INITIAL_PRESSURE_FILE=None):
         # os.chdir(f"/Users/ben/Documents/GitHub/drought-ensemble/{run_dir}")
         # for now set consumptive use to 1 inch per week
         # TODO figure out if this is the right number
-        run_specs = self.sequence[-1]
+        run_specs = self.sequence["years"][-1]
         irrigation = run_specs["irrigation"] == "True"
         pumping_rate_fraction = run_specs["pumping_rate_fraction"]
         year_wetness = run_specs["wetness"]

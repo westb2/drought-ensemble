@@ -4,6 +4,7 @@ import parflow as pf
 import shutil
 import numpy as np
 import xarray as xr
+import json
 
 from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurface_storage, \
     calculate_water_table_depth, calculate_evapotranspiration, calculate_overland_flow_grid
@@ -37,13 +38,16 @@ class RunOutputReader:
         shutil.copyfile(f'{run_dir}/mannings.pfb', f'{run_dir}/run.out.mannings.pfb')
         return data_accessor
 
-    def read_output(self):
+    def read_output(self, save_to_file=False):
         pressure_files = []
         saturation_files = []
-        for _, output_folder in zip(self.run.sequence, self.run.get_output_folders()):
+        output_folders = self.run.get_output_folders()
+        
+        for _, output_folder in zip(self.run.sequence["years"], output_folders):
             # data_accessor = self.get_data_accessor(output_folder)
-            pressure_files.extend([f'{output_folder}/run.out.press.{str(timestep).zfill(5)}.pfb' for timestep in range(self.run.domain.num_output_files)])
-            saturation_files.extend([f'{output_folder}/run.out.satur.{str(timestep).zfill(5)}.pfb' for timestep in range(self.run.domain.num_output_files)])
+            pressure_files.extend([f'{output_folder}/run.out.press.{str(timestep).zfill(5)}.pfb' for timestep in range(1, self.run.domain.num_output_files+1)])
+            saturation_files.extend([f'{output_folder}/run.out.satur.{str(timestep).zfill(5)}.pfb' for timestep in range(1, self.run.domain.num_output_files+1)])
+        
         pressure = pf.read_pfb_sequence(pressure_files)
         saturation = pf.read_pfb_sequence(saturation_files)
         # convert to xarray
@@ -52,12 +56,12 @@ class RunOutputReader:
                         "y": range(self.domain_attributes["mask"].shape[1]), 
                         "x": range(self.domain_attributes["mask"].shape[2])})
         pressure = xarray.DataArray(pressure, dims=["time", "z", "y", "x"],
-                        coords={"time": range(0,self.run.domain.stop_time*self.run.number_of_years, self.run.domain.dump_interval), 
+                        coords={"time": range(0,self.run.domain.num_output_files*self.run.number_of_years, 1), 
                         "z": range(pressure.shape[1]), 
                         "y": range(pressure.shape[2]), 
                         "x": range(pressure.shape[3])})*mask
         saturation = xarray.DataArray(saturation, dims=["time", "z", "y", "x"],
-                        coords={"time": range(0,self.run.domain.stop_time*self.run.number_of_years, self.run.domain.dump_interval), 
+                        coords={"time": range(0,self.run.domain.num_output_files*self.run.number_of_years, 1), 
                         "z": range(saturation.shape[1]), 
                         "y": range(saturation.shape[2]), 
                         "x": range(saturation.shape[3])})*mask
@@ -73,9 +77,15 @@ class RunOutputReader:
                         "x": range(self.domain_attributes["porosity"].shape[2])})*mask
 
 
-        data_array = xarray.Dataset({"pressure": pressure, "saturation": saturation, "mask": mask, "mannings": mannings})
+        data_array = xarray.Dataset({"pressure": pressure, "saturation": saturation, "mask": mask, "mannings": mannings}, attrs={"sequence_name": self.run.sequence["name"]})
         data_array.info()
         # save to netcdf
         # pressure.to_netcdf(f'{self.run.get_output_folders()[0]}/run.out.pressure.nc')
+        if save_to_file:
+            os.makedirs(f'{self.run.domain.directory}/processed_full_runs', exist_ok=True)
+            output_path = f'{self.run.domain.directory}/processed_full_runs/{self.run.sequence["name"]}'
+            os.makedirs(output_path, exist_ok=True)
+            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
+            json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
+            print(f"Saved condensed output to {output_path}")
         return data_array
-
