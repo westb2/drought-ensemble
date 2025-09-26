@@ -6,6 +6,7 @@ from parflow import Run
 from parflow.tools.io import read_pfb, read_clm
 from parflow.tools.fs import mkdir
 from parflow.tools.settings import set_working_directory
+
 import subsettools as st
 import hf_hydrodata as hf
 import configparser
@@ -13,6 +14,7 @@ import configparser
 # define a class called Domain
 class Domain:
     def __init__(self, config_file, project_root="/Users/ben/Documents/GitHub/drought-ensemble", TESTING=False):
+        
         self.config_file = config_file
         # if testing, only grab one day of data
         self.TESTING = TESTING
@@ -39,6 +41,13 @@ class Domain:
                     # Keep as string if conversion fails
                     pass
                 setattr(self, key, value)
+        
+        # Ensure name attribute exists - use domain_name as fallback
+        if not hasattr(self, 'name') or not self.name:
+            if hasattr(self, 'domain_name') and self.domain_name:
+                self.name = self.domain_name
+            else:
+                raise ValueError("Config file must contain either 'name' or 'domain_name' field")
                 
         if TESTING:
             self.directory = os.path.join(self.project_root, "domains", self.name, "testing")

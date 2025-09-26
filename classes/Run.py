@@ -5,12 +5,28 @@ import parflow as pf
 import numpy as np
 import pandas as pd
 import json
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+try:
+    from .RunOutputReader import RunOutputReader
+except ImportError:
+    from RunOutputReader import RunOutputReader
 
 # define a class called Run
 class Run:
-    def __init__(self, sequence=None, domain=None):
+    def __init__(self, sequence=None, domain=None, output_root=None):
         self.domain = domain
         self.TESTING = domain.TESTING if domain else False
+        if output_root is None:
+            self.output_root = domain.project_root
+            self.output_dir = os.path.join(domain.project_root, domain.name)
+        else:
+            self.output_root = output_root
+            self.output_dir = os.path.join(self.output_root, "", self.domain.name)
+            if not os.path.exists(self.output_dir):
+                os.makedirs(self.output_dir)
         self.sequence = sequence
         if sequence:
             if isinstance(sequence, str):
@@ -21,6 +37,7 @@ class Run:
             raise ValueError("Either sequence_file or sequence must be provided")
         self.number_of_years = len(self.sequence["years"])
         self.run_dir = self.get_run_folder()
+        self.output_reader = None
 
 
     def get_sequence_file_path(self):
@@ -55,11 +72,17 @@ class Run:
 
 
     def get_run_folder_from_sequence(self, sequence):
-        return os.path.join(self.domain.directory, "raw_runs", self.hash_sequence(sequence))
+        return os.path.join(self.output_dir, "raw_runs", self.hash_sequence(sequence))
 
 
     def get_run_folder(self):
         return self.get_run_folder_from_sequence(self.sequence)
+
+    def create_output_reader(self):
+        """Create the output reader after the run is complete"""
+        if self.output_reader is None:
+            self.output_reader = RunOutputReader(self)
+        return self.output_reader
 
     def run_exists(self):
         return os.path.exists(self.get_run_folder_from_sequence(self.sequence))   
@@ -70,7 +93,7 @@ class Run:
             "name": self.sequence["name"],
             "years": self.sequence["years"][:-1]
         }
-        previous_run = Run(sequence=previous_sequence, domain=self.domain)
+        previous_run = Run(sequence=previous_sequence, domain=self.domain, output_root=self.output_root)
         # left justify to get the last timestamp with up to 4 0s
         ending_timestamp = str(int(self.domain.num_output_files)).zfill(5)
         return os.path.join(previous_run.run_dir, f"run.out.press.{ending_timestamp}.pfb")
@@ -84,7 +107,7 @@ class Run:
                 "name": self.sequence["name"],
                 "years": self.sequence["years"][:year+1]
             }
-            sub_run = Run(sequence=sub_sequence, domain=self.domain)
+            sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root)
             if not sub_run.run_exists():
                 print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
                 if year>0:

@@ -6,15 +6,16 @@ import numpy as np
 import xarray as xr
 import json
 
-from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurface_storage, \
-    calculate_water_table_depth, calculate_evapotranspiration, calculate_overland_flow_grid
+# Hydrology functions are available but not currently used in this class
+# from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurface_storage, \
+#     calculate_water_table_depth, calculate_evapotranspiration, calculate_overland_flow_grid
 
 import xarray
 
 class RunOutputReader:
     def __init__(self, run):
         self.run = run
-        data_accessor = self.get_data_accessor(self.run.domain.get_base_run_folder("average"))
+        data_accessor = self.get_data_accessor(self.run.get_output_folders()[0])
         self.domain_attributes = {}
 
         self.domain_attributes["mask"] = data_accessor.mask
@@ -33,7 +34,6 @@ class RunOutputReader:
 
 
     def get_data_accessor(self, run_dir):
-        run_dir = self.run.get_output_folders()[0]
         data_accessor = pf.Run.from_definition(f'{run_dir}/run.yaml').data_accessor
         shutil.copyfile(f'{run_dir}/mannings.pfb', f'{run_dir}/run.out.mannings.pfb')
         return data_accessor
@@ -82,8 +82,8 @@ class RunOutputReader:
         # save to netcdf
         # pressure.to_netcdf(f'{self.run.get_output_folders()[0]}/run.out.pressure.nc')
         if save_to_file:
-            os.makedirs(f'{self.run.domain.directory}/processed_full_runs', exist_ok=True)
-            output_path = f'{self.run.domain.directory}/processed_full_runs/{self.run.sequence["name"]}'
+            os.makedirs(f'{self.run.output_root}/processed_full_runs', exist_ok=True)
+            output_path = f'{self.run.output_root}/{self.run.domain.name}/processed_full_runs/{self.run.sequence["name"]}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))

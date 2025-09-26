@@ -10,9 +10,9 @@ from unittest.mock import Mock, patch, MagicMock
 # Add parent directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from RunOutputReader import RunOutputReader
-from Run import Run
-from Domain import Domain
+from ..RunOutputReader import RunOutputReader
+from ..Run import Run
+from ..Domain import Domain
 
 
 class TestRunOutputReader(unittest.TestCase):
@@ -70,10 +70,6 @@ class TestRunOutputReader(unittest.TestCase):
         """Test the get_data_accessor method"""
         print("\n🧪 Testing get_data_accessor method...")
         
-        # Mock the run's get_output_folders method
-        mock_output_folder = "/fake/output/folder"
-        self.run.get_output_folders = Mock(return_value=[mock_output_folder])
-        
         # Mock ParFlow Run.from_definition
         mock_run = Mock()
         mock_run.data_accessor = self.mock_data_accessor
@@ -82,15 +78,16 @@ class TestRunOutputReader(unittest.TestCase):
              patch('shutil.copyfile') as mock_copyfile:
             
             reader = RunOutputReader(self.run)
-            result = reader.get_data_accessor("fake_dir")
+            test_run_dir = "fake_dir"
+            result = reader.get_data_accessor(test_run_dir)
             
             # Test that the method returns the data accessor
             self.assertEqual(result, self.mock_data_accessor)
             
-            # Test that copyfile was called (may be called multiple times due to initialization)
+            # Test that copyfile was called with the correct run_dir parameter
             mock_copyfile.assert_called_with(
-                f'{mock_output_folder}/mannings.pfb', 
-                f'{mock_output_folder}/run.out.mannings.pfb'
+                f'{test_run_dir}/mannings.pfb', 
+                f'{test_run_dir}/run.out.mannings.pfb'
             )
             
             print("✅ get_data_accessor test passed")

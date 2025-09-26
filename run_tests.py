@@ -28,6 +28,12 @@ def run_domain_tests():
         print("\n✅ Domain tests completed successfully!")
         return True
         
+    except ImportError as e:
+        print(f"❌ Domain tests failed due to missing required dependencies: {e}")
+        print("   Install with: pip install subsettools hf_hydrodata")
+        import traceback
+        traceback.print_exc()
+        return False
     except Exception as e:
         print(f"❌ Domain tests failed: {e}")
         import traceback
@@ -92,6 +98,8 @@ def run_package_import_tests():
         from classes import Run as RunClass
         from classes import RunOutputReader as RunOutputReaderClass
         print("✅ Subpackage imports work")
+        
+        # Dependencies are now required
         
         print("✅ Domain config imports work")
         
