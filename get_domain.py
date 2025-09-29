@@ -44,7 +44,7 @@ def get_domain(config):
     # load your preferred template runscript
     reference_run = st.get_template_runscript(grid, "transient", "solid", pf_out_dir)
     ij_bounds, mask = st.define_huc_domain(hucs=hucs, grid=grid)
-    os.environ["PARFLOW_DIR"] = "/Users/ben/parflow_installation/parflow"
+    # os.environ["PARFLOW_DIR"] = "/Users/ben/parflow_installation/parflow"
     mask_solid_paths = st.write_mask_solid(mask=mask, grid=grid, write_dir=static_write_dir)
     static_paths = st.subset_static(ij_bounds, dataset=var_ds, write_dir=static_write_dir)
     clm_paths = st.config_clm(ij_bounds, start=start, end=end, dataset=var_ds, write_dir=static_write_dir)

@@ -16,12 +16,13 @@ except ImportError:
 
 # define a class called Run
 class Run:
-    def __init__(self, sequence=None, domain=None, output_root=None):
+    def __init__(self, sequence=None, domain=None, output_root=None, netcdf_output=False):
         self.domain = domain
+        self.netcdf_output = netcdf_output
         self.TESTING = domain.TESTING if domain else False
         if output_root is None:
-            self.output_root = domain.project_root
-            self.output_dir = os.path.join(domain.project_root, domain.name)
+            self.output_root = domain.directory
+            self.output_dir = os.path.join(domain.directory, domain.name)
         else:
             self.output_root = output_root
             self.output_dir = os.path.join(self.output_root, "", self.domain.name)
@@ -72,7 +73,7 @@ class Run:
 
 
     def get_run_folder_from_sequence(self, sequence):
-        return os.path.join(self.output_dir, "raw_runs", self.hash_sequence(sequence))
+        return os.path.join(self.output_root, "raw_runs", self.hash_sequence(sequence))
 
 
     def get_run_folder(self):
@@ -118,7 +119,17 @@ class Run:
                 print(f"Year {year} of the run already exists in {sub_run.get_run_folder()}")
         print(f"Running {self.sequence2string(self.sequence)}")
         
-
+    def switch_to_netcdf(self, model):
+        model.NetCDF.NumTimestepsPerFile = self.domain.stop_time
+        model.NetCDF.WritePressure = True
+        model.NetCDF.WriteSaturation = True
+        model.NetCDF.WriteMannings = True
+        model.NetCDF.WriteSubsurface  = True
+        model.NetCDF.WriteSlopes = True
+        model.NetCDF.WriteMask = True
+        model.NetCDF.WriteDZMultiplier = True
+        model.NetCDF.WriteEvapTrans = True
+        model.NetCDF.WriteOverlandBCFlux = True
 
     def run_year(self, flux_cycling=False, pumping_layer=4, flux_time_series=False, 
             years = 1, INITIAL_PRESSURE_FILE=None):
@@ -139,6 +150,8 @@ class Run:
             os.remove("./drv_vegp.dat")
             shutil.copyfile("./drv_vegp_for_irrigation.dat", "./drv_vegp.dat")
         model = pf.Run.from_definition("./run.yaml")
+        if self.netcdf_output:
+            self.switch_to_netcdf(model)
         model.TimingInfo.StartCount = 0
         if pumping_rate_fraction > 0.0:
             model = self.add_pumping_to_model(model,
