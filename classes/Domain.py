@@ -15,6 +15,7 @@ import configparser
 class Domain:
     def __init__(self, config_file, project_root="/glade/u/home/bwest/drought-ensemble", TESTING=False):
         
+        
         self.config_file = config_file
         # if testing, only grab one day of data
         self.TESTING = TESTING
@@ -23,6 +24,11 @@ class Domain:
         self.AVERAGE_WETNESS_TYPE = "average"
         self.project_root = project_root
         self.config = self.get_config()
+        self.dump_interval = 1
+        if self.TESTING:
+            self.stop_time = 24
+        else:
+            self.stop_time = 8760
         # make each item in the config a class attribute
         for key in self.config['DEFAULT']:
             value = self.config.get('DEFAULT', key)
@@ -169,13 +175,8 @@ class Domain:
         print(f"Setting working directory to {pf_out_dir}")
         # load the specified run script
         run = Run.from_definition(runscript_path)
-        run.TimingInfo.StopTime = 8760
-        if self.TESTING:
-            run.TimingInfo.DumpInterval = 1
-            run.TimingInfo.StopTime = 24
-        else:
-            run.TimingInfo.DumpInterval = 24*5
-            run.TimingInfo.StopTime = 8760
+        run.TimingInfo.StopTime = self.stop_time
+        run.TimingInfo.DumpInterval = self.dump_interval
         run.Solver.CLM.MetFileName = "CW3E"
         os.remove(runscript_path)
         runscript_path = runscript_path.replace(".yaml", "")

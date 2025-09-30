@@ -18,6 +18,7 @@ Main modules:
 
 # Import main classes for easy access
 from .classes import Domain, Run, RunOutputReader
+from .ensemble_running import run_sequence_on_domain
 
 # Version information
 __version__ = '1.0.0'
@@ -29,9 +30,11 @@ __all__ = [
     'Domain',
     'Run',
     'RunOutputReader',
+    'run_sequence_on_domain',
     'classes',
     'analysis', 
     'drought_metrics',
+    'ensemble_running',
     'wolf',
     'potomac',
     'gila',

@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import json
 import sys
+import xarray
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -88,6 +89,14 @@ class Run:
     def run_exists(self):
         return os.path.exists(self.get_run_folder_from_sequence(self.sequence))   
 
+    def create_initial_pressure_file_from_netcdf(self, previous_run_dir):
+        run_output = xarray.open_dataset(os.path.join(previous_run_dir, f"run.out.00001.nc"))
+        final_pressure = run_output.pressure.isel(time=self.domain.stop_time-1)
+        final_pressure = final_pressure.to_numpy()
+        final_pressure_filename = os.path.join(previous_run_dir, "run.out.final_pressure.pfb")
+        pf.write_pfb(final_pressure_filename, final_pressure, p=self.domain.p, q=self.domain.q, dist=True)
+        return final_pressure_filename
+
     def get_initial_pressure_file(self):
         # Create a sub-sequence with all years except the last one
         previous_sequence = {
@@ -97,7 +106,11 @@ class Run:
         previous_run = Run(sequence=previous_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
         # left justify to get the last timestamp with up to 4 0s
         ending_timestamp = str(int(self.domain.num_output_files)).zfill(5)
-        return os.path.join(previous_run.run_dir, f"run.out.press.{ending_timestamp}.pfb")
+        if self.netcdf_output:
+            file_path = self.create_initial_pressure_file_from_netcdf(previous_run.run_dir)
+            return file_path
+        else:
+            return os.path.join(previous_run.run_dir, f"run.out.press.{ending_timestamp}.pfb")
 
 
     def run_full_sequence(self):
@@ -120,7 +133,6 @@ class Run:
         print(f"Running {self.sequence2string(self.sequence)}")
         
     def switch_to_netcdf(self, model):
-        model.NetCDF.NumTimestepsPerFile = 1
         model.NetCDF.WritePressure = True
         model.NetCDF.WriteSaturation = True
         model.NetCDF.WriteMannings = True
@@ -131,15 +143,15 @@ class Run:
         model.NetCDF.WriteEvapTrans = True
         model.NetCDF.WriteOverlandBCFlux = True
         model.NetCDF.WriteCLM                 = True
-        model.NetCDF.NumStepsPerFile          = 1
+        model.NetCDF.NumStepsPerFile          = self.domain.stop_time
         model.NetCDF.NodeLevelIO              = False
-        model.NetCDF.CLMNumStepsPerFile       = 1
+        model.NetCDF.CLMNumStepsPerFile       = self.domain.stop_time
 
-        model.PrintCLM = False
-        model.PrintMask = False
-        model.PrintPressure = False
-        model.PrintSaturation = False
-        model.PrintSubsurfData = False
+        model.Solver.PrintCLM = False
+        model.Solver.PrintMask = False
+        model.Solver.PrintPressure = False
+        model.Solver.PrintSaturation = False
+        model.Solver.PrintSubsurfData = False
         return model
 
     def run_year(self, flux_cycling=False, pumping_layer=4, flux_time_series=False, 

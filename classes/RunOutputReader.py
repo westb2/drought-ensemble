@@ -13,8 +13,56 @@ import json
 import xarray
 
 class RunOutputReader:
-    def __init__(self, run):
+    def __init__(self, run, output_folder="processed_full_runs"):
         self.run = run
+        
+
+
+
+    def read_output_netcdf(self, save_to_file=False):
+        output_folders = self.run.get_output_folders()
+        datasets = []
+        for output_folder in output_folders:
+            data = xarray.open_dataset(os.path.join(output_folder, f"run.out.00001.nc"))
+            datasets.append(data)
+
+        data_array = xarray.concat(datasets, dim="time")
+        run_input_data = xarray.open_dataset(os.path.join(output_folders[0], f"run.out.00000.nc"))
+        data_array["mask"] = (["z", "y", "x"], run_input_data.mask.isel(time=0).data)
+        data_array["mannings"] = (["y", "x"], run_input_data.mannings.isel(time=0).data)
+        data_array["porosity"] = (["z", "y", "x"], run_input_data.porosity.isel(time=0).data)
+        data_array["specific_storage"] = (["z", "y", "x"], run_input_data.specific_storage.isel(time=0).data)
+        data_array["DZ_Multiplier"] = (["z", "y", "x"], run_input_data.DZ_Multiplier.isel(time=0).data)
+        data_array["slopex"] = (["y", "x"], run_input_data.slopex.isel(time=0).data)
+        data_array["slopey"] = (["y", "x"], run_input_data.slopey.isel(time=0).data)
+        data_array["perm_x"] = (["z", "y", "x"], run_input_data.perm_x.isel(time=0).data)
+        data_array["perm_y"] = (["z", "y", "x"], run_input_data.perm_y.isel(time=0).data)   
+        data_array["perm_z"] = (["z", "y", "x"], run_input_data.perm_z.isel(time=0).data)
+
+        data_array.info()
+        if save_to_file:
+            os.makedirs(f'{self.run.output_root}/{output_folder}', exist_ok=True)
+            output_path = f'{self.run.output_root}/{output_folder}/{self.run.sequence["name"]}'
+            os.makedirs(output_path, exist_ok=True)
+            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
+            json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
+            print(f"Saved condensed output to {output_path}")
+        return data_array
+
+
+
+    def get_data_accessor(self, run_dir):
+        data_accessor = pf.Run.from_definition(f'{run_dir}/run.yaml').data_accessor
+        shutil.copyfile(f'{run_dir}/mannings.pfb', f'{run_dir}/run.out.mannings.pfb')
+        return data_accessor
+
+    def read_output(self, save_to_file=False):
+        if self.run.netcdf_output:
+            return self.read_output_netcdf(save_to_file)
+        else:
+            return self.read_output_pfb(save_to_file)
+
+    def read_output_pfb(self, save_to_file=False):
         data_accessor = self.get_data_accessor(self.run.get_output_folders()[0])
         self.domain_attributes = {}
 
@@ -32,13 +80,6 @@ class RunOutputReader:
         self.domain_attributes["slope_x"] = data_accessor.slope_x
         self.domain_attributes["slope_y"] = data_accessor.slope_y
 
-
-    def get_data_accessor(self, run_dir):
-        data_accessor = pf.Run.from_definition(f'{run_dir}/run.yaml').data_accessor
-        shutil.copyfile(f'{run_dir}/mannings.pfb', f'{run_dir}/run.out.mannings.pfb')
-        return data_accessor
-
-    def read_output(self, save_to_file=False):
         pressure_files = []
         saturation_files = []
         output_folders = self.run.get_output_folders()
@@ -82,8 +123,8 @@ class RunOutputReader:
         # save to netcdf
         # pressure.to_netcdf(f'{self.run.get_output_folders()[0]}/run.out.pressure.nc')
         if save_to_file:
-            os.makedirs(f'{self.run.output_root}/processed_full_runs', exist_ok=True)
-            output_path = f'{self.run.output_root}/{self.run.domain.name}/processed_full_runs/{self.run.sequence["name"]}'
+            os.makedirs(f'{self.run.output_root}/{output_folder}', exist_ok=True)
+            output_path = f'{self.run.output_root}/{output_folder}/{self.run.sequence["name"]}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
