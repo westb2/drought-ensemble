@@ -94,7 +94,7 @@ class Run:
             "name": self.sequence["name"],
             "years": self.sequence["years"][:-1]
         }
-        previous_run = Run(sequence=previous_sequence, domain=self.domain, output_root=self.output_root)
+        previous_run = Run(sequence=previous_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
         # left justify to get the last timestamp with up to 4 0s
         ending_timestamp = str(int(self.domain.num_output_files)).zfill(5)
         return os.path.join(previous_run.run_dir, f"run.out.press.{ending_timestamp}.pfb")
@@ -108,7 +108,7 @@ class Run:
                 "name": self.sequence["name"],
                 "years": self.sequence["years"][:year+1]
             }
-            sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root)
+            sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
             if not sub_run.run_exists():
                 print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
                 if year>0:
@@ -124,12 +124,23 @@ class Run:
         model.NetCDF.WritePressure = True
         model.NetCDF.WriteSaturation = True
         model.NetCDF.WriteMannings = True
-        model.NetCDF.WriteSubsurface  = True
+        model.NetCDF.WriteSubsurface = True
         model.NetCDF.WriteSlopes = True
         model.NetCDF.WriteMask = True
         model.NetCDF.WriteDZMultiplier = True
         model.NetCDF.WriteEvapTrans = True
         model.NetCDF.WriteOverlandBCFlux = True
+        model.NetCDF.WriteCLM                 = True
+        model.NetCDF.NumStepsPerFile          = 1
+        model.NetCDF.NodeLevelIO              = False
+        model.NetCDF.CLMNumStepsPerFile       = 1
+
+        model.PrintCLM = False
+        model.PrintMask = False
+        model.PrintPressure = False
+        model.PrintSaturation = False
+        model.PrintSubsurfData = False
+        return model
 
     def run_year(self, flux_cycling=False, pumping_layer=4, flux_time_series=False, 
             years = 1, INITIAL_PRESSURE_FILE=None):
@@ -150,8 +161,6 @@ class Run:
             os.remove("./drv_vegp.dat")
             shutil.copyfile("./drv_vegp_for_irrigation.dat", "./drv_vegp.dat")
         model = pf.Run.from_definition("./run.yaml")
-        if self.netcdf_output:
-            self.switch_to_netcdf(model)
         model.TimingInfo.StartCount = 0
         if pumping_rate_fraction > 0.0:
             model = self.add_pumping_to_model(model,
@@ -165,6 +174,9 @@ class Run:
         model.TimingInfo.StopTime = self.domain.stop_time
         if INITIAL_PRESSURE_FILE is not None:
             model.Geom.domain.ICPressure.FileName = INITIAL_PRESSURE_FILE
+         # Apply netCDF settings early if requested
+        if self.netcdf_output:
+            model = self.switch_to_netcdf(model)
             # run.ICPressure.FileFormat = "ParFlowBinary"
         model.write("run", file_format="yaml")
         model.run()
