@@ -11,17 +11,19 @@ from classes.Run import Run
 from classes.Domain import Domain
 
 
-def run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name):
-    domain = Domain(config_file=f"{project_root}/domains/{domain_name}/config.ini", project_root=project_root, TESTING=True)
+def run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING):
+    domain = Domain(config_file=f"{project_root}/domains/{domain_name}/config.ini", project_root=project_root, TESTING=TESTING)
     domain.get_domain()
     run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True)
     run.run_full_sequence()
 
-    run_output_reader = RunOutputReader(run, output_folder=f"processed_full_runs/{ensemble_name}")
+    run_output_reader = RunOutputReader(run, processed_output_folder=f"processed_full_runs/{ensemble_name}")
     data = run_output_reader.read_output(save_to_file=True)
 
 if __name__ == "__main__":
     domain_name = sys.argv[1]
     sequence_path = sys.argv[2]
     project_root = sys.argv[3]
-    run_sequence_on_domain(domain_name, sequence_path, project_root)
+    ensemble_name = sys.argv[4]
+    TESTING = sys.argv[5]
+    run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING)

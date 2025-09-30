@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N ensemble
+#PBS -A UPRI0032
+#PBS -q main
+#PBS -m bae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=10:00:00 
+#PBS -l select=1:ncpus=64:mpiprocs=64
+#PBS -j oe
+
+module load conda
+conda activate droughts
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs
+source ~/pf_env.sh
+python3 do_spinup.py
+        

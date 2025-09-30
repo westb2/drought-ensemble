@@ -13,7 +13,8 @@ import json
 import xarray
 
 class RunOutputReader:
-    def __init__(self, run, output_folder="processed_full_runs"):
+    def __init__(self, run, processed_output_folder="processed_full_runs"):
+        self.processed_output_folder = processed_output_folder
         self.run = run
         
 
@@ -25,6 +26,7 @@ class RunOutputReader:
         for output_folder in output_folders:
             data = xarray.open_dataset(os.path.join(output_folder, f"run.out.00001.nc"))
             datasets.append(data)
+
 
         data_array = xarray.concat(datasets, dim="time")
         run_input_data = xarray.open_dataset(os.path.join(output_folders[0], f"run.out.00000.nc"))
@@ -41,8 +43,8 @@ class RunOutputReader:
 
         data_array.info()
         if save_to_file:
-            os.makedirs(f'{self.run.output_root}/{output_folder}', exist_ok=True)
-            output_path = f'{self.run.output_root}/{output_folder}/{self.run.sequence["name"]}'
+            os.makedirs(f'{self.run.output_root}/{self.processed_output_folder}', exist_ok=True)
+            output_path = f'{self.run.output_root}/{self.processed_output_folder}/{self.run.sequence["name"]}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
@@ -123,8 +125,8 @@ class RunOutputReader:
         # save to netcdf
         # pressure.to_netcdf(f'{self.run.get_output_folders()[0]}/run.out.pressure.nc')
         if save_to_file:
-            os.makedirs(f'{self.run.output_root}/{output_folder}', exist_ok=True)
-            output_path = f'{self.run.output_root}/{output_folder}/{self.run.sequence["name"]}'
+            os.makedirs(f'{self.run.output_root}/{self.processed_output_folder}', exist_ok=True)
+            output_path = f'{self.run.output_root}/{self.processed_output_folder}/{self.run.sequence["name"]}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
