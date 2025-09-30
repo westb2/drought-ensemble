@@ -1,15 +1,17 @@
 import sys
 import os
+import shutil
 
 from RunOutputReader import RunOutputReader
 from Run import Run
 from Domain import Domain
 
-
-domain = Domain(config_file="/glade/u/home/bwest/drought-ensemble/domains/wolf_test/config.ini", TESTING=True)
+project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
+domain = Domain(config_file=f"{project_root}/domains/wolf_test/config.ini", TESTING=True)
 domain.get_domain()
 
-run = Run(sequence="simple_test.json", domain=domain, output_root=None, netcdf_output=True)
+shutil.rmtree(f"{project_root}/domains/wolf_test/testing", ignore_errors=True)
+run = Run(sequence="simple_test.json", domain=domain, output_root="", netcdf_output=True)
 run.run_full_sequence()
 
 # run_output_reader = RunOutputReader(run)

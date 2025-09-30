@@ -120,7 +120,7 @@ class Run:
         print(f"Running {self.sequence2string(self.sequence)}")
         
     def switch_to_netcdf(self, model):
-        model.NetCDF.NumTimestepsPerFile = self.domain.stop_time
+        model.NetCDF.NumTimestepsPerFile = 1
         model.NetCDF.WritePressure = True
         model.NetCDF.WriteSaturation = True
         model.NetCDF.WriteMannings = True
