@@ -12,6 +12,10 @@ from classes.Domain import Domain
 
 
 def run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING):
+    print(TESTING)
+    if TESTING == "False":
+        TESTING = False
+    print(TESTING)
     domain = Domain(config_file=f"{project_root}/domains/{domain_name}/config.ini", project_root=project_root, TESTING=TESTING)
     domain.get_domain()
     run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True)

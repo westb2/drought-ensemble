@@ -4,13 +4,13 @@
 #PBS -q main
 #PBS -m bae
 #PBS -M benjaminwest@arizona.edu
-#PBS -l walltime=12:00:00 
+#PBS -l walltime=00:10:00 
 #PBS -l select=1:ncpus=1:mpiprocs=1
 #PBS -j oe
 
 module load conda
 conda activate droughts
-cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running
 source ~/pf_env.sh
 python3 get_domain.py
         

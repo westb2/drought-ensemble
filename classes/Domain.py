@@ -61,7 +61,7 @@ class Domain:
             self.stop_time = 24
         else:
             self.directory = os.path.join(self.project_root, "domains", self.name)
-            self.dump_interval = 24*5
+            self.dump_interval = 1
             self.stop_time = 8760
         self.num_output_files = (self.stop_time // self.dump_interval)
         self.inputs_directory = os.path.join(self.directory, "inputs")

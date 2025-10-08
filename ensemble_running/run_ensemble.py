@@ -15,7 +15,7 @@ from classes.Domain import Domain
 # these are the input we can change
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
 domain_name = "potomac"
-ensemble_name = "ensemble_1"
+ensemble_name = "simple_test"
 sequences_folder = os.path.join(project_root, "run_sequences", ensemble_name)
 
 sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequences_folder)]
@@ -26,13 +26,13 @@ for sequence in sequences:
     with open("tmp_job.pbs", "w") as f:
         f.write(
 f"""#!/bin/bash
-#PBS -N ensemble
+#PBS -N {domain_name}_{ensemble_name}
 #PBS -A UPRI0032
 #PBS -q main
 #PBS -m bae
 #PBS -M benjaminwest@arizona.edu
-#PBS -l walltime=12:00:00 
-#PBS -l select=1:ncpus=64:mpiprocs=64
+#PBS -l walltime=02:00:00 
+#PBS -l select=4:ncpus=256:mpiprocs=256
 #PBS -j oe
 
 module load conda
