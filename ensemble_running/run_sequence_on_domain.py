@@ -18,10 +18,10 @@ def run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_na
     print(TESTING)
     domain = Domain(config_file=f"{project_root}/domains/{domain_name}/config.ini", project_root=project_root, TESTING=TESTING)
     domain.get_domain()
-    run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True)
+    run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True, ensemble_name=ensemble_name)
     run.run_full_sequence()
 
-    run_output_reader = RunOutputReader(run, processed_output_folder=f"processed_full_runs/{ensemble_name}")
+    run_output_reader = RunOutputReader(run)
     data = run_output_reader.read_output(save_to_file=True)
 
 if __name__ == "__main__":

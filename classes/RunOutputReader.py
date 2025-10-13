@@ -13,11 +13,9 @@ import json
 import xarray
 
 class RunOutputReader:
-    def __init__(self, run, processed_output_folder="processed_full_runs"):
-        self.processed_output_folder = processed_output_folder
+    def __init__(self, run):
         self.run = run
-        
-
+        self.processed_output_folder = self.run.processed_output_path
 
 
     def read_output_netcdf(self, save_to_file=False):
@@ -43,11 +41,11 @@ class RunOutputReader:
 
         data_array.info()
         if save_to_file:
-            os.makedirs(f'{self.run.output_root}/{self.processed_output_folder}', exist_ok=True)
-            output_path = f'{self.run.output_root}/{self.processed_output_folder}/{self.run.sequence["name"]}'
+            output_path = f'{self.run.processed_output_path}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
+            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             print(f"Saved condensed output to {output_path}")
         return data_array
 
@@ -125,10 +123,10 @@ class RunOutputReader:
         # save to netcdf
         # pressure.to_netcdf(f'{self.run.get_output_folders()[0]}/run.out.pressure.nc')
         if save_to_file:
-            os.makedirs(f'{self.run.output_root}/{self.processed_output_folder}', exist_ok=True)
-            output_path = f'{self.run.output_root}/{self.processed_output_folder}/{self.run.sequence["name"]}'
+            output_path = f'{self.run.processed_output_path}'
             os.makedirs(output_path, exist_ok=True)
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
+            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             print(f"Saved condensed output to {output_path}")
         return data_array

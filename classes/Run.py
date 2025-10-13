@@ -17,8 +17,9 @@ except ImportError:
 
 # define a class called Run
 class Run:
-    def __init__(self, sequence=None, domain=None, output_root=None, netcdf_output=False):
+    def __init__(self, sequence=None, domain=None, output_root=None, netcdf_output=False, ensemble_name=""):
         self.domain = domain
+        self.ensemble_name = ensemble_name
         self.netcdf_output = netcdf_output
         self.TESTING = domain.TESTING if domain else False
         if output_root is None:
@@ -40,6 +41,11 @@ class Run:
         self.number_of_years = len(self.sequence["years"])
         self.run_dir = self.get_run_folder()
         self.output_reader = None
+        self.processed_output_root = "processed_full_runs"
+        os.makedirs(f'{self.output_root}/{self.processed_output_root}', exist_ok=True)
+        self.processed_output_path = os.path.join(self.output_root, self.processed_output_root, self.ensemble_name, self.sequence["name"])
+        os.makedirs(self.processed_output_path, exist_ok=True)
+
 
 
     def get_sequence_file_path(self):
@@ -124,6 +130,8 @@ class Run:
             sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
             if not sub_run.run_exists():
                 print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
+                with open(os.path.join(self.processed_output_path, "run_log.txt"), "w") as f:
+                    f.write(f"Running year {year} of the run in {sub_run.get_run_folder()}")
                 if year>0:
                     sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
                 else:
@@ -131,6 +139,8 @@ class Run:
             else:
                 print(f"Year {year} of the run already exists in {sub_run.get_run_folder()}")
         print(f"Running {self.sequence2string(self.sequence)}")
+        with open(os.path.join(self.processed_output_path, "run_log.txt"), "w") as f:
+            f.write(f"Finished running full sequence with final year output in {self.get_run_folder()}")
         
     def switch_to_netcdf(self, model):
         model.NetCDF.WritePressure = True
@@ -192,6 +202,7 @@ class Run:
             # run.ICPressure.FileFormat = "ParFlowBinary"
         model.write("run", file_format="yaml")
         model.run()
+
 
 
     def add_pumping_to_model(self, model, pumping_rate_fraction=1.,

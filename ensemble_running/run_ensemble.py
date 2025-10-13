@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import json
 
 from config import TESTING
 # Add the project root to the Python path for imports
@@ -15,7 +16,7 @@ from classes.Domain import Domain
 # these are the input we can change
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
 domain_name = "potomac"
-ensemble_name = "simple_test"
+ensemble_name = "partial_run"
 sequences_folder = os.path.join(project_root, "run_sequences", ensemble_name)
 
 sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequences_folder)]
@@ -23,17 +24,20 @@ sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequenc
 sequences = [sequence for sequence in sequences if sequence.endswith(".json")]
 
 for sequence in sequences:
+    sequence_data = json.load(open(sequence))
+    sequence_name = sequence_data["name"]
     with open("tmp_job.pbs", "w") as f:
         f.write(
 f"""#!/bin/bash
-#PBS -N {domain_name}_{ensemble_name}
+#PBS -N {domain_name}_{ensemble_name}_{sequence_name}
 #PBS -A UPRI0032
 #PBS -q main
 #PBS -m bae
 #PBS -M benjaminwest@arizona.edu
-#PBS -l walltime=02:00:00 
-#PBS -l select=4:ncpus=256:mpiprocs=256
+#PBS -l walltime=01:00:00 
+#PBS -l select=4:ncpus=64:mpiprocs=64
 #PBS -j oe
+
 
 module load conda
 conda activate droughts
