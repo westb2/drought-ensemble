@@ -16,7 +16,7 @@ from classes.Domain import Domain
 # these are the input we can change
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
 domain_name = "potomac"
-ensemble_name = "partial_run"
+ensemble_name = "ensemble_1"
 sequences_folder = os.path.join(project_root, "run_sequences", ensemble_name)
 
 sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequences_folder)]
@@ -34,8 +34,8 @@ f"""#!/bin/bash
 #PBS -q main
 #PBS -m bae
 #PBS -M benjaminwest@arizona.edu
-#PBS -l walltime=01:00:00 
-#PBS -l select=4:ncpus=64:mpiprocs=64
+#PBS -l walltime=12:00:00 
+#PBS -l select=1:ncpus=64:mpiprocs=64
 #PBS -j oe
 
 
@@ -46,4 +46,4 @@ source ~/pf_env.sh
 python3 ../run_sequence_on_domain.py {domain_name} {sequence} {project_root} {ensemble_name} {TESTING}
         """)
     os.system(f"qsub tmp_job.pbs")
-    shutil.rmtree(f"{project_root}/ensemble_running/pbs_outputs/tmp_job.pbs", ignore_errors=True)
+    # shutil.rmtree(f"{project_root}/ensemble_running/pbs_outputs/tmp_job.pbs", ignore_errors=True)

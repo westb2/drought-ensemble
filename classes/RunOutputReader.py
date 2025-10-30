@@ -7,8 +7,8 @@ import xarray as xr
 import json
 
 # Hydrology functions are available but not currently used in this class
-# from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurface_storage, \
-#     calculate_water_table_depth, calculate_evapotranspiration, calculate_overland_flow_grid
+from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurface_storage, \
+    calculate_water_table_depth, calculate_evapotranspiration, calculate_overland_flow_grid
 
 import xarray
 
@@ -18,33 +18,78 @@ class RunOutputReader:
         self.processed_output_folder = self.run.processed_output_path
 
 
+    def calculate_subsurface_storage_wrapper(self, porosity, pressure, saturation, specific_storage, dx, dy, mask):
+        """Wrapper to make mask a positional argument"""
+        dz = np.array([1.0, 0.5, 0.25, 0.125, 0.05, 0.025, 0.005, 0.003, 0.0015, 0.0005])  # 1D array of layer thicknesses
+        dz = dz * 200
+        return calculate_subsurface_storage(porosity, pressure, saturation, specific_storage, dx, dy, dz, mask=mask)
+
+
+    def calculate_overland_flow_wrapper(self, pressure, slopex, slopey, mannings, dx, dy, mask):
+        """Wrapper to make mask a positional argument"""
+        return calculate_overland_flow_grid(pressure, slopex, slopey, mannings, dx, dy, mask=mask)
+
+
     def read_output_netcdf(self, save_to_file=False):
         output_folders = self.run.get_output_folders()
         datasets = []
         for output_folder in output_folders:
+            
             data = xarray.open_dataset(os.path.join(output_folder, f"run.out.00001.nc"))
             datasets.append(data)
 
 
-        data_array = xarray.concat(datasets, dim="time")
+        data_array = xarray.concat(datasets, dim="time", combine_attrs="no_conflicts")
         run_input_data = xarray.open_dataset(os.path.join(output_folders[0], f"run.out.00000.nc"))
-        data_array["mask"] = (["z", "y", "x"], run_input_data.mask.isel(time=0).data)
-        data_array["mannings"] = (["y", "x"], run_input_data.mannings.isel(time=0).data)
-        data_array["porosity"] = (["z", "y", "x"], run_input_data.porosity.isel(time=0).data)
-        data_array["specific_storage"] = (["z", "y", "x"], run_input_data.specific_storage.isel(time=0).data)
-        data_array["DZ_Multiplier"] = (["z", "y", "x"], run_input_data.DZ_Multiplier.isel(time=0).data)
-        data_array["slopex"] = (["y", "x"], run_input_data.slopex.isel(time=0).data)
-        data_array["slopey"] = (["y", "x"], run_input_data.slopey.isel(time=0).data)
-        data_array["perm_x"] = (["z", "y", "x"], run_input_data.perm_x.isel(time=0).data)
-        data_array["perm_y"] = (["z", "y", "x"], run_input_data.perm_y.isel(time=0).data)   
-        data_array["perm_z"] = (["z", "y", "x"], run_input_data.perm_z.isel(time=0).data)
+        data_array["mask"] = run_input_data.mask.isel(time=0)
+        data_array["mannings"] = run_input_data.mannings.isel(time=0)
+        data_array["porosity"] = run_input_data.porosity.isel(time=0)
+        data_array["specific_storage"] = run_input_data.specific_storage.isel(time=0)
+        data_array["DZ_Multiplier"] = run_input_data.DZ_Multiplier.isel(time=0)
+        data_array["slopex"] = run_input_data.slopex.isel(time=0)
+        data_array["slopey"] = run_input_data.slopey.isel(time=0)
+        data_array["perm_x"] = run_input_data.perm_x.isel(time=0)
+        data_array["perm_y"] = run_input_data.perm_y.isel(time=0)
+        data_array["perm_z"] = run_input_data.perm_z.isel(time=0)
+
+
+        overland_flow = xr.apply_ufunc(
+            self.calculate_overland_flow_wrapper,
+            data_array.pressure,           # (time, z, y, x)
+            data_array.slopex,             # (y, x)
+            data_array.slopey,             # (y, x)
+            data_array.mannings,           # (y, x)
+            1000,                    # scalar dx
+            1000,                    # scalar dy
+            data_array.mask,               # (z, y, x)
+            input_core_dims=[['z', 'y', 'x'], ['y', 'x'], ['y', 'x'], ['y', 'x'], [], [], ['z', 'y', 'x']],
+            output_core_dims=[['y', 'x']],
+            vectorize=True
+        )
+        data_array["overland_flow"] = overland_flow
+
+        subsurface_storage = xr.apply_ufunc(
+            self.calculate_subsurface_storage_wrapper,
+            data_array.porosity,           # (z, y, x)
+            data_array.pressure,           # (time, z, y, x)
+            data_array.saturation,         # (time, z, y, x)
+            data_array.specific_storage,   # (z, y, x)
+            1000,                    # scalar dx
+            1000,                    # scalar dy
+            data_array.mask,               # (z, y, x)
+            input_core_dims=[['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], [], [], ['z', 'y', 'x']],
+            output_core_dims=[['z', 'y', 'x']],  # Changed from ['y', 'x'] to ['z', 'y', 'x']
+            vectorize=True
+        )
+        data_array["subsurface_storage"] = subsurface_storage
 
         data_array.info()
         if save_to_file:
             output_path = f'{self.run.processed_output_path}'
             os.makedirs(output_path, exist_ok=True)
-            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
+            
+            # Ensure all variables are saved by setting unlimited_dims explicitly
             data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
             print(f"Saved condensed output to {output_path}")
         return data_array
@@ -79,6 +124,8 @@ class RunOutputReader:
         self.domain_attributes["mannings"] = data_accessor.mannings
         self.domain_attributes["slope_x"] = data_accessor.slope_x
         self.domain_attributes["slope_y"] = data_accessor.slope_y
+
+        self.domain_attributes["storage"] = data_accessor.storage
 
         pressure_files = []
         saturation_files = []
