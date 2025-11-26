@@ -94,8 +94,8 @@ class Domain:
     def get_domain_year(self, year, wetness_type):
          # You need to register on https://hydrogen.princeton.edu/pin before you can use the hydrodata utilities
         hf.register_api_pin("benjaminwest@arizona.edu", "7343")
-        start_year = year
-        end_year = year + 1
+        start_year = year -1
+        end_year = year
         runname = f"{self.name}_{wetness_type}"
         print(f"Getting domain for {runname}")
         # provide a way to create a subset from the conus domain (huc, lat/lon bbox currently supported)

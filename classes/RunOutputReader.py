@@ -33,66 +33,71 @@ class RunOutputReader:
     def read_output_netcdf(self, save_to_file=False):
         output_folders = self.run.get_output_folders()
         datasets = []
-        for output_folder in output_folders:
-            
-            data = xarray.open_dataset(os.path.join(output_folder, f"run.out.00001.nc"))
-            datasets.append(data)
-
-
-        data_array = xarray.concat(datasets, dim="time", combine_attrs="no_conflicts")
+        file_list = []
+        # data = xarray.open_mfdataset(file_list, concat_dim="time", combine="by_coords")
         run_input_data = xarray.open_dataset(os.path.join(output_folders[0], f"run.out.00000.nc"))
-        data_array["mask"] = run_input_data.mask.isel(time=0)
-        data_array["mannings"] = run_input_data.mannings.isel(time=0)
-        data_array["porosity"] = run_input_data.porosity.isel(time=0)
-        data_array["specific_storage"] = run_input_data.specific_storage.isel(time=0)
-        data_array["DZ_Multiplier"] = run_input_data.DZ_Multiplier.isel(time=0)
-        data_array["slopex"] = run_input_data.slopex.isel(time=0)
-        data_array["slopey"] = run_input_data.slopey.isel(time=0)
-        data_array["perm_x"] = run_input_data.perm_x.isel(time=0)
-        data_array["perm_y"] = run_input_data.perm_y.isel(time=0)
-        data_array["perm_z"] = run_input_data.perm_z.isel(time=0)
+        for year,output_folder in enumerate(output_folders):
+            processed_output_path = os.path.join(output_folder, f"processed_output.nc")
+            if os.path.exists(processed_output_path):
+                file_list.append(processed_output_path)
+                print(f"Found processed output for year {year} at {processed_output_path}")
+                continue
+            raw_output_path = os.path.join(output_folder, f"run.out.00001.nc")
+            data = xarray.open_dataset(raw_output_path)
+        # data_array = xarray.concat(datasets, dim="time", combine_attrs="no_conflicts")
+        
+            data["mask"] = run_input_data.mask.isel(time=0)
+            data["mannings"] = run_input_data.mannings.isel(time=0)
+            data["porosity"] = run_input_data.porosity.isel(time=0)
+            data["specific_storage"] = run_input_data.specific_storage.isel(time=0)
+            data["DZ_Multiplier"] = run_input_data.DZ_Multiplier.isel(time=0)
+            data["slopex"] = run_input_data.slopex.isel(time=0)
+            data["slopey"] = run_input_data.slopey.isel(time=0)
+            data["perm_x"] = run_input_data.perm_x.isel(time=0)
+            data["perm_y"] = run_input_data.perm_y.isel(time=0)
+            data["perm_z"] = run_input_data.perm_z.isel(time=0)
 
 
-        overland_flow = xr.apply_ufunc(
-            self.calculate_overland_flow_wrapper,
-            data_array.pressure,           # (time, z, y, x)
-            data_array.slopex,             # (y, x)
-            data_array.slopey,             # (y, x)
-            data_array.mannings,           # (y, x)
-            1000,                    # scalar dx
-            1000,                    # scalar dy
-            data_array.mask,               # (z, y, x)
-            input_core_dims=[['z', 'y', 'x'], ['y', 'x'], ['y', 'x'], ['y', 'x'], [], [], ['z', 'y', 'x']],
-            output_core_dims=[['y', 'x']],
-            vectorize=True
-        )
-        data_array["overland_flow"] = overland_flow
+            overland_flow = xr.apply_ufunc(
+                self.calculate_overland_flow_wrapper,
+                data.pressure,           # (time, z, y, x)
+                data.slopex,             # (y, x)
+                data.slopey,             # (y, x)
+                data.mannings,           # (y, x)
+                1000,                    # scalar dx
+                1000,                    # scalar dy
+                data.mask,               # (z, y, x)
+                input_core_dims=[['z', 'y', 'x'], ['y', 'x'], ['y', 'x'], ['y', 'x'], [], [], ['z', 'y', 'x']],
+                output_core_dims=[['y', 'x']],
+                vectorize=True
+            )
+            data["overland_flow"] = overland_flow
 
-        subsurface_storage = xr.apply_ufunc(
-            self.calculate_subsurface_storage_wrapper,
-            data_array.porosity,           # (z, y, x)
-            data_array.pressure,           # (time, z, y, x)
-            data_array.saturation,         # (time, z, y, x)
-            data_array.specific_storage,   # (z, y, x)
-            1000,                    # scalar dx
-            1000,                    # scalar dy
-            data_array.mask,               # (z, y, x)
-            input_core_dims=[['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], [], [], ['z', 'y', 'x']],
-            output_core_dims=[['z', 'y', 'x']],  # Changed from ['y', 'x'] to ['z', 'y', 'x']
-            vectorize=True
-        )
-        data_array["subsurface_storage"] = subsurface_storage
-
-        data_array.info()
-        if save_to_file:
-            output_path = f'{self.run.processed_output_path}'
-            os.makedirs(output_path, exist_ok=True)
-            json.dump(self.run.sequence, open(os.path.join(output_path, "sequence.json"), "w"))
-            
-            # Ensure all variables are saved by setting unlimited_dims explicitly
-            data_array.to_netcdf(os.path.join(output_path, "run.out.nc"))
-            print(f"Saved condensed output to {output_path}")
-        return data_array
+            subsurface_storage = xr.apply_ufunc(
+                self.calculate_subsurface_storage_wrapper,
+                data.porosity,           # (z, y, x)
+                data.pressure,           # (time, z, y, x)
+                data.saturation,         # (time, z, y, x)
+                data.specific_storage,   # (z, y, x)
+                1000,                    # scalar dx
+                1000,                    # scalar dy
+                data.mask,               # (z, y, x)
+                input_core_dims=[['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], [], [], ['z', 'y', 'x']],
+                output_core_dims=[['z', 'y', 'x']],  # Changed from ['y', 'x'] to ['z', 'y', 'x']
+                vectorize=True
+            )
+            data["subsurface_storage"] = subsurface_storage
+            processed_output_path = os.path.join(output_folder, f"processed_output.nc")
+            print(f"Saving processed output for year {year} to {processed_output_path}")
+            data.to_netcdf(processed_output_path)
+            file_list.append(processed_output_path)
+        condensed_output_path = f'{self.run.processed_output_path}'
+        json.dump(self.run.sequence, open(os.path.join(condensed_output_path, "sequence.json"), "w"))
+        file_locations_file = os.path.join(condensed_output_path, "file_locations.json")
+        with open(file_locations_file, "w") as f:
+            json.dump(file_list, f)
+        print(f"Saved condensed output to {condensed_output_path}")
+        return condensed_output_path
 
 
 

@@ -189,7 +189,7 @@ class Run:
                             pumping_rate_fraction=pumping_rate_fraction, 
                             irrigation=irrigation, flux_cycling=flux_cycling, 
                             pumping_layer=pumping_layer, flux_time_series=flux_time_series,
-                            start_time=0, end_time=self.domain.stop_time * years)
+                            start_time=0, end_time=self.domain.stop_time)
         model.run_dir = os.getcwd()
         model.TimingInfo.DumpInterval = self.domain.dump_interval
         model.Solver.CLM.CLMDumpInterval = self.domain.dump_interval
@@ -254,7 +254,7 @@ class Run:
             #     run.Solver.EvapTransFileTransient = True
             #     run.Solver.EvapTrans.FileName = f"{self.run_dir}/fluxes"
             # else:
-        pf.write_pfb(f"{self.run_dir}/fluxes_on.pfb", fluxes*1.0, p=self.domain.P, q=self.domain.Q, dist=True)
+        pf.write_pfb(f"{self.run_dir}/fluxes_on.pfb", fluxes*1.0, p=self.domain.p, q=self.domain.q, dist=True)
         model.Solver.EvapTransFile = True
         model.Solver.EvapTrans.FileName = f"{self.run_dir}/fluxes_on.pfb"
         # else:
