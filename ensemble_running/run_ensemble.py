@@ -15,8 +15,8 @@ from classes.Domain import Domain
 
 # these are the input we can change
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
-domain_name = "wolf"
-ensemble_name = "pumping_test"
+domain_name = "potomac_without_flow_barrier"
+ensemble_name = "ensemble_1"
 sequences_folder = os.path.join(project_root, "run_sequences", ensemble_name)
 
 sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequences_folder)]

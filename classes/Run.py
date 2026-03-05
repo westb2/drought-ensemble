@@ -39,6 +39,10 @@ class Run:
         else:
             raise ValueError("Either sequence_file or sequence must be provided")
         self.number_of_years = len(self.sequence["years"])
+        if "pumping_layer" in self.sequence:
+            self.pumping_layer = self.sequence["pumping_layer"]
+        else:
+            self.pumping_layer = 2
         self.run_dir = self.get_run_folder()
         self.output_reader = None
         self.processed_output_root = "processed_full_runs"
@@ -72,7 +76,12 @@ class Run:
 
     def sequence2string(self, sequence):
         years = sequence["years"]
-        return "_".join([f"{year['wetness']}_{year['pumping_rate_fraction']}_{year['irrigation']}" for year in years])
+        sequence_string = "_".join([f"{year['wetness']}_{year['pumping_rate_fraction']}_{year['irrigation']}" for year in years])
+        if self.pumping_layer != 2:
+            exists_pumping_in_run = sum(1 for year in years if year["pumping_rate_fraction"] > 0.0) > 0
+            if exists_pumping_in_run:
+                sequence_string = sequence_string + f"_pumping_layer_{self.pumping_layer}"
+        return sequence_string
 
 
     def hash_sequence(self, sequence):
@@ -125,6 +134,7 @@ class Run:
             # Create a sub-sequence with only the years up to the current year
             sub_sequence = {
                 "name": self.sequence["name"],
+                # "pumping_layer": self.pumping_layer,
                 "years": self.sequence["years"][:year+1]
             }
             sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
@@ -173,6 +183,8 @@ class Run:
         irrigation = run_specs["irrigation"] == "True"
         pumping_rate_fraction = run_specs["pumping_rate_fraction"]
         year_wetness = run_specs["wetness"]
+        print(f"Copying domain to run directory {self.run_dir}")
+        print(f"Domain base run folder: {self.domain.get_base_run_folder(year_wetness)}")
         shutil.copytree(f"{self.domain.get_base_run_folder(year_wetness)}", self.run_dir)
         os.chdir(self.run_dir)
         # Write the sequence to a file
@@ -206,13 +218,12 @@ class Run:
 
 
     def add_pumping_to_model(self, model, pumping_rate_fraction=1.,
-                    irrigation=False, flux_cycling=False, pumping_layer=2, flux_time_series=False,
+                    irrigation=False, flux_cycling=False, flux_time_series=False,
                     start_time=0, end_time=8760):
         data_accessor = model.data_accessor
         shutil.copyfile(f"{self.run_dir}/mask.pfb", f"{self.run_dir}/{model.get_name()}.out.mask.pfb")
         domain_mask = np.where(data_accessor.mask > 0, 1, 0)
         # mask = np.where(data_accessor.mask > 0, 1, np.nan)
-        pumping_layer = 2
         df = pd.read_csv(f"{self.run_dir}/drv_vegm.dat", sep=' ', skiprows=1)
         df.rename(columns={'Unnamed: 0': 'x', 'Unnamed: 1': 'y',}, inplace=True)
         df["is_cropland"] = df["12"] + df["14"]
@@ -230,9 +241,9 @@ class Run:
         #to add wells ~30 meters down we need to add them to the third from the bottom layer
         if irrigation:
             # if we are doing irrigation because we estimate based off consumptive use we need to do more pumping
-            fluxes[pumping_layer,:,:] = -1.3/dz[pumping_layer]
+            fluxes[self.pumping_layer,:,:] = -1.3/dz[self.pumping_layer]
         else:
-            fluxes[pumping_layer,:,:] = -1.0/dz[pumping_layer]
+            fluxes[self.pumping_layer,:,:] = -1.0/dz[self.pumping_layer]
 
         fluxes = fluxes * irrigation_mask
         pumped_area_fraction = self.calculate_pumped_area_fraction("12")

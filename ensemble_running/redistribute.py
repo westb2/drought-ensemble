@@ -6,7 +6,7 @@ def get_config(config_file):
     config.read(config_file)
     return config
 
-domain_name = "potomac"
+domain_name = "potomac_without_flow_barrier"
 TESTING = False
 wetness_types = ["dry","average"]
 config_file = f"/glade/derecho/scratch/bwest/drought-ensemble/domains/{domain_name}/config.ini"

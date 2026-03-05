@@ -74,10 +74,11 @@ class Domain:
     def get_domain(self):
         if not self.domain_exists(self.DRY_WETNESS_TYPE):
             self.get_domain_year(self.dry_year, self.DRY_WETNESS_TYPE)
-        if not self.domain_exists(self.WET_WETNESS_TYPE):
-            self.get_domain_year(self.wet_year, self.WET_WETNESS_TYPE)
         if not self.domain_exists(self.AVERAGE_WETNESS_TYPE):
             self.get_domain_year(self.average_year, self.AVERAGE_WETNESS_TYPE)
+        if not self.domain_exists(self.WET_WETNESS_TYPE):
+            self.get_domain_year(self.wet_year, self.WET_WETNESS_TYPE)
+        
 
     def domain_exists(self, wetness_type):
         runname = f"{self.name}_{wetness_type}"
