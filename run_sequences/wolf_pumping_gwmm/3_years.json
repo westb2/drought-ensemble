@@ -1,0 +1,70 @@
+{
+    "name": "3_year_drought",
+    "years": [
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0001,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0001,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0001,
+            "irrigation": "False"
+        }, 
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0001,
+            "irrigation": "False"
+        },  
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0001,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        }   
+    ]
+}

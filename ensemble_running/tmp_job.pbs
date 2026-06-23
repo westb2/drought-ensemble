@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -N wolf2_25_year_spinup_spinup
+#PBS -A UPRI0032
+#PBS -q main
+#PBS -m bae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=12:00:00 
+#PBS -l select=4:ncpus=64:mpiprocs=64
+#PBS -j oe
+module load conda
+conda activate droughts
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs
+source ~/pf_env.sh
+python3 ../run_sequence_on_domain.py wolf2 /glade/derecho/scratch/bwest/drought-ensemble/run_sequences/25_year_spinup/spinup.json /glade/derecho/scratch/bwest/drought-ensemble 25_year_spinup False
+        

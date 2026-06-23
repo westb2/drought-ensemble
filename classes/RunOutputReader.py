@@ -42,6 +42,7 @@ class RunOutputReader:
                 file_list.append(processed_output_path)
                 print(f"Found processed output for year {year} at {processed_output_path}")
                 continue
+            print(f"Processing year {year} from {output_folder}")
             raw_output_path = os.path.join(output_folder, f"run.out.00001.nc")
             data = xarray.open_dataset(raw_output_path)
         # data_array = xarray.concat(datasets, dim="time", combine_attrs="no_conflicts")

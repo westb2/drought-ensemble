@@ -1,0 +1,87 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/31cdd09f9100c787544e94d87002b367950e5a18af33731896690f6343258437
+Running year 2 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/d38f6d526e24604107b05195405475314f705b94c9938d5ab7937eb10968f0e5
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/file_manager.py", line 211, in _acquire_with_cache_info
+    file = self._cache[self._key]
+           ~~~~~~~~~~~^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/lru_cache.py", line 56, in __getitem__
+    value = self._cache[key]
+            ~~~~~~~~~~~^^^^^
+KeyError: [<class 'netCDF4._netCDF4.Dataset'>, ('/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/31cdd09f9100c787544e94d87002b367950e5a18af33731896690f6343258437/run.out.00001.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '79924ca6-a01f-436f-8888-49c8c13f6988']
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 33, in <module>
+    run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING)
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 22, in run_sequence_on_domain
+    run.run_full_sequence()
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 136, in run_full_sequence
+    sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 116, in get_initial_pressure_file
+    file_path = self.create_initial_pressure_file_from_netcdf(previous_run.run_dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 99, in create_initial_pressure_file_from_netcdf
+    run_output = xarray.open_dataset(os.path.join(previous_run_dir, f"run.out.00001.nc"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/api.py", line 760, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/netCDF4_.py", line 682, in open_dataset
+    store = NetCDF4DataStore.open(
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/netCDF4_.py", line 468, in open
+    return cls(manager, group=group, mode=mode, lock=lock, autoclose=autoclose)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/netCDF4_.py", line 398, in __init__
+    self.format = self.ds.data_model
+                  ^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/netCDF4_.py", line 477, in ds
+    return self._acquire()
+           ^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/netCDF4_.py", line 471, in _acquire
+    with self._manager.acquire_context(needs_lock) as root:
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/file_manager.py", line 199, in acquire_context
+    file, cached = self._acquire_with_cache_info(needs_lock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/file_manager.py", line 217, in _acquire_with_cache_info
+    file = self._opener(*self._args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/netCDF4/_netCDF4.pyx", line 2469, in netCDF4._netCDF4.Dataset.__init__
+  File "src/netCDF4/_netCDF4.pyx", line 2028, in netCDF4._netCDF4._ensure_nc_success
+FileNotFoundError: [Errno 2] No such file or directory: '/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/31cdd09f9100c787544e94d87002b367950e5a18af33731896690f6343258437/run.out.00001.nc'

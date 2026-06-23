@@ -12,5 +12,5 @@ module load conda
 conda activate droughts
 cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running
 source ~/pf_env.sh
-python3 get_domain.py
+python3 get_domain.py potomac_flow_barrier_0011
         

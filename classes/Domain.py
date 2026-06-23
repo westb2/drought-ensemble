@@ -11,12 +11,16 @@ import subsettools as st
 import hf_hydrodata as hf
 import configparser
 
+_DEFAULT_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 # define a class called Domain
 class Domain:
-    def __init__(self, config_file, project_root="/glade/u/home/bwest/drought-ensemble", TESTING=False):
+    def __init__(self, config_file, project_root=_DEFAULT_PROJECT_ROOT, TESTING=False, full_config_file_path_given=True):
         
-        
-        self.config_file = config_file
+        if full_config_file_path_given:
+            self.config_file = config_file
+        else:
+            self.config_file = os.path.join(project_root, "domains", config_file, "config.ini")
         # if testing, only grab one day of data
         self.TESTING = TESTING
         self.DRY_WETNESS_TYPE = "dry"
@@ -30,12 +34,13 @@ class Domain:
         else:
             self.stop_time = 8760
         # make each item in the config a class attribute
+        string_fields = {'huc_id', 'current_huc_id', 'current_reference_gage', 'name', 'domain_name', 'current_run_name'}
         for key in self.config['DEFAULT']:
             value = self.config.get('DEFAULT', key)
+            attr_name = key.lower()
             # Keep certain fields as strings (identifiers, names, etc.)
-            string_fields = ['huc_id', 'current_huc_id', 'current_reference_gage', 'name', 'domain_name', 'current_run_name']
-            if key in string_fields:
-                setattr(self, key, value)
+            if attr_name in string_fields:
+                setattr(self, attr_name, value)
             else:
                 # Try to convert numeric values
                 try:
@@ -46,14 +51,17 @@ class Domain:
                 except ValueError:
                     # Keep as string if conversion fails
                     pass
-                setattr(self, key, value)
+                setattr(self, attr_name, value)
         
         # Ensure name attribute exists - use domain_name as fallback
-        if not hasattr(self, 'name') or not self.name:
-            if hasattr(self, 'domain_name') and self.domain_name:
-                self.name = self.domain_name
-            else:
-                raise ValueError("Config file must contain either 'name' or 'domain_name' field")
+        name = self._get_config_value_case_insensitive('name')
+        domain_name = self._get_config_value_case_insensitive('domain_name')
+        if name:
+            self.name = name
+        elif domain_name:
+            self.name = domain_name
+        else:
+            raise ValueError("Config file must contain either 'name' or 'domain_name' field")
                 
         if TESTING:
             self.directory = os.path.join(self.project_root, "domains", self.name, "testing")
@@ -70,6 +78,13 @@ class Domain:
         config = configparser.ConfigParser()
         config.read(self.config_file)
         return config
+
+    def _get_config_value_case_insensitive(self, key, section='DEFAULT'):
+        key_lower = key.lower()
+        for config_key in self.config[section]:
+            if config_key.lower() == key_lower:
+                return self.config.get(section, config_key)
+        return None
 
     def get_domain(self):
         if not self.domain_exists(self.DRY_WETNESS_TYPE):

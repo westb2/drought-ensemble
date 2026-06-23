@@ -1,0 +1,208 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/inputs/wolf_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387
+Year 2 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c
+Year 3 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/135c42d47dddf768b8658f96129bc570c3f2b083931d89766145d0bc392baa7c
+Year 4 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/75e584a05c8bdf27cc56356578c459a58175d09be9b20f83ca60221793a740e3
+Year 5 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/5508712d2e18b51db6e2f4f853715cba34711f4d77be790265b718a9e15c0b2f
+Year 6 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/913e7381184fb240df74ea5e87c3a38cef6e52f2c55165baba10e0d482321b97
+Year 7 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f2a4002edc3e2b1d293f6be2b7524ec4163f0d1255709956b1243e164a6f244a
+Year 8 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f9bf7474db324be5bc2ae1c3484799c6c67af674567150a365f508571faf894e
+Year 9 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c40ed0d5687b8698d09fe54b68da21996b472df987130f88400a01abe2a7a151
+Year 10 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/1425bb1d392dfb4e7975dd2f51c19fb93f0cd1e8d6c52bb7ccb898197e297d11
+Running year 11 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/ec16cfda040ab2785ad83c150005d3aa8c80162a79c701fd8513d1bf52d93d58
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/ec16cfda040ab2785ad83c150005d3aa8c80162a79c701fd8513d1bf52d93d58
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 12 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f03d7e8de9e3f1942bd08e904258725165951cbdb7cef3a45bf76fbe259e838e
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f03d7e8de9e3f1942bd08e904258725165951cbdb7cef3a45bf76fbe259e838e
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 13 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/23757db1c29edaf2c88596e949162a8882797e3bb9416f8e59a63b5513438e9e
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/23757db1c29edaf2c88596e949162a8882797e3bb9416f8e59a63b5513438e9e
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 14 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c45896ea7564b76277c9de68357e9945252c3c5a91f216c29cca2e0eefc4b956
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c45896ea7564b76277c9de68357e9945252c3c5a91f216c29cca2e0eefc4b956
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 15 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/50b5fe3034ab5a6fa30f11d9ca4a0a3d70a6148ccc9f68cb71d5696d0a314126
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/50b5fe3034ab5a6fa30f11d9ca4a0a3d70a6148ccc9f68cb71d5696d0a314126
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 16 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/06a2d006a67fe371df12f607ddfd89243bd8a2d5b7a2c055a3a70c6873d2960d
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/06a2d006a67fe371df12f607ddfd89243bd8a2d5b7a2c055a3a70c6873d2960d
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 17 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/6cc490b6df5dac78ed787dc5089e6beabb7f9adcfe85749788050a2bab8cae13
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/6cc490b6df5dac78ed787dc5089e6beabb7f9adcfe85749788050a2bab8cae13
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False
+Found processed output for year 0 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c/processed_output.nc
+Found processed output for year 1 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387/processed_output.nc
+Found processed output for year 2 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c/processed_output.nc
+Found processed output for year 3 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/135c42d47dddf768b8658f96129bc570c3f2b083931d89766145d0bc392baa7c/processed_output.nc
+Found processed output for year 4 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/75e584a05c8bdf27cc56356578c459a58175d09be9b20f83ca60221793a740e3/processed_output.nc
+Found processed output for year 5 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/5508712d2e18b51db6e2f4f853715cba34711f4d77be790265b718a9e15c0b2f/processed_output.nc
+Found processed output for year 6 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/913e7381184fb240df74ea5e87c3a38cef6e52f2c55165baba10e0d482321b97/processed_output.nc
+Found processed output for year 7 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f2a4002edc3e2b1d293f6be2b7524ec4163f0d1255709956b1243e164a6f244a/processed_output.nc
+Found processed output for year 8 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f9bf7474db324be5bc2ae1c3484799c6c67af674567150a365f508571faf894e/processed_output.nc
+Found processed output for year 9 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c40ed0d5687b8698d09fe54b68da21996b472df987130f88400a01abe2a7a151/processed_output.nc
+Found processed output for year 10 at /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/1425bb1d392dfb4e7975dd2f51c19fb93f0cd1e8d6c52bb7ccb898197e297d11/processed_output.nc
+Saving processed output for year 11 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/ec16cfda040ab2785ad83c150005d3aa8c80162a79c701fd8513d1bf52d93d58/processed_output.nc
+Saving processed output for year 12 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/f03d7e8de9e3f1942bd08e904258725165951cbdb7cef3a45bf76fbe259e838e/processed_output.nc
+Saving processed output for year 13 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/23757db1c29edaf2c88596e949162a8882797e3bb9416f8e59a63b5513438e9e/processed_output.nc
+Saving processed output for year 14 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/c45896ea7564b76277c9de68357e9945252c3c5a91f216c29cca2e0eefc4b956/processed_output.nc
+Saving processed output for year 15 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/50b5fe3034ab5a6fa30f11d9ca4a0a3d70a6148ccc9f68cb71d5696d0a314126/processed_output.nc
+Saving processed output for year 16 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/06a2d006a67fe371df12f607ddfd89243bd8a2d5b7a2c055a3a70c6873d2960d/processed_output.nc
+Saving processed output for year 17 to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/raw_runs/6cc490b6df5dac78ed787dc5089e6beabb7f9adcfe85749788050a2bab8cae13/processed_output.nc
+Saved condensed output to /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf/processed_full_runs/pumping_ensemble/baseline

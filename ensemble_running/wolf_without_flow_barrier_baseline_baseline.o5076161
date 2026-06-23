@@ -1,0 +1,40 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+Aborting in file </glade/work/gartavanis/parflow/parflow/pfsimulator/amps/common/amps_ffopen.c> line : 253
+AMPS Error
+dec1260.hsn.de.hpc.ucar.edu: rank 0 died from signal 6 and dumped core
+dec1280.hsn.de.hpc.ucar.edu: rank 240 died from signal 15
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/inputs/wolf_without_flow_barrier_wet
+Running year 0 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/wolf_without_flow_barrier/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow run failed. Contents of error output file:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+# ==============================================================================
+

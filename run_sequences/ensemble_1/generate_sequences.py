@@ -15,7 +15,7 @@ for i in range(10):
 for i in range(8):
     sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
 #recovery
-for i in range(5):
+for i in range(10):
     sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
 sequence["years"] = sequence_years
 
@@ -32,7 +32,7 @@ for drought_length in drought_lengths:
     for i in range(drought_length):
         sequence_years.append({"wetness": "dry", "pumping_rate_fraction": 0.0, "irrigation": "False"})
     #recovery
-    for i in range(5):
+    for i in range(10):
         sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
     sequence["years"] = sequence_years
     json.dump(sequence, open(f"{sequence_name}.json", "w"))

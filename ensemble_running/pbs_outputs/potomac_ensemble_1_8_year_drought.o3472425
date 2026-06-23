@@ -1,0 +1,1622 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+dec2145.hsn.de.hpc.ucar.edu: rank 56 died from signal 11
+dec2145.hsn.de.hpc.ucar.edu: rank 17 died from signal 15
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387
+Year 2 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c
+Year 3 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/3d8ed65413d6f5858f7477507f81c0244343853678704237565653e027803569
+Year 4 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/2ff5250bb54632d4013b985e8c208a83a30a28cb7194cec757feed7f1774b9cb
+Year 5 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ee30527481b3c43126c818dfc42b9e0c71eb5bcc765429cf0d729153c3fb4cae
+Year 6 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ac780d6b8b80375262493be134384890e84c6594e80705fdbd7b77fda208d643
+Year 7 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/aae55948480a9c348fc3d39302a2ebf148ee5ce0d699838c9a0a2100b53d6831
+Year 8 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/5539bc71ceef534fc4013478f958284d44adaae00ff49d2ce1bb27316259245e
+Year 9 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/44b64886d1e65f2d07c1efde92880cf6f53c6c6a78395257709987ee3f5320f0
+Year 10 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/b741a05454da7c6fe48cb48f9dd83449d297a2b64ef45baf7442f0151cda77f2
+Year 11 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7eb6daf7d9cc423ab0c8bc14a8cdb721b7c22ebd63ac8440cd8e4d3fa79cea0b
+Year 12 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/9187d3853d6b1b294468a0d611f42ea68536e25558164b674b9ba2c6d4a7f9bd
+Year 13 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ad082abe4d67bf77dfd584f5cd7e932c5624450e45b6235a9f59819dcdd02799
+Year 14 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4b0e89718b87c7dbf1aee73ff8c44f317ee8ffd98e012917cebdab45e35bf914
+Year 15 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/45ebd28779a7e84c0c7a645c716646f86a70b57d193f9559b831df3e3805409c
+Running year 16 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7b82ebd1b5a6916a762101977012bf956f4988f126ddc6b160b16115137d9766
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7b82ebd1b5a6916a762101977012bf956f4988f126ddc6b160b16115137d9766
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 17 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4b19dd5cc51f53ef94c5961e985aa3a417c5443b6110e56b05577f8fdc6e85cb
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4b19dd5cc51f53ef94c5961e985aa3a417c5443b6110e56b05577f8fdc6e85cb
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 18 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ff7b19457c30a38f789e6a0ee6191ce96873a5b3eb34a07ca442d8328aa8ce24
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ff7b19457c30a38f789e6a0ee6191ce96873a5b3eb34a07ca442d8328aa8ce24
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 19 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/17e7cdf3c99fbacd906cc930ff147ad5b4755b1663247cc0acc3c1c7cff6e471
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/17e7cdf3c99fbacd906cc930ff147ad5b4755b1663247cc0acc3c1c7cff6e471
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 20 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/afc28e86ba64e5f8e8a3454888ef9413866c319d794b3882f6129152e17cf46f
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/afc28e86ba64e5f8e8a3454888ef9413866c319d794b3882f6129152e17cf46f
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow run failed. Contents of error output file:
+--------------------------------------------------------------------------------
+ Using drv_clmin.dat start time    2005.74794520548     
+ CLM Start Time:         2005          10           1           0           0
+           0
+ 
+Node 1: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 1:          is set to a large value that may cause problems
+Node 1:          with how time cycles calculations are evaluated.  Values
+Node 1:          specified via a time cycle may be on/off at the slightly
+Node 1:          wrong times times due to how Parflow discretizes time.
+Node 2: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 2:          is set to a large value that may cause problems
+Node 2:          with how time cycles calculations are evaluated.  Values
+Node 2:          specified via a time cycle may be on/off at the slightly
+Node 2:          wrong times times due to how Parflow discretizes time.
+Node 3: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 3:          is set to a large value that may cause problems
+Node 3:          with how time cycles calculations are evaluated.  Values
+Node 3:          specified via a time cycle may be on/off at the slightly
+Node 3:          wrong times times due to how Parflow discretizes time.
+Node 4: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 4:          is set to a large value that may cause problems
+Node 4:          with how time cycles calculations are evaluated.  Values
+Node 4:          specified via a time cycle may be on/off at the slightly
+Node 4:          wrong times times due to how Parflow discretizes time.
+Node 5: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 5:          is set to a large value that may cause problems
+Node 5:          with how time cycles calculations are evaluated.  Values
+Node 5:          specified via a time cycle may be on/off at the slightly
+Node 5:          wrong times times due to how Parflow discretizes time.
+Node 6: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 6:          is set to a large value that may cause problems
+Node 6:          with how time cycles calculations are evaluated.  Values
+Node 6:          specified via a time cycle may be on/off at the slightly
+Node 6:          wrong times times due to how Parflow discretizes time.
+Node 7: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 7:          is set to a large value that may cause problems
+Node 7:          with how time cycles calculations are evaluated.  Values
+Node 7:          specified via a time cycle may be on/off at the slightly
+Node 7:          wrong times times due to how Parflow discretizes time.
+Node 8: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 8:          is set to a large value that may cause problems
+Node 8:          with how time cycles calculations are evaluated.  Values
+Node 8:          specified via a time cycle may be on/off at the slightly
+Node 8:          wrong times times due to how Parflow discretizes time.
+Node 9: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 9:          is set to a large value that may cause problems
+Node 9:          with how time cycles calculations are evaluated.  Values
+Node 9:          specified via a time cycle may be on/off at the slightly
+Node 9:          wrong times times due to how Parflow discretizes time.
+Node 10: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 10:          is set to a large value that may cause problems
+Node 10:          with how time cycles calculations are evaluated.  Values
+Node 10:          specified via a time cycle may be on/off at the slightly
+Node 10:          wrong times times due to how Parflow discretizes time.
+Node 11: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 11:          is set to a large value that may cause problems
+Node 11:          with how time cycles calculations are evaluated.  Values
+Node 11:          specified via a time cycle may be on/off at the slightly
+Node 11:          wrong times times due to how Parflow discretizes time.
+Node 12: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 12:          is set to a large value that may cause problems
+Node 12:          with how time cycles calculations are evaluated.  Values
+Node 12:          specified via a time cycle may be on/off at the slightly
+Node 12:          wrong times times due to how Parflow discretizes time.
+Node 13: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 13:          is set to a large value that may cause problems
+Node 13:          with how time cycles calculations are evaluated.  Values
+Node 13:          specified via a time cycle may be on/off at the slightly
+Node 13:          wrong times times due to how Parflow discretizes time.
+Node 14: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 14:          is set to a large value that may cause problems
+Node 14:          with how time cycles calculations are evaluated.  Values
+Node 14:          specified via a time cycle may be on/off at the slightly
+Node 14:          wrong times times due to how Parflow discretizes time.
+Node 15: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 15:          is set to a large value that may cause problems
+Node 15:          with how time cycles calculations are evaluated.  Values
+Node 15:          specified via a time cycle may be on/off at the slightly
+Node 15:          wrong times times due to how Parflow discretizes time.
+Node 16: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 16:          is set to a large value that may cause problems
+Node 16:          with how time cycles calculations are evaluated.  Values
+Node 16:          specified via a time cycle may be on/off at the slightly
+Node 16:          wrong times times due to how Parflow discretizes time.
+Node 17: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 17:          is set to a large value that may cause problems
+Node 17:          with how time cycles calculations are evaluated.  Values
+Node 17:          specified via a time cycle may be on/off at the slightly
+Node 17:          wrong times times due to how Parflow discretizes time.
+Node 18: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 18:          is set to a large value that may cause problems
+Node 18:          with how time cycles calculations are evaluated.  Values
+Node 18:          specified via a time cycle may be on/off at the slightly
+Node 18:          wrong times times due to how Parflow discretizes time.
+Node 19: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 19:          is set to a large value that may cause problems
+Node 19:          with how time cycles calculations are evaluated.  Values
+Node 19:          specified via a time cycle may be on/off at the slightly
+Node 19:          wrong times times due to how Parflow discretizes time.
+Node 20: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 20:          is set to a large value that may cause problems
+Node 20:          with how time cycles calculations are evaluated.  Values
+Node 20:          specified via a time cycle may be on/off at the slightly
+Node 20:          wrong times times due to how Parflow discretizes time.
+Node 21: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 21:          is set to a large value that may cause problems
+Node 21:          with how time cycles calculations are evaluated.  Values
+Node 21:          specified via a time cycle may be on/off at the slightly
+Node 21:          wrong times times due to how Parflow discretizes time.
+Node 22: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 22:          is set to a large value that may cause problems
+Node 22:          with how time cycles calculations are evaluated.  Values
+Node 22:          specified via a time cycle may be on/off at the slightly
+Node 22:          wrong times times due to how Parflow discretizes time.
+Node 23: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 23:          is set to a large value that may cause problems
+Node 23:          with how time cycles calculations are evaluated.  Values
+Node 23:          specified via a time cycle may be on/off at the slightly
+Node 23:          wrong times times due to how Parflow discretizes time.
+Node 24: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 24:          is set to a large value that may cause problems
+Node 24:          with how time cycles calculations are evaluated.  Values
+Node 24:          specified via a time cycle may be on/off at the slightly
+Node 24:          wrong times times due to how Parflow discretizes time.
+Node 25: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 25:          is set to a large value that may cause problems
+Node 25:          with how time cycles calculations are evaluated.  Values
+Node 25:          specified via a time cycle may be on/off at the slightly
+Node 25:          wrong times times due to how Parflow discretizes time.
+Node 26: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 26:          is set to a large value that may cause problems
+Node 26:          with how time cycles calculations are evaluated.  Values
+Node 26:          specified via a time cycle may be on/off at the slightly
+Node 26:          wrong times times due to how Parflow discretizes time.
+Node 27: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 27:          is set to a large value that may cause problems
+Node 27:          with how time cycles calculations are evaluated.  Values
+Node 27:          specified via a time cycle may be on/off at the slightly
+Node 27:          wrong times times due to how Parflow discretizes time.
+Node 28: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 28:          is set to a large value that may cause problems
+Node 28:          with how time cycles calculations are evaluated.  Values
+Node 28:          specified via a time cycle may be on/off at the slightly
+Node 28:          wrong times times due to how Parflow discretizes time.
+Node 29: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 29:          is set to a large value that may cause problems
+Node 29:          with how time cycles calculations are evaluated.  Values
+Node 29:          specified via a time cycle may be on/off at the slightly
+Node 29:          wrong times times due to how Parflow discretizes time.
+Node 30: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 30:          is set to a large value that may cause problems
+Node 30:          with how time cycles calculations are evaluated.  Values
+Node 30:          specified via a time cycle may be on/off at the slightly
+Node 30:          wrong times times due to how Parflow discretizes time.
+Node 31: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 31:          is set to a large value that may cause problems
+Node 31:          with how time cycles calculations are evaluated.  Values
+Node 31:          specified via a time cycle may be on/off at the slightly
+Node 31:          wrong times times due to how Parflow discretizes time.
+Node 32: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 32:          is set to a large value that may cause problems
+Node 32:          with how time cycles calculations are evaluated.  Values
+Node 32:          specified via a time cycle may be on/off at the slightly
+Node 32:          wrong times times due to how Parflow discretizes time.
+Node 33: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 33:          is set to a large value that may cause problems
+Node 33:          with how time cycles calculations are evaluated.  Values
+Node 33:          specified via a time cycle may be on/off at the slightly
+Node 33:          wrong times times due to how Parflow discretizes time.
+Node 34: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 34:          is set to a large value that may cause problems
+Node 34:          with how time cycles calculations are evaluated.  Values
+Node 34:          specified via a time cycle may be on/off at the slightly
+Node 34:          wrong times times due to how Parflow discretizes time.
+Node 35: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 35:          is set to a large value that may cause problems
+Node 35:          with how time cycles calculations are evaluated.  Values
+Node 35:          specified via a time cycle may be on/off at the slightly
+Node 35:          wrong times times due to how Parflow discretizes time.
+Node 36: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 36:          is set to a large value that may cause problems
+Node 36:          with how time cycles calculations are evaluated.  Values
+Node 36:          specified via a time cycle may be on/off at the slightly
+Node 36:          wrong times times due to how Parflow discretizes time.
+Node 37: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 37:          is set to a large value that may cause problems
+Node 37:          with how time cycles calculations are evaluated.  Values
+Node 37:          specified via a time cycle may be on/off at the slightly
+Node 37:          wrong times times due to how Parflow discretizes time.
+Node 38: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 38:          is set to a large value that may cause problems
+Node 38:          with how time cycles calculations are evaluated.  Values
+Node 38:          specified via a time cycle may be on/off at the slightly
+Node 38:          wrong times times due to how Parflow discretizes time.
+Node 39: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 39:          is set to a large value that may cause problems
+Node 39:          with how time cycles calculations are evaluated.  Values
+Node 39:          specified via a time cycle may be on/off at the slightly
+Node 39:          wrong times times due to how Parflow discretizes time.
+Node 40: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 40:          is set to a large value that may cause problems
+Node 40:          with how time cycles calculations are evaluated.  Values
+Node 40:          specified via a time cycle may be on/off at the slightly
+Node 40:          wrong times times due to how Parflow discretizes time.
+Node 41: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 41:          is set to a large value that may cause problems
+Node 41:          with how time cycles calculations are evaluated.  Values
+Node 41:          specified via a time cycle may be on/off at the slightly
+Node 41:          wrong times times due to how Parflow discretizes time.
+Node 42: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 42:          is set to a large value that may cause problems
+Node 42:          with how time cycles calculations are evaluated.  Values
+Node 42:          specified via a time cycle may be on/off at the slightly
+Node 42:          wrong times times due to how Parflow discretizes time.
+Node 43: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 43:          is set to a large value that may cause problems
+Node 43:          with how time cycles calculations are evaluated.  Values
+Node 43:          specified via a time cycle may be on/off at the slightly
+Node 43:          wrong times times due to how Parflow discretizes time.
+Node 44: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 44:          is set to a large value that may cause problems
+Node 44:          with how time cycles calculations are evaluated.  Values
+Node 44:          specified via a time cycle may be on/off at the slightly
+Node 44:          wrong times times due to how Parflow discretizes time.
+Node 45: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 45:          is set to a large value that may cause problems
+Node 45:          with how time cycles calculations are evaluated.  Values
+Node 45:          specified via a time cycle may be on/off at the slightly
+Node 45:          wrong times times due to how Parflow discretizes time.
+Node 46: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 46:          is set to a large value that may cause problems
+Node 46:          with how time cycles calculations are evaluated.  Values
+Node 46:          specified via a time cycle may be on/off at the slightly
+Node 46:          wrong times times due to how Parflow discretizes time.
+Node 47: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 47:          is set to a large value that may cause problems
+Node 47:          with how time cycles calculations are evaluated.  Values
+Node 47:          specified via a time cycle may be on/off at the slightly
+Node 47:          wrong times times due to how Parflow discretizes time.
+Node 48: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 48:          is set to a large value that may cause problems
+Node 48:          with how time cycles calculations are evaluated.  Values
+Node 48:          specified via a time cycle may be on/off at the slightly
+Node 48:          wrong times times due to how Parflow discretizes time.
+Node 49: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 49:          is set to a large value that may cause problems
+Node 49:          with how time cycles calculations are evaluated.  Values
+Node 49:          specified via a time cycle may be on/off at the slightly
+Node 49:          wrong times times due to how Parflow discretizes time.
+Node 50: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 50:          is set to a large value that may cause problems
+Node 50:          with how time cycles calculations are evaluated.  Values
+Node 50:          specified via a time cycle may be on/off at the slightly
+Node 50:          wrong times times due to how Parflow discretizes time.
+Node 51: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 51:          is set to a large value that may cause problems
+Node 51:          with how time cycles calculations are evaluated.  Values
+Node 51:          specified via a time cycle may be on/off at the slightly
+Node 51:          wrong times times due to how Parflow discretizes time.
+Node 52: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 52:          is set to a large value that may cause problems
+Node 52:          with how time cycles calculations are evaluated.  Values
+Node 52:          specified via a time cycle may be on/off at the slightly
+Node 52:          wrong times times due to how Parflow discretizes time.
+Node 53: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 53:          is set to a large value that may cause problems
+Node 53:          with how time cycles calculations are evaluated.  Values
+Node 53:          specified via a time cycle may be on/off at the slightly
+Node 53:          wrong times times due to how Parflow discretizes time.
+Node 54: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 54:          is set to a large value that may cause problems
+Node 54:          with how time cycles calculations are evaluated.  Values
+Node 54:          specified via a time cycle may be on/off at the slightly
+Node 54:          wrong times times due to how Parflow discretizes time.
+Node 55: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 55:          is set to a large value that may cause problems
+Node 55:          with how time cycles calculations are evaluated.  Values
+Node 55:          specified via a time cycle may be on/off at the slightly
+Node 55:          wrong times times due to how Parflow discretizes time.
+Node 56: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 56:          is set to a large value that may cause problems
+Node 56:          with how time cycles calculations are evaluated.  Values
+Node 56:          specified via a time cycle may be on/off at the slightly
+Node 56:          wrong times times due to how Parflow discretizes time.
+Node 57: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 57:          is set to a large value that may cause problems
+Node 57:          with how time cycles calculations are evaluated.  Values
+Node 57:          specified via a time cycle may be on/off at the slightly
+Node 57:          wrong times times due to how Parflow discretizes time.
+Node 58: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 58:          is set to a large value that may cause problems
+Node 58:          with how time cycles calculations are evaluated.  Values
+Node 58:          specified via a time cycle may be on/off at the slightly
+Node 58:          wrong times times due to how Parflow discretizes time.
+Node 59: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 59:          is set to a large value that may cause problems
+Node 59:          with how time cycles calculations are evaluated.  Values
+Node 59:          specified via a time cycle may be on/off at the slightly
+Node 59:          wrong times times due to how Parflow discretizes time.
+Node 60: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 60:          is set to a large value that may cause problems
+Node 60:          with how time cycles calculations are evaluated.  Values
+Node 60:          specified via a time cycle may be on/off at the slightly
+Node 60:          wrong times times due to how Parflow discretizes time.
+Node 61: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 61:          is set to a large value that may cause problems
+Node 61:          with how time cycles calculations are evaluated.  Values
+Node 61:          specified via a time cycle may be on/off at the slightly
+Node 61:          wrong times times due to how Parflow discretizes time.
+Node 62: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 62:          is set to a large value that may cause problems
+Node 62:          with how time cycles calculations are evaluated.  Values
+Node 62:          specified via a time cycle may be on/off at the slightly
+Node 62:          wrong times times due to how Parflow discretizes time.
+Node 63: Warning: Input variable <Solver.MaxConvergenceFailures> 
+Node 63:          is set to a large value that may cause problems
+Node 63:          with how time cycles calculations are evaluated.  Values
+Node 63:          specified via a time cycle may be on/off at the slightly
+Node 63:          wrong times times due to how Parflow discretizes time.
+ energy balance in canopy X  0.114659844467123     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.516013608919877     
+ energy balance in canopy X  0.622460228627798     
+ energy balance in canopy X  0.202536868512581     
+ energy balance in canopy X  0.248941356043012     
+ energy balance in canopy X  0.173972019212691     
+ energy balance in canopy X  0.135072769754821     
+ energy balance in canopy X  0.166478826765360     
+ energy balance in canopy X  0.119092436816295     
+ energy balance in canopy X  0.161804803136295     
+ energy balance in canopy X  0.187788078323099     
+ energy balance in canopy X  0.115638754090948     
+ energy balance in canopy X  0.235186734050892     
+ energy balance in canopy X  0.223927099842143     
+ energy balance in canopy X  0.212597714942866     
+ energy balance in canopy X  0.187290609082439     
+ energy balance in canopy X  0.137777358786181     
+ energy balance in canopy X  0.138697526621133     
+ energy balance in canopy X  0.155228577233213     
+ energy balance in canopy X  0.100070586118882     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X   1.64404033687449     
+ energy balance in canopy X  0.674405289566149     
+ energy balance in canopy X   1.49766555589001     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.178607181439965     
+ energy balance in canopy X  0.151821885780983     
+ energy balance in canopy X  0.151692302399546     
+ energy balance in canopy X  0.456430812609710     
+ energy balance in canopy X  0.439071734029589     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.134482240567870     
+ energy balance in canopy X  0.655655332793359     
+ energy balance in canopy X  0.104377575714629     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.166989341418047     
+ energy balance in canopy X  0.101113290955521     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.163162944024794     
+ energy balance in canopy X  0.147706848790317     
+ energy balance in canopy X  0.183309563431358     
+ energy balance in canopy X  0.798489279792086     
+ energy balance in canopy X  0.213457343919423     
+ energy balance in canopy X  0.232465887312287     
+ energy balance in canopy X  0.155231055258596     
+ energy balance in canopy X  0.178585324655451     
+ energy balance in canopy X  0.179421867377478     
+ energy balance in canopy X  0.100002993707378     
+ energy balance in canopy X  0.316362810665332     
+ energy balance in canopy X  0.110729356763649     
+ energy balance in canopy X  0.198587412434172     
+ energy balance in canopy X  0.177269215743564     
+ energy balance in canopy X  0.156163424805563     
+ energy balance in canopy X  0.203824408339923     
+ energy balance in canopy X  0.251123291471369     
+ energy balance in canopy X  0.253188261099773     
+ energy balance in canopy X  0.347904880439291     
+ energy balance in canopy X  0.292355050851857     
+ energy balance in canopy X  0.156047394280876     
+ energy balance in canopy X  0.161246034637141     
+ energy balance in canopy X  0.141007383496735     
+ energy balance in canopy X  0.179333187699381     
+ energy balance in canopy X  0.520412014107890     
+ energy balance in canopy X  0.150934116509951     
+ energy balance in canopy X  0.233453783837247     
+ energy balance in canopy X  0.174246678456704     
+ energy balance in canopy X  0.193071290711202     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.114760868685686     
+ energy balance in canopy X  0.231539201883386     
+ energy balance in canopy X  0.224237096335379     
+ energy balance in canopy X  0.265018945672789     
+ energy balance in canopy X  0.190677500124519     
+ energy balance in canopy X  0.121225659261754     
+ energy balance in canopy X  0.282507457258351     
+ energy balance in canopy X  0.223295806673830     
+ energy balance in canopy X  0.242768221639469     
+ energy balance in canopy X  0.428700241318927     
+ energy balance in canopy X  0.310342836588362     
+ energy balance in canopy X  0.111145668031138     
+ energy balance in canopy X  0.147150460565197     
+ energy balance in canopy X  0.192049518879095     
+ energy balance in canopy X  0.244833542975169     
+ energy balance in canopy X  0.275091269581388     
+ energy balance in canopy X  0.266567855841609     
+ energy balance in canopy X  0.113684894813506     
+ energy balance in canopy X  0.244659551157099     
+ energy balance in canopy X  0.290901928321542     
+ energy balance in canopy X  0.165427072816545     
+ energy balance in canopy X  0.125933065008638     
+ energy balance in canopy X  0.115221874870215     
+ energy balance in canopy X  0.377210642896600     
+ energy balance in canopy X  0.378573325380195     
+ energy balance in canopy X  0.488262567494736     
+ energy balance in canopy X  0.114121729965738     
+ energy balance in canopy X  0.211856333003457     
+ energy balance in canopy X  0.128280858207802     
+ energy balance in canopy X  0.334328363213867     
+ energy balance in canopy X  0.163394320154076     
+ energy balance in canopy X  0.103209430793473     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.120964844794440     
+ energy balance in canopy X  0.151524286186950     
+ energy balance in canopy X  0.111511783364609     
+ energy balance in canopy X  0.117385397646956     
+ energy balance in canopy X  0.147468451288034     
+ energy balance in canopy X  0.110713960388146     
+ energy balance in canopy X  0.111190351383854     
+ energy balance in canopy X  0.503176999116427     
+ energy balance in canopy X  0.731240527831702     
+ energy balance in canopy X  0.202565407906306     
+ energy balance in canopy X  0.474978834715344     
+ energy balance in canopy X  0.772675501288624     
+ energy balance in canopy X  0.259041264076721     
+ energy balance in canopy X  0.343054816061148     
+ energy balance in canopy X  0.333725819475461     
+ energy balance in canopy X  0.257108497744753     
+ energy balance in canopy X  0.607698282102859     
+ energy balance in canopy X  0.741871269825957     
+ energy balance in canopy X  0.275784617388375     
+ energy balance in canopy X  0.776939999675882     
+ energy balance in canopy X  0.867888761803471     
+ energy balance in canopy X  0.822989550637693     
+ energy balance in canopy X  0.327865613099540     
+ energy balance in canopy X  0.438963848108912     
+ energy balance in canopy X  0.340220137252111     
+ energy balance in canopy X  0.187959511729908     
+ energy balance in canopy X  0.297130224519805     
+ energy balance in canopy X  0.258069924877525     
+ energy balance in canopy X  0.230187585809574     
+ energy balance in canopy X  0.122002769991539     
+ energy balance in canopy X  0.343953324795962     
+ energy balance in canopy X  0.395407020607237     
+ energy balance in canopy X  0.235119399346743     
+ energy balance in canopy X  0.661025402828230     
+ energy balance in canopy X  0.157261257935367     
+ energy balance in canopy X  0.466581979991133     
+ energy balance in canopy X  0.457229339518932     
+ energy balance in canopy X  0.128759745391235     
+ energy balance in canopy X  0.581143744539645     
+ energy balance in canopy X  0.505909197094496     
+ energy balance in canopy X  0.381943088042647     
+ energy balance in canopy X  0.226135054555776     
+ energy balance in canopy X  0.864898051916555     
+ energy balance in canopy X  0.161571590918570     
+ energy balance in canopy X  0.135584850445852     
+ energy balance in canopy X  0.296009983732503     
+ energy balance in canopy X  0.371861220841382     
+ energy balance in canopy X  0.151300952114589     
+ energy balance in canopy X  0.287556496172364     
+ energy balance in canopy X  0.550893717858877     
+ energy balance in canopy X  0.311839419772376     
+ energy balance in canopy X  0.386049475749751     
+ energy balance in canopy X  0.110640197494057     
+ energy balance in canopy X  0.118637352213248     
+ energy balance in canopy X  0.120724821830343     
+ energy balance in canopy X  0.243493680912671     
+ energy balance in canopy X  0.193921432625601     
+ energy balance in canopy X  0.405092785118555     
+ energy balance in canopy X  0.293223241993871     
+ energy balance in canopy X  0.167846326396599     
+ energy balance in canopy X  0.547932313492396     
+ energy balance in canopy X  0.360280629843061     
+ energy balance in canopy X  0.278177826592511     
+ energy balance in canopy X  0.311203455997266     
+ energy balance in canopy X  0.298670532511331     
+ energy balance in canopy X  0.295998560143204     
+ energy balance in canopy X  0.329046951881089     
+ energy balance in canopy X  0.134845770461929     
+ energy balance in canopy X  0.265013077722756     
+ energy balance in canopy X  0.296864076185948     
+ energy balance in canopy X  0.398243889549740     
+ energy balance in canopy X  0.386964465892582     
+ energy balance in canopy X  0.163919165588148     
+ energy balance in canopy X  0.120182979056771     
+ energy balance in canopy X  0.404332022748378     
+ energy balance in canopy X  0.175686814754421     
+ energy balance in canopy X  0.206514615229317     
+ energy balance in canopy X  0.160548447065153     
+ energy balance in canopy X  0.415297042495553     
+ energy balance in canopy X  0.211679155730110     
+ energy balance in canopy X  0.142685650528307     
+ energy balance in canopy X  0.520826633616487     
+ energy balance in canopy X  0.243155477263556     
+ energy balance in canopy X  0.378611742734400     
+ energy balance in canopy X  0.378651340355539     
+ energy balance in canopy X  0.371891401921381     
+ energy balance in canopy X  0.311878742670189     
+ energy balance in canopy X  0.479962111834041     
+ energy balance in canopy X  0.386492987710355     
+ energy balance in canopy X  0.183481466330008     
+ energy balance in canopy X  0.122155659172151     
+ energy balance in canopy X  0.837934636423675     
+ energy balance in canopy X  0.339964126888830     
+ energy balance in canopy X  0.419070896003007     
+ energy balance in canopy X  0.283508204702670     
+ energy balance in canopy X  0.624854255039764     
+ energy balance in canopy X  0.114325663337986     
+ energy balance in canopy X  0.171818322136083     
+ energy balance in canopy X  0.372674172720849     
+ energy balance in canopy X  0.282141594448042     
+ energy balance in canopy X  0.301143230704909     
+ energy balance in canopy X  0.126876953865313     
+ energy balance in canopy X  0.177504067753077     
+ energy balance in canopy X  0.359985368154980     
+ energy balance in canopy X  0.538568971112902     
+ energy balance in canopy X  0.240139219005307     
+ energy balance in canopy X  0.255080358743356     
+ energy balance in canopy X  0.729339463763296     
+ energy balance in canopy X  0.567842275630532     
+ energy balance in canopy X  0.288243708615887     
+ energy balance in canopy X  0.320030665708721     
+ energy balance in canopy X  0.300086688034384     
+ energy balance in canopy X  0.713694277087257     
+ energy balance in canopy X  0.143134360536521     
+ energy balance in canopy X  0.123173472602659     
+ energy balance in canopy X  0.108736414321882     
+ energy balance in canopy X  0.220883317432197     
+ energy balance in canopy X  0.491197237214131     
+ energy balance in canopy X  0.249506711813964     
+ energy balance in canopy X  0.126147781461015     
+ energy balance in canopy X  0.314750062489800     
+ energy balance in canopy X  0.395653448930730     
+ energy balance in canopy X  0.121947322592462     
+ energy balance in canopy X  0.372309929239691     
+ energy balance in canopy X  0.345646060877279     
+ energy balance in canopy X  0.299335697517606     
+ energy balance in canopy X  0.102733725375373     
+ energy balance in canopy X  0.150578183859011     
+ energy balance in canopy X  0.211729450775156     
+ energy balance in canopy X  0.198494902454577     
+ energy balance in canopy X  0.586708369624063     
+ energy balance in canopy X  0.222526980082463     
+ energy balance in canopy X  0.329290501960919     
+ energy balance in canopy X  0.115930870888960     
+ energy balance in canopy X  0.113998817751373     
+ energy balance in canopy X  0.758745002738380     
+ energy balance in canopy X  0.270074282249830     
+ energy balance in canopy X  0.860837694237347     
+ energy balance in canopy X  0.400599394775696     
+ energy balance in canopy X  0.540510799335387     
+ energy balance in canopy X  0.834036096370511     
+ energy balance in canopy X  0.510958736430894     
+ energy balance in canopy X  0.254005733672201     
+ energy balance in canopy X  0.158289001169656     
+ energy balance in canopy X  0.256897936815335     
+ energy balance in canopy X  0.229869273883409     
+ energy balance in canopy X  0.184488902550875     
+ energy balance in canopy X  0.323541329742376     
+ energy balance in canopy X  0.147146249687516     
+ energy balance in canopy X  0.389198156063557     
+ energy balance in canopy X  0.305721133179674     
+ energy balance in canopy X  0.483899478114466     
+ energy balance in canopy X  0.257444121478084     
+ energy balance in canopy X  0.123964489204841     
+ energy balance in canopy X  0.238714986496298     
+ energy balance in canopy X  0.297376467378626     
+ energy balance in canopy X  0.456100705600832     
+ energy balance in canopy X  0.235377792997600     
+ energy balance in canopy X  0.186781211848427     
+ energy balance in canopy X  0.179979621999177     
+ energy balance in canopy X  0.241849648838009     
+ energy balance in canopy X  0.265449822532851     
+ energy balance in canopy X  0.548213544831235     
+ energy balance in canopy X  0.391843891365525     
+ energy balance in canopy X  0.534060642104954     
+ energy balance in canopy X  0.165065954637807     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.233200605918313     
+ energy balance in canopy X  0.132555452767665     
+ energy balance in canopy X  0.121953221904318     
+ energy balance in canopy X  0.128566846506349     
+ energy balance in canopy X  0.119131873992330     
+ energy balance in canopy X  0.192001879949458     
+ energy balance in canopy X  0.207975128909123     
+ energy balance in canopy X  0.176641060111880     
+ energy balance in canopy X  0.494578226875930     
+ energy balance in canopy X  0.302032213799688     
+ energy balance in canopy X  0.191644532747926     
+ energy balance in canopy X  0.481333072528358     
+ energy balance in canopy X  0.174504517012206     
+ energy balance in canopy X  0.151513404550624     
+ energy balance in canopy X  0.285643410276510     
+ energy balance in canopy X  0.272883626348104     
+ energy balance in canopy X  0.215570798253452     
+ energy balance in canopy X  0.138442948854568     
+ energy balance in canopy X  0.134551836920096     
+ energy balance in canopy X  0.148042642046725     
+ energy balance in canopy X  0.602019935229261     
+ energy balance in canopy X  0.557273635144337     
+ energy balance in canopy X  0.729006373511872     
+ energy balance in canopy X  0.485864879705716     
+ energy balance in canopy X  0.311155946788400     
+ energy balance in canopy X  0.309508027940026     
+ energy balance in canopy X  0.121824195034172     
+ energy balance in canopy X  0.169419432093044     
+ energy balance in canopy X  0.115038905555600     
+ energy balance in canopy X  0.240300093558403     
+ energy balance in canopy X  0.132115708637784     
+ energy balance in canopy X  0.136776158994181     
+ energy balance in canopy X  0.133431225532874     
+ energy balance in canopy X  0.108733123724107     
+ energy balance in canopy X  0.554708566514002     
+ energy balance in canopy X  0.107778899072699     
+ energy balance in canopy X  0.112679780847174     
+ energy balance in canopy X  0.385479923702128     
+ energy balance in canopy X  0.513454375715156     
+ energy balance in canopy X  0.115476252425665     
+ energy balance in canopy X  0.107269622476545     
+ energy balance in canopy X -0.106202583162450     
+ energy balance in canopy X  0.124229556073956     
+ energy balance in canopy X  0.491487662373267     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.129705416858677     
+ energy balance in canopy X  0.178355321466064     
+ energy balance in canopy X  0.310823577418780     
+ energy balance in canopy X  0.223491680785109     
+ energy balance in canopy X  0.315311908202915     
+ energy balance in canopy X  0.689095265614696     
+ energy balance in canopy X  0.322490774771211     
+ energy balance in canopy X  0.833770474863478     
+ energy balance in canopy X  0.237938951334403     
+ energy balance in canopy X  0.151184355119895     
+ energy balance in canopy X  0.185740375632953     
+ energy balance in canopy X  0.319603882219731     
+ energy balance in canopy X  0.320837218965700     
+ energy balance in canopy X  0.344941149256854     
+ energy balance in canopy X  0.474490692502194     
+ energy balance in canopy X  0.384574344604196     
+ energy balance in canopy X  0.200202775282207     
+ energy balance in canopy X  0.109896326720616     
+ energy balance in canopy X  0.382058752236659     
+ energy balance in canopy X  0.568188287164119     
+ energy balance in canopy X  0.322306226611403     
+ energy balance in canopy X  0.345364111017737     
+ energy balance in canopy X  0.346114594858605     
+ energy balance in canopy X  0.176830507735268     
+ energy balance in canopy X  0.766961515597927     
+ energy balance in canopy X  0.283046206345176     
+ energy balance in canopy X  0.148504309969880     
+ energy balance in canopy X  0.160901403116871     
+ energy balance in canopy X  0.308843991550805     
+ energy balance in canopy X  0.308598104329612     
+ energy balance in canopy X  0.306816643330940     
+ energy balance in canopy X  0.282165995377255     
+ energy balance in canopy X  0.450140805357854     
+ energy balance in canopy X  0.379404193062769     
+ energy balance in canopy X  0.232826976455861     
+ energy balance in canopy X  0.407904868275921     
+ energy balance in canopy X  0.442977123046589     
+ energy balance in canopy X  0.196794022932629     
+ energy balance in canopy X  0.212692720661536     
+ energy balance in canopy X  0.126275006863303     
+ energy balance in canopy X  0.226153077716958     
+ energy balance in canopy X  0.642569372664418     
+ energy balance in canopy X  0.210300925819404     
+ energy balance in canopy X  0.713121180690131     
+ energy balance in canopy X  0.322416584262143     
+ energy balance in canopy X  0.609742434342891     
+ energy balance in canopy X  0.806572838015242     
+ energy balance in canopy X  0.714655471785747     
+ energy balance in canopy X  0.397082537163691     
+ energy balance in canopy X  0.499456845520712     
+ energy balance in canopy X  0.447445139853741     
+ energy balance in canopy X  0.560834609404417     
+ energy balance in canopy X  0.121778523771468     
+ energy balance in canopy X  0.106449612676244     
+ energy balance in canopy X  0.691226558256908     
+ energy balance in canopy X  0.146409171253183     
+ energy balance in canopy X  0.175739556456236     
+ energy balance in canopy X  0.162970348956492     
+ energy balance in canopy X  0.167370906377549     
+ energy balance in canopy X  0.146986549598751     
+ energy balance in canopy X  0.126528376424879     
+ energy balance in canopy X  0.138767222782931     
+ energy balance in canopy X  0.260763449598052     
+ energy balance in canopy X  0.134125103249758     
+ energy balance in canopy X  0.116878019186622     
+ energy balance in canopy X  0.396597294658420     
+ energy balance in canopy X  0.295236879661559     
+ energy balance in canopy X  0.187297137252621     
+ energy balance in canopy X  0.205805761389122     
+ energy balance in canopy X  0.409335391551032     
+ energy balance in canopy X  0.236482410442918     
+ energy balance in canopy X  0.268194323669618     
+ energy balance in canopy X  0.116973653446138     
+ energy balance in canopy X  0.227749311312131     
+ energy balance in canopy X  0.151642945839889     
+ energy balance in canopy X  0.341849473357300     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.137353453867078     
+ energy balance in canopy X  0.163429212070767     
+ energy balance in canopy X  0.121378201393689     
+ energy balance in canopy X  0.138278795240140     
+ energy balance in canopy X  0.119182707517069     
+ energy balance in canopy X  0.145023541851224     
+ energy balance in canopy X  0.164142444913026     
+ energy balance in canopy X  0.206733886514940     
+ energy balance in canopy X  0.124746126439199     
+ energy balance in canopy X  0.180800114992003     
+ energy balance in canopy X  0.117156920613908     
+ energy balance in canopy X  0.218593783156606     
+ energy balance in canopy X  0.222739486679870     
+ energy balance in canopy X  0.229474137473787     
+ energy balance in canopy X  0.168382380257285     
+ energy balance in canopy X  0.231757164634381     
+ energy balance in canopy X  0.124991129480627     
+ energy balance in canopy X  0.118601485191761     
+ energy balance in canopy X  0.235854922984643     
+ energy balance in canopy X  0.106300662660182     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.223391667931146     
+ energy balance in canopy X  0.115338571039445     
+ energy balance in canopy X  0.123776567254005     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.712502765028528     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.112689131254271     
+ energy balance in canopy X  0.134724620980613     
+ energy balance in canopy X  0.106332826989792     
+ energy balance in canopy X  0.116764891048057     
+ energy balance in canopy X  0.109620450138614     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.102536838122766     
+ energy balance in canopy X  0.117188252674666     
+ energy balance in canopy X  0.117169001929341     
+ energy balance in canopy X  0.100674820260402     
+ energy balance in canopy X  0.279810579794116     
+ energy balance in canopy X  0.403972131499685     
+ energy balance in canopy X  0.140790063127262     
+ energy balance in canopy X  0.161970355144518     
+ energy balance in canopy X  0.128782727443102     
+ energy balance in canopy X  0.298799808727388     
+ energy balance in canopy X  0.177015492519288     
+ energy balance in canopy X  0.110958780894372     
+ energy balance in canopy X  0.174966133192292     
+ energy balance in canopy X  0.223332537191247     
+ energy balance in canopy X  0.111752551257240     
+ energy balance in canopy X  0.325229739697605     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.334034262825469     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.173916950696622     
+ energy balance in canopy X  0.116392568589504     
+ energy balance in canopy X  0.128872462732780     
+ energy balance in canopy X  0.132335319927137     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X   1.47435466826053     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.883250222956676     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.159071684851227     
+ energy balance in canopy X  0.235672242819227     
+ energy balance in canopy X  0.117513181089585     
+ energy balance in canopy X  0.104067154164767     
+ energy balance in canopy X  0.102683326393510     
+ energy balance in canopy X  0.126970693261896     
+ energy balance in canopy X  0.293033785631927     
+ energy balance in canopy X  0.200514119502245     
+ energy balance in canopy X  0.225719938496525     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.124405895265660     
+ energy balance in canopy X  0.114015279156593     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.195759623320162     
+ energy balance in canopy X  0.169525225829922     
+ energy balance in canopy X  0.208948047243405     
+ energy balance in canopy X  0.127923836690742     
+ energy balance in canopy X  0.111863596365778     
+ energy balance in canopy X  0.247726588161090     
+ energy balance in canopy X  0.208885252080059     
+ energy balance in canopy X  0.249067723088896     
+ energy balance in canopy X  0.291567682508415     
+ energy balance in canopy X  0.353870126760150     
+ energy balance in canopy X  0.375380421163676     
+ energy balance in canopy X  0.188188745946334     
+ energy balance in canopy X  0.223887090399010     
+ energy balance in canopy X  0.196356387072274     
+ energy balance in canopy X  0.232555980428906     
+ energy balance in canopy X  0.195614952863107     
+ energy balance in canopy X  0.208100502947854     
+ energy balance in canopy X  0.214527025257663     
+ energy balance in canopy X  0.114271514633863     
+ energy balance in canopy X  0.246133410940416     
+ energy balance in canopy X  0.196571628720132     
+ energy balance in canopy X  0.434073777957984     
+ energy balance in canopy X  0.437939154122375     
+ energy balance in canopy X  0.503898192292915     
+ energy balance in canopy X  0.395553669818412     
+ energy balance in canopy X  0.390887394030109     
+ energy balance in canopy X  0.377619572509673     
+ energy balance in canopy X  0.396214307621264     
+ energy balance in canopy X  0.341805332406302     
+ energy balance in canopy X  0.364454536264347     
+ energy balance in canopy X  0.241452899440169     
+ energy balance in canopy X  0.374532896926056     
+ energy balance in canopy X  0.333474804918531     
+ energy balance in canopy X  0.485389739228374     
+ energy balance in canopy X  0.531918954971154     
+ energy balance in canopy X  0.531489028956997     
+ energy balance in canopy X  0.496455361350314     
+ energy balance in canopy X  0.499009139560364     
+ energy balance in canopy X  0.525864155213434     
+ energy balance in canopy X  0.414592764291974     
+ energy balance in canopy X  0.454030262021028     
+ energy balance in canopy X  0.285131385153861     
+ energy balance in canopy X  0.227090824814056     
+ energy balance in canopy X  0.300278128131147     
+ energy balance in canopy X  0.406415977162766     
+ energy balance in canopy X  0.408738439567799     
+ energy balance in canopy X  0.385914514302350     
+ energy balance in canopy X  0.381814059597502     
+ energy balance in canopy X  0.409994112555218     
+ energy balance in canopy X  0.436739150319823     
+ energy balance in canopy X  0.443557010210739     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.200929952143404     
+ energy balance in canopy X  0.203347677834468     
+ energy balance in canopy X  0.129781306064096     
+ energy balance in canopy X  0.307098754129278     
+ energy balance in canopy X  0.257658763814355     
+ energy balance in canopy X  0.445873027950270     
+ energy balance in canopy X  0.273382662751338     
+ energy balance in canopy X  0.320488319832400     
+ energy balance in canopy X  0.560185145371548     
+ energy balance in canopy X  0.142814424250297     
+ energy balance in canopy X  0.196866902417298     
+ energy balance in canopy X  0.206884536842779     
+ energy balance in canopy X  0.203151008447783     
+ energy balance in canopy X  0.150019895644206     
+ energy balance in canopy X  0.251715690831155     
+ energy balance in canopy X  0.310001772867651     
+ energy balance in canopy X  0.419660093834686     
+ energy balance in canopy X  0.427984804695406     
+ energy balance in canopy X  0.133655084858013     
+ energy balance in canopy X  0.163945612524572     
+ energy balance in canopy X  0.172200111030342     
+ energy balance in canopy X  0.185317681207017     
+ energy balance in canopy X  0.538246878347877     
+ energy balance in canopy X  0.171632104328033     
+ energy balance in canopy X  0.433866580963638     
+ energy balance in canopy X  0.158988728012076     
+ energy balance in canopy X  0.105543197768952     
+ energy balance in canopy X  0.157025738603195     
+ energy balance in canopy X  0.185007385805832     
+ energy balance in canopy X  0.161803174049538     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.139720622195263     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.103459472078502     
+ energy balance in canopy X  0.131856505771394     
+ energy balance in canopy X  0.108794676828023     
+ energy balance in canopy X  0.104858043131421     
+ energy balance in canopy X  0.281146144359518     
+ energy balance in canopy X -0.140946613384893     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.248234872609359     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.141909827816811     
+ energy balance in canopy X  0.264547176641130     
+ energy balance in canopy X  0.448595912775644     
+ energy balance in canopy X  0.343601062745520     
+ energy balance in canopy X  0.365013086981151     
+ energy balance in canopy X  0.215237340482517     
+ energy balance in canopy X  0.465281882751285     
+ energy balance in canopy X  0.160084405560397     
+ energy balance in canopy X  0.135205500099971     
+ energy balance in canopy X  0.193193280349277     
+ energy balance in canopy X  0.425451791406104     
+ energy balance in canopy X  0.406903237087633     
+ energy balance in canopy X  0.248979347292391     
+ energy balance in canopy X  0.335721876452411     
+ energy balance in canopy X  0.467346672463570     
+ energy balance in canopy X  0.442097448817471     
+ energy balance in canopy X  0.172830991230299     
+ energy balance in canopy X  0.203250575794129     
+ energy balance in canopy X  0.149501039591577     
+ energy balance in canopy X  0.289617625933964     
+ energy balance in canopy X  0.102412730633191     
+ energy balance in canopy X  0.305752497238430     
+ energy balance in canopy X  0.223395281373939     
+ energy balance in canopy X  0.293068255518037     
+ energy balance in canopy X  0.409990945410343     
+ energy balance in canopy X  0.144551561030539     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.100875006040781     
+ energy balance in canopy X  0.238508036631544     
+ energy balance in canopy X  0.214227395936931     
+ energy balance in canopy X  0.130035713528784     
+ energy balance in canopy X  0.328655350509081     
+ energy balance in canopy X  0.144852451561775     
+ energy balance in canopy X  0.119594246513671     
+ energy balance in canopy X  0.115657621469893     
+ energy balance in canopy X  0.179698525761324     
+ energy balance in canopy X  0.174184631587529     
+ energy balance in canopy X  0.149681007329733     
+ energy balance in canopy X  0.107796854449262     
+ energy balance in canopy X  0.181816824933406     
+ energy balance in canopy X  0.208507876080716     
+ energy balance in canopy X  0.141214056771304     
+ energy balance in canopy X  0.164441320700803     
+ energy balance in canopy X  0.261342346099120     
+ energy balance in canopy X  0.130689412380192     
+ energy balance in canopy X  0.176893904461792     
+ energy balance in canopy X  0.193847578210608     
+ energy balance in canopy X  0.123076953929598     
+ energy balance in canopy X  0.165894029799688     
+ energy balance in canopy X  0.210954799243908     
+ energy balance in canopy X  0.135037751618995     
+ energy balance in canopy X  0.256523843318462     
+ energy balance in canopy X  0.157301198562280     
+ energy balance in canopy X  0.260105582707013     
+ energy balance in canopy X  0.136485497412444     
+ energy balance in canopy X  0.132510122304907     
+ energy balance in canopy X  0.178420922519074     
+ energy balance in canopy X  0.220065534096136     
+ energy balance in canopy X  0.147769757827000     
+ energy balance in canopy X  0.213143087301205     
+ energy balance in canopy X  0.129739371076980     
+ energy balance in canopy X  0.149784275586072     
+ energy balance in canopy X  0.133589134412986     
+ energy balance in canopy X  0.255646777643655     
+ energy balance in canopy X  0.103179344375697     
+ energy balance in canopy X  0.154409515863364     
+ energy balance in canopy X  0.219278343551842     
+ energy balance in canopy X  0.133803157912631     
+ energy balance in canopy X  0.209755779728525     
+ energy balance in canopy X  0.196590317484791     
+ energy balance in canopy X  0.157209602383894     
+ energy balance in canopy X  0.170112283017183     
+ energy balance in canopy X  0.214276928597471     
+ energy balance in canopy X  0.138643392323175     
+ energy balance in canopy X  0.115857148074298     
+ energy balance in canopy X  0.145795162540466     
+ energy balance in canopy X  0.191089493869050     
+ energy balance in canopy X  0.106697944857636     
+ energy balance in canopy X  0.116113404997378     
+ energy balance in canopy X  0.160274380001447     
+ energy balance in canopy X  0.125132347930723     
+ energy balance in canopy X  0.171155475441530     
+ energy balance in canopy X  0.240934820683520     
+ energy balance in canopy X  0.254569444085384     
+ energy balance in canopy X  0.157343671558067     
+ energy balance in canopy X  0.359465792910775     
+ energy balance in canopy X  0.213975374859061     
+ energy balance in canopy X  0.144334423999759     
+ energy balance in canopy X  0.187763018959664     
+ energy balance in canopy X  0.110102566870559     
+ energy balance in canopy X  0.266965790516203     
+ energy balance in canopy X  0.291019017793452     
+ energy balance in canopy X  0.113378941748451     
+ energy balance in canopy X  0.152607243940778     
+ energy balance in canopy X  0.108983436677669     
+ energy balance in canopy X  0.172905136851156     
+ energy balance in canopy X  0.256741520495311     
+ energy balance in canopy X  0.111623760677503     
+ energy balance in canopy X  0.124084815830848     
+ energy balance in canopy X  0.107012211510586     
+ energy balance in canopy X  0.103090402852601     
+ energy balance in canopy X  0.193600485303733     
+ energy balance in canopy X  0.108015642021293     
+ energy balance in canopy X  0.143507729840273     
+ energy balance in canopy X  0.148038333735087     
+ energy balance in canopy X  0.203300217568312     
+ energy balance in canopy X  0.126593474656104     
+ energy balance in canopy X  0.165065268795516     
+ energy balance in canopy X  0.200320743130490     
+ energy balance in canopy X  0.333942360057840     
+ energy balance in canopy X  0.209512488645032     
+ energy balance in canopy X  0.148458257399639     
+ energy balance in canopy X  0.303986555358414     
+ energy balance in canopy X  0.225138990645270     
+ energy balance in canopy X  0.187411606723920     
+ energy balance in canopy X  0.182400995266882     
+ energy balance in canopy X  0.187412189760018     
+ energy balance in canopy X  0.158810940866495     
+ energy balance in canopy X  0.170269649734131     
+ energy balance in canopy X  0.116448765373441     
+ energy balance in canopy X  0.139826294010462     
+ energy balance in canopy X  0.119768539240056     
+ energy balance in canopy X  0.101605659904806     
+ energy balance in canopy X  0.140410030683483     
+ energy balance in canopy X  0.242102812516315     
+ energy balance in canopy X  0.212242467967442     
+ energy balance in canopy X  0.235514966143661     
+ energy balance in canopy X  0.205806544817456     
+ energy balance in canopy X  0.245877884054515     
+ energy balance in canopy X  0.124290987939993     
+ energy balance in canopy X  0.175910527105820     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.196097514931139     
+ energy balance in canopy X  0.914415808068277     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.356199503080418     
+ energy balance in canopy X  0.205328815628960     
+ energy balance in canopy X  0.338179685759926     
+ energy balance in canopy X  0.308339236717046     
+ energy balance in canopy X  0.107856114590781     
+ energy balance in canopy X  0.140493423717317     
+ energy balance in canopy X  0.527233652890914     
+ energy balance in canopy X  0.450106190496321     
+ energy balance in canopy X  0.314742361405557     
+ energy balance in canopy X  0.464425798527046     
+ energy balance in canopy X  0.141701249481429     
+ energy balance in canopy X  0.141327932960124     
+ energy balance in canopy X  0.202375460969407     
+ energy balance in canopy X  0.216114559321838     
+ energy balance in canopy X  0.110844764153505     
+ energy balance in canopy X  0.167826458104223     
+ energy balance in canopy X  0.211433425723975     
+ energy balance in canopy X  0.292094133152261     
+ energy balance in canopy X  0.121825622334562     
+ energy balance in canopy X  0.212506522276847     
+ energy balance in canopy X  0.198509831344914     
+ energy balance in canopy X  0.274986787987828     
+ energy balance in canopy X  0.133047648822767     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.639240722467875     
+ energy balance in canopy X  0.362091707938106     
+ energy balance in canopy X  0.280203356817239     
+ energy balance in canopy X  0.110889269326051     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.323374260313443     
+ energy balance in canopy X  0.240145932685223     
+ energy balance in canopy X  0.214766234257326     
+ energy balance in canopy X  0.322132628600428     
+ energy balance in canopy X  0.232142156513660     
+ energy balance in canopy X  0.242448027534223     
+ energy balance in canopy X  0.109388313569141     
+ energy balance in canopy X  0.126602496115780     
+ energy balance in canopy X  0.193144381492019     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.176447763785291     
+ energy balance in canopy X  0.141090002079267     
+ energy balance in canopy X  0.193762908862993     
+ energy balance in canopy X  0.111201638525884     
+ energy balance in canopy X  0.105016921948078     
+ energy balance in canopy X  0.107620895200967     
+ energy balance in canopy X  0.172577808251305     
+ energy balance in canopy X  0.121702993901039     
+ energy balance in canopy X  0.145532714382341     
+ energy balance in canopy X  0.165687223243935     
+ energy balance in canopy X  0.113910445524205     
+ energy balance in canopy X  0.118695986908136     
+ energy balance in canopy X  0.115022156328514     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.137902637168622     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.108871914271418     
+ energy balance in canopy X  0.179541215818048     
+ energy balance in canopy X  0.140915249965872     
+ energy balance in canopy X  0.113843844148548     
+ energy balance in canopy X  0.107866606833056     
+ energy balance in canopy X  0.132289335780044     
+ energy balance in canopy X  0.263013120109932     
+ energy balance in canopy X  0.198577903033723     
+ energy balance in canopy X  0.174100030741386     
+ energy balance in canopy X  0.114977606130935     
+ energy balance in canopy X  0.121994609765579     
+ energy balance in canopy X  0.130534355620256     
+ energy balance in canopy X  0.152667227905440     
+ energy balance in canopy X  0.101397384828289     
+ energy balance in canopy X  0.151211391637020     
+ energy balance in canopy X  0.107195153188158     
+ energy balance in canopy X  0.102766456969889     
+ energy balance in canopy X  0.146073955997480     
+ energy balance in canopy X  0.130826350198646     
+ energy balance in canopy X  0.104395385845706     
+ energy balance in canopy X  0.261456887411555     
+ energy balance in canopy X  0.146299190462827     
+ energy balance in canopy X  0.229323367659575     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.159471613552441     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.118668015054610     
+ energy balance in canopy X  0.112900172166746     
+ energy balance in canopy X  0.154871107469347     
+ energy balance in canopy X  0.108180166886584     
+ energy balance in canopy X  0.134268568620918     
+ energy balance in canopy X  0.139042998065179     
+ energy balance in canopy X  0.135422058238305     
+ energy balance in canopy X  0.123702367214023     
+ energy balance in canopy X  0.139739836653852     
+ energy balance in canopy X  0.121500964891098     
+ energy balance in canopy X  0.185043912453260     
+ energy balance in canopy X  0.261981796271016     
+ energy balance in canopy X  0.119536399774567     
+ energy balance in canopy X  0.159330765131045     
+ energy balance in canopy X  0.129655834425108     
+ energy balance in canopy X  0.137639228271638     
+ energy balance in canopy X  0.114581686788618     
+ energy balance in canopy X  0.156458366261894     
+ energy balance in canopy X  0.134518774980343     
+ energy balance in canopy X  0.221747108478148     
+ energy balance in canopy X  0.174905595745855     
+ energy balance in canopy X  0.194643871866731     
+ energy balance in canopy X  0.244557832961220     
+ energy balance in canopy X  0.264465036323003     
+ energy balance in canopy X  0.220712675875518     
+ energy balance in canopy X  0.149004225470875     
+ energy balance in canopy X  0.145064490755544     
+ energy balance in canopy X  0.136094457716993     
+ energy balance in canopy X  0.118076084335300     
+ energy balance in canopy X  0.123121585652370     
+ energy balance in canopy X  0.147615585963550     
+ energy balance in canopy X  0.167855204994325     
+ energy balance in canopy X  0.147948133379714     
+ energy balance in canopy X  0.108988876370290     
+ energy balance in canopy X  0.184395391084379     
+ energy balance in canopy X  0.123346589719176     
+ energy balance in canopy X  0.142204276007632     
+ energy balance in canopy X  0.226644732540734     
+ energy balance in canopy X  0.253039757140996     
+ energy balance in canopy X  0.180820306982099     
+ energy balance in canopy X  0.201872995973233     
+ energy balance in canopy X  0.118887922317086     
+ energy balance in canopy X  0.221934966990162     
+ energy balance in canopy X  0.123225681737566     
+ energy balance in canopy X  0.141595191412193     
+ energy balance in canopy X -0.166763000937650     
+ energy balance in canopy X -0.126230873691100     
+ energy balance in canopy X -0.156656943587627     
+ energy balance in canopy X -0.240711747477967     
+ energy balance in canopy X -0.227942438537383     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.182240188721892     
+ energy balance in canopy X  0.137098669563926     
+ energy balance in canopy X  0.174591447964069     
+ energy balance in canopy X  0.134494930966817     
+ energy balance in canopy X  0.150893635897717     
+ energy balance in canopy X  0.126482199629628     
+ energy balance in canopy X  0.115990301385409     
+ energy balance in canopy X  0.120579891959508     
+ energy balance in canopy X  0.143558923260713     
+ energy balance in canopy X  0.141569659427390     
+ energy balance in canopy X  0.101594123795955     
+ energy balance in canopy X  0.119945085633354     
+ energy balance in canopy X  0.176040299685319     
+ energy balance in canopy X  0.113011300507182     
+ energy balance in canopy X  0.141263533814879     
+ energy balance in canopy X  0.176127224871394     
+ energy balance in canopy X  0.163497717521295     
+ energy balance in canopy X  0.104423473275418     
+ energy balance in canopy X  0.170204340352456     
+ energy balance in canopy X  0.187244450899229     
+ energy balance in canopy X  0.143110767218559     
+ energy balance in canopy X  0.141926554176848     
+ energy balance in canopy X  0.113966969844611     
+ energy balance in canopy X  0.100817953474902     
+ energy balance in canopy X  0.186124041462975     
+ energy balance in canopy X  0.127069605653290     
+ energy balance in canopy X  0.215199442195086     
+ energy balance in canopy X -0.101239475020265     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.178313891776710     
+ energy balance in canopy X  0.173973964003551     
+ energy balance in canopy X  0.245917341791838     
+ energy balance in canopy X  0.148642619197602     
+ energy balance in canopy X  0.168205134640118     
+ energy balance in canopy X  0.274858171947372     
+ energy balance in canopy X  0.121232709289288     
+ energy balance in canopy X  0.159574620526719     
+ energy balance in canopy X  0.253509909833156     
+ energy balance in canopy X  0.217634056650716     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.790960250197230     
+ energy balance in canopy X  0.217215219118014     
+ energy balance in canopy X  0.478587985129003     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.882124826196510     
+ energy balance in canopy X  0.212824694774525     
+ energy balance in canopy X  0.254206059723117     
+ energy balance in canopy X  0.155869920765667     
+ energy balance in canopy X  0.113239020536525     
+ energy balance in canopy X  0.226923409220021     
+ energy balance in canopy X  0.160018348029396     
+ energy balance in canopy X  0.153387701948645     
+ energy balance in canopy X  0.126765469101571     
+ energy balance in canopy X  0.126186914545357     
+ energy balance in canopy X  0.203602926693534     
+ energy balance in canopy X  0.226998425570557     
+ energy balance in canopy X  0.113175627384678     
+ energy balance in canopy X  0.137964945011959     
+ energy balance in canopy X  0.112771355550734     
+ energy balance in canopy X  0.150915732332521     
+ energy balance in canopy X -0.168334385244790     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.120997409536230     
+ energy balance in canopy X  0.139855307729420     
+ energy balance in canopy X  0.104509004849888     
+ energy balance in canopy X  0.137153572922671     
+ energy balance in canopy X  0.176129175199918     
+ energy balance in canopy X  0.172415310070477     
+ energy balance in canopy X  0.169710445175468     
+ energy balance in canopy X  0.157721466463528     
+ energy balance in canopy X  0.228155328432621     
+ energy balance in canopy X  0.186004275028608     
+ energy balance in canopy X  0.220278098152519     
+ energy balance in canopy X  0.209942379922083     
+ energy balance in canopy X  0.228681504410744     
+ energy balance in canopy X  0.136643713371257     
+ energy balance in canopy X  0.142969237706069     
+ energy balance in canopy X  0.119784813242106     
+ energy balance in canopy X  0.158168045128136     
+ energy balance in canopy X  0.210242404590616     
+ energy balance in canopy X  0.171374331901433     
+ energy balance in canopy X  0.178606042753245     
+ energy balance in canopy X  0.112602334533150     
+ energy balance in canopy X  0.141373358410192     
+ energy balance in canopy X  0.163711478807713     
+ energy balance in canopy X  0.119831134818469     
+ energy balance in canopy X  0.183028009003138     
+ energy balance in canopy X  0.112414990128670     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.104598939348179     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.172181149500226     
+ energy balance in canopy X  0.120879473607324     
+ energy balance in canopy X -0.167665037392183     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.166688673170860     
+ energy balance in canopy X  0.169305112358202     
+ energy balance in canopy X  0.145302325569311     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.122769713523784     
+ energy balance in canopy X  0.100571291177999     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.142111576962463     
+ energy balance in canopy X  0.156178371490114     
+ energy balance in canopy X  0.228597209820791     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.136915420884463     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.100682654930928     
+ energy balance in canopy X -0.156880256817049     
+ energy balance in canopy X -0.149476368483217     
+ energy balance in canopy X -0.184281023495100     
+ energy balance in canopy X -0.104467369672854     
+ energy balance in canopy X -0.102284403219649     
+ energy balance in canopy X -0.138002477281514     
+ energy balance in canopy X -0.104885012713485     
+ energy balance in canopy X -0.127552359940202     
+ energy balance in canopy X -0.317475328055890     
+ energy balance in canopy X -0.140347102802059     
+ energy balance in canopy X -0.284141094673592     
+ energy balance in canopy X -0.245019883566703     
+ energy balance in canopy X -0.340203316123993     
+ energy balance in canopy X -0.391967264028214     
+ energy balance in canopy X -0.146880998844470     
+ energy balance in canopy X  0.147796826510415     
+ energy balance in canopy X  0.103799217584811     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.109898051166283     
+ energy balance in canopy X  0.175769204082307     
+ energy balance in canopy X  0.218419949142945     
+ energy balance in canopy X  0.114402195044839     
+ energy balance in canopy X  0.114423926547392     
+ energy balance in canopy X  0.163542125442323     
+ energy balance in canopy X  0.109325634227059     
+ energy balance in canopy X  0.158217415968949     
+ energy balance in canopy X  0.103671533912724     
+ energy balance in canopy X  0.120946862736186     
+ energy balance in canopy X  0.152836881382267     
+ energy balance in canopy X  0.141677569650497     
+ energy balance in canopy X  0.113917783242957     
+ energy balance in canopy X  0.151550678840636     
+ energy balance in canopy X -0.129041084623733     
+ energy balance in canopy X  0.161830979652350     
+ energy balance in canopy X  0.116670798956434     
+ energy balance in canopy X  0.273950465409015     
+ energy balance in canopy X  0.375520398333990     
+ energy balance in canopy X  0.358279687634450     
+ energy balance in canopy X  0.244470918004211     
+ energy balance in canopy X  0.200283691182733     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.122892368571321     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.187234988255099     
+ energy balance in canopy X  0.124991639723888     
+ energy balance in canopy X  0.289233675423333     
+ energy balance in canopy X  0.235570313087351     
+ energy balance in canopy X  0.353521940926925     
+ energy balance in canopy X  0.177796606439031     
+ energy balance in canopy X  0.117658083318460     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.117979635443561     
+ energy balance in canopy X  0.164816509514722     
+ energy balance in canopy X  0.104265263339450     
+ energy balance in canopy X  0.106743018723403     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+ energy balance in canopy X  0.128842820120532     
+ energy balance in canopy X  0.161249995793185     
+ Write CLM Active Restart: istep_pf =            0
+ CLM Active Restart Written: clm.rst.                                
+
+--------------------------------------------------------------------------------
+# ==============================================================================
+

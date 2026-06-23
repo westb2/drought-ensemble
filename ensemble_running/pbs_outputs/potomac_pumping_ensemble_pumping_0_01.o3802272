@@ -1,0 +1,118 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387
+Year 2 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c
+Year 3 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c7a6c9f48b8c18d67f24d9d5b08e10c164937257d094c018db00dc605f90d667
+Year 4 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/73bb3282cc5d2a5902af6898b2630945c22749744733c53e37a3dad401468277
+Year 5 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/3fbc89b1772a4864a1251f55a7447ab388c8bc99d2d0416085c3c82484187661
+Year 6 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/18cf10fff7b5fa3b378039cf50527e957f04a78805cd29534e166113f6e81511
+Year 7 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/9f881bcf7730f51e18746946cf0fa2dd56614547a8d3fa02d954b492979ff4c6
+Year 8 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4bebbe27912eec4fbd0e4e878a82c29a49bff11f999ac7f849e32d529891141c
+Year 9 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/bf8932e91223fd17a646dc3c1304586f6c829b99c19113e7455f0acec82f9c05
+Running year 10 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ec7a5038e9fdc2f8e687fa0c4a0b0265785acfeb96e735ee11796d45c690e1fb
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ec7a5038e9fdc2f8e687fa0c4a0b0265785acfeb96e735ee11796d45c690e1fb
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 11 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/15c30c214b64e889c75319a0c10dd63c2212e259ea52584cb8baeb8138ef96ff
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/15c30c214b64e889c75319a0c10dd63c2212e259ea52584cb8baeb8138ef96ff
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 12 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/1aac66e0fd723f1a2d65cdddb2c2a815e139d68a44e9e5a94fc8674025f8e488
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/1aac66e0fd723f1a2d65cdddb2c2a815e139d68a44e9e5a94fc8674025f8e488
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running average_0.0_False_average_0.0_False_average_0.0_False_average_0.01_False_average_0.01_False_average_0.01_False_average_0.01_False_average_0.01_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False
+Found processed output for year 0 at /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c/processed_output.nc
+Found processed output for year 1 at /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387/processed_output.nc
+Found processed output for year 2 at /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c/processed_output.nc
+Saving processed output for year 3 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c7a6c9f48b8c18d67f24d9d5b08e10c164937257d094c018db00dc605f90d667/processed_output.nc
+Saving processed output for year 4 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/73bb3282cc5d2a5902af6898b2630945c22749744733c53e37a3dad401468277/processed_output.nc
+Saving processed output for year 5 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/3fbc89b1772a4864a1251f55a7447ab388c8bc99d2d0416085c3c82484187661/processed_output.nc
+Saving processed output for year 6 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/18cf10fff7b5fa3b378039cf50527e957f04a78805cd29534e166113f6e81511/processed_output.nc
+Saving processed output for year 7 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/9f881bcf7730f51e18746946cf0fa2dd56614547a8d3fa02d954b492979ff4c6/processed_output.nc
+Saving processed output for year 8 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4bebbe27912eec4fbd0e4e878a82c29a49bff11f999ac7f849e32d529891141c/processed_output.nc
+Saving processed output for year 9 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/bf8932e91223fd17a646dc3c1304586f6c829b99c19113e7455f0acec82f9c05/processed_output.nc
+Saving processed output for year 10 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ec7a5038e9fdc2f8e687fa0c4a0b0265785acfeb96e735ee11796d45c690e1fb/processed_output.nc
+Saving processed output for year 11 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/15c30c214b64e889c75319a0c10dd63c2212e259ea52584cb8baeb8138ef96ff/processed_output.nc
+Saving processed output for year 12 to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/1aac66e0fd723f1a2d65cdddb2c2a815e139d68a44e9e5a94fc8674025f8e488/processed_output.nc
+Saved condensed output to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/processed_full_runs/pumping_ensemble/pumping_0_01

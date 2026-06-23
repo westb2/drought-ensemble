@@ -1,0 +1,691 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387
+Year 2 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c
+Year 3 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/3d8ed65413d6f5858f7477507f81c0244343853678704237565653e027803569
+Year 4 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/2ff5250bb54632d4013b985e8c208a83a30a28cb7194cec757feed7f1774b9cb
+Year 5 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/ee30527481b3c43126c818dfc42b9e0c71eb5bcc765429cf0d729153c3fb4cae
+Running year 6 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/045637c944420ddff22bbf509df737db6c08a866e0f1d9d2d0e40b8230730d27
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/045637c944420ddff22bbf509df737db6c08a866e0f1d9d2d0e40b8230730d27
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 7 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/97f1d80ae21e1207b89bf788957d493dae232bb06a10d38d3dda8cb7c956b08c
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/97f1d80ae21e1207b89bf788957d493dae232bb06a10d38d3dda8cb7c956b08c
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 8 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/9e6f007ed334b4527b605ccceeaa54117fcf1bb4462332fa26becaad76eb5d49
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/9e6f007ed334b4527b605ccceeaa54117fcf1bb4462332fa26becaad76eb5d49
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 9 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/788c317c7afeeb4a188c4c7c34d6163835412ed9b1622bb6c7deaacd964a862d
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/788c317c7afeeb4a188c4c7c34d6163835412ed9b1622bb6c7deaacd964a862d
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 10 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b5284b44b0d0738a104968df5aa8f33a117a395ee45dd5df22738eb5cf6289da
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b5284b44b0d0738a104968df5aa8f33a117a395ee45dd5df22738eb5cf6289da
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 11 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/0e11257d91c1f1347c1704c3cf04134ce987ba7686531047703dcea853eaec59
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/0e11257d91c1f1347c1704c3cf04134ce987ba7686531047703dcea853eaec59
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 12 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/4daf6a2423b447c0ebe7b90bf209fe38763988a28d9b66675e59ebfad377da95
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/4daf6a2423b447c0ebe7b90bf209fe38763988a28d9b66675e59ebfad377da95
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 13 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f060314939a7a7ebf0eb87e3e6177488e7cdd470cb8caf4b57f531c13a56129f
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f060314939a7a7ebf0eb87e3e6177488e7cdd470cb8caf4b57f531c13a56129f
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 14 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/dc8d47313960b43fcf8cbb4f7859e768c666e16645a1303e17abc7881e51d0d4
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/dc8d47313960b43fcf8cbb4f7859e768c666e16645a1303e17abc7881e51d0d4
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 15 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/ce70f437817f4614f5bf9ee4f7a65d99534333a37a77bf914b99f9d405902412
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/ce70f437817f4614f5bf9ee4f7a65d99534333a37a77bf914b99f9d405902412
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 16 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f625a2817b9dd695b1cb7d48e4eea42ae296505baa074f2bbfc488f3e340bd9f
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f625a2817b9dd695b1cb7d48e4eea42ae296505baa074f2bbfc488f3e340bd9f
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 17 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/bdc40a48522c9d793fe12b74c2555d8e1e25601f2eeca9c05773fb64a230800c
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/bdc40a48522c9d793fe12b74c2555d8e1e25601f2eeca9c05773fb64a230800c
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 18 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/04572cf5826ab66ba2b7d316f1ae62577df474c7548b243e19e37c38ccf8e032
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/04572cf5826ab66ba2b7d316f1ae62577df474c7548b243e19e37c38ccf8e032
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 19 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/2e686625c7f47fd7a4ee8e7922bfee55c840bddd3633989e5ec740fc6547daa1
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/2e686625c7f47fd7a4ee8e7922bfee55c840bddd3633989e5ec740fc6547daa1
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 20 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/e8eedd5237c9e676ef268983a6f93e5daa2cd8b3296df46c52e6d576f8c694fa
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/e8eedd5237c9e676ef268983a6f93e5daa2cd8b3296df46c52e6d576f8c694fa
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 21 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/c6b164429c7a4a3ba7b72c7cae76979e977d156da994e6d48c25adc09742234a
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/c6b164429c7a4a3ba7b72c7cae76979e977d156da994e6d48c25adc09742234a
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 22 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/95a5346fb68d3e497e8b1acdb4a524c922395ea5022a4d5448dda31a8b878685
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/95a5346fb68d3e497e8b1acdb4a524c922395ea5022a4d5448dda31a8b878685
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 23 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/39105e77b177b1713a26074de1494fbd1eee7972b04d01ee0047c880f8217397
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/39105e77b177b1713a26074de1494fbd1eee7972b04d01ee0047c880f8217397
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 24 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/0c9231cb39da308ba9b0e572987b4061ef8e625422ab30386abc2568a23074da
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/0c9231cb39da308ba9b0e572987b4061ef8e625422ab30386abc2568a23074da
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 25 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/1ea20ffa718c3c62cdcb107588ccb5b183d2c7c6990d832d62af900a311edeec
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/1ea20ffa718c3c62cdcb107588ccb5b183d2c7c6990d832d62af900a311edeec
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 26 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/7c068068849cb386f62720374180781dbc05a0a62c936b126eb43d3cbf913b58
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/7c068068849cb386f62720374180781dbc05a0a62c936b126eb43d3cbf913b58
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 27 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/d381a2bac5f32ea4e42704f872f9a728cd0716ca7fd2c3bc6358e79b608de8b7
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/d381a2bac5f32ea4e42704f872f9a728cd0716ca7fd2c3bc6358e79b608de8b7
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 28 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/8232e2fc9fecc65a05d05eb333f9bafb18b4eb89387ba9fba96e5ec00e047c3f
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/8232e2fc9fecc65a05d05eb333f9bafb18b4eb89387ba9fba96e5ec00e047c3f
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 29 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/32819e93f3d6c6840b4661e3a2a546cd7c0f6bf64d8938de293306a1f94b63f7
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/32819e93f3d6c6840b4661e3a2a546cd7c0f6bf64d8938de293306a1f94b63f7
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 30 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/a81c1d6611556b3506438c678d408e4db00dfa6a8635d3f1adac17ab9cd5677b
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/a81c1d6611556b3506438c678d408e4db00dfa6a8635d3f1adac17ab9cd5677b
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 31 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b87e7c3fb2d96c7d4843887962289056ad4e7678d9716522fe42c12a8c12e3d9
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b87e7c3fb2d96c7d4843887962289056ad4e7678d9716522fe42c12a8c12e3d9
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 32 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/d7faf34ffa4881eee8df4d2beaf4d1ffba10873fd342a38ceded704fd5c29c51
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/d7faf34ffa4881eee8df4d2beaf4d1ffba10873fd342a38ceded704fd5c29c51
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 33 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f981c519d534f6f59a66c72ee2c55b8fda5d84ea636bd7ee791c3848715e97fb
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/f981c519d534f6f59a66c72ee2c55b8fda5d84ea636bd7ee791c3848715e97fb
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 34 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/545829921914ad9483a840b9d6eb1fa4f1b5076e874802c44b77c6dc04f996d2
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/545829921914ad9483a840b9d6eb1fa4f1b5076e874802c44b77c6dc04f996d2
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running year 35 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b0eef9a7353505828a65df8ee3ac61382776c1000cd7d2b6e25a602a56247400
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/raw_runs/b0eef9a7353505828a65df8ee3ac61382776c1000cd7d2b6e25a602a56247400
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow ran successfully
+# ==============================================================================
+
+Running average_0.0_False_average_0.0_False_average_0.0_False_dry_0.0_False_dry_0.0_False_dry_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False_average_0.0_False
+xarray.Dataset {
+dimensions:
+	time = 864 ;
+	z = 10 ;
+	y = 136 ;
+	x = 70 ;
+
+variables:
+	float64 pressure(time, z, y, x) ;
+	float64 saturation(time, z, y, x) ;
+	float64 evaptrans(time, z, y, x) ;
+	float64 overland_bc_flux(time, y, x) ;
+	float64 time(time) ;
+	float64 mask(z, y, x) ;
+	float64 mannings(y, x) ;
+	float64 porosity(z, y, x) ;
+	float64 specific_storage(z, y, x) ;
+	float64 DZ_Multiplier(z, y, x) ;
+	float64 slopex(y, x) ;
+	float64 slopey(y, x) ;
+	float64 perm_x(z, y, x) ;
+	float64 perm_y(z, y, x) ;
+	float64 perm_z(z, y, x) ;
+
+// global attributes:
+}Saved condensed output to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/testing/processed_full_runs/ensemble_1/3_year_drought

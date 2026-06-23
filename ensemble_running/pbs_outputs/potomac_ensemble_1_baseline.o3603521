@@ -1,0 +1,22 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Traceback (most recent call last):
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 33, in <module>
+    run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING)
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 21, in run_sequence_on_domain
+    run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True, ensemble_name=ensemble_name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 36, in __init__
+    self.sequence = self.get_sequence_from_file(self.get_sequence_file_path())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 68, in get_sequence_from_file
+    with open(sequence_file, 'r') as file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/glade/derecho/scratch/bwest/drought-ensemble/run_sequences/ensemble_1/baseline.json'

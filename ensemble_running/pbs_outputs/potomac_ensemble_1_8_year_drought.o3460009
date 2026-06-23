@@ -1,0 +1,74 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+Aborting in file </glade/work/gartavanis/parflow/parflow/pfsimulator/amps/common/amps_ffopen.c> line : 253
+AMPS Error
+dec1738.hsn.de.hpc.ucar.edu: rank 0 died from signal 6 and dumped core
+dec1789.hsn.de.hpc.ucar.edu: rank 240 died from signal 15
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Year 1 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/c6a8270c59d4b1edfca7b7ea99723a58e219f902b69b3d6b1fa8ba8db8b82387
+Year 2 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/67af0c575def0eb3b36403eb3b1cc5f7c5af80d7a9ab86c2946749024619ec5c
+Year 3 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/3d8ed65413d6f5858f7477507f81c0244343853678704237565653e027803569
+Year 4 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/2ff5250bb54632d4013b985e8c208a83a30a28cb7194cec757feed7f1774b9cb
+Year 5 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ee30527481b3c43126c818dfc42b9e0c71eb5bcc765429cf0d729153c3fb4cae
+Year 6 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ac780d6b8b80375262493be134384890e84c6594e80705fdbd7b77fda208d643
+Year 7 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/aae55948480a9c348fc3d39302a2ebf148ee5ce0d699838c9a0a2100b53d6831
+Year 8 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/5539bc71ceef534fc4013478f958284d44adaae00ff49d2ce1bb27316259245e
+Year 9 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/44b64886d1e65f2d07c1efde92880cf6f53c6c6a78395257709987ee3f5320f0
+Year 10 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/b741a05454da7c6fe48cb48f9dd83449d297a2b64ef45baf7442f0151cda77f2
+Year 11 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7eb6daf7d9cc423ab0c8bc14a8cdb721b7c22ebd63ac8440cd8e4d3fa79cea0b
+Year 12 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/9187d3853d6b1b294468a0d611f42ea68536e25558164b674b9ba2c6d4a7f9bd
+Year 13 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ad082abe4d67bf77dfd584f5cd7e932c5624450e45b6235a9f59819dcdd02799
+Year 14 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/4b0e89718b87c7dbf1aee73ff8c44f317ee8ffd98e012917cebdab45e35bf914
+Year 15 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/45ebd28779a7e84c0c7a645c716646f86a70b57d193f9559b831df3e3805409c
+Running year 16 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7b82ebd1b5a6916a762101977012bf956f4988f126ddc6b160b16115137d9766
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/7b82ebd1b5a6916a762101977012bf956f4988f126ddc6b160b16115137d9766
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow run failed. Contents of error output file:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+# ==============================================================================
+

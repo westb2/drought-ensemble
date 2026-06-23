@@ -1,0 +1,10 @@
+{
+    "name": "baseline",
+    "years": [
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 1e-9,
+            "irrigation": "False"
+        }
+    ]
+}

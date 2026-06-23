@@ -1,0 +1,1801 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+Exception in thread Thread-3 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+Exception in thread Thread-1 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+    data = _get_gridded_data_from_api(options)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+    raise ValueError(
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'north_windspeed', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_shortwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-5 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+Exception in thread Thread-6 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+    self._update_chunk_length()
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+    raise InvalidChunkLength(self, line)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    data = _get_gridded_data_from_api(options)
+    for line in self.read_chunked(amt, decode_content=decode_content):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_longwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'specific_humidity', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-4 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'atmospheric_pressure', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-2 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'east_windspeed', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-8 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'air_temp', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-7 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'precipitation', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1998, 10, 1, 0, 0), 'end_time': datetime.datetime(1999, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-16 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'air_temp', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-12 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'atmospheric_pressure', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-13 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_longwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-9 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_shortwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-15 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+Exception in thread Thread-10 (_subset_forcing_variable):
+    subset_data = get_hf_gridded_data(hf_filter_options)
+Traceback (most recent call last):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'precipitation', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'east_windspeed', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-11 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'north_windspeed', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(1996, 10, 1, 0, 0), 'end_time': datetime.datetime(1997, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-20 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'atmospheric_pressure', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(2004, 10, 1, 0, 0), 'end_time': datetime.datetime(2005, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-21 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_longwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(2004, 10, 1, 0, 0), 'end_time': datetime.datetime(2005, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Exception in thread Thread-17 (_subset_forcing_variable):
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 761, in _update_chunk_length
+    self.chunk_left = int(line, 16)
+                      ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 444, in _error_catcher
+    yield
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 828, in read_chunked
+    self._update_chunk_length()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 765, in _update_chunk_length
+    raise InvalidChunkLength(self, line)
+urllib3.exceptions.InvalidChunkLength: InvalidChunkLength(got length b'', 0 bytes read)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 624, in stream
+    for line in self.read_chunked(amt, decode_content=decode_content):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 816, in read_chunked
+    with self._error_catcher():
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/urllib3/response.py", line 461, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+urllib3.exceptions.ProtocolError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1598, in _get_gridded_data_from_api
+    response = requests.get(gridded_data_url, headers=headers, timeout=4000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/requests/models.py", line 818, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 16, in get_hf_gridded_data
+    data = hf.get_gridded_data(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/data_catalog.py", line 29, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1224, in get_gridded_data
+    data = _get_gridded_data_from_api(options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/hf_hydrodata/gridded.py", line 1618, in _get_gridded_data_from_api
+    raise ValueError(
+ValueError: Timeout error from server. Try again later or try to reduce the size of data in the API request using time or space filters.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 373, in _subset_forcing_variable
+    (subset_data, end_block_date) = _read_hf_hydrodata_block(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/subsetting.py", line 441, in _read_hf_hydrodata_block
+    subset_data = get_hf_gridded_data(hf_filter_options)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/subsettools/_common.py", line 18, in get_hf_gridded_data
+    raise ValueError(
+ValueError: No HydroData entry found for the requested filters: {'dataset': 'CW3E', 'variable': 'downward_shortwave', 'grid': 'conus2', 'file_type': 'pfb', 'grid_bounds': (3662, 1657, 3732, 1793), 'mask': 'false', 'temporal_resolution': 'hourly', 'dataset_version': '1.0', 'start_time': datetime.datetime(2004, 10, 1, 0, 0), 'end_time': datetime.datetime(2005, 10, 1, 0, 0), 'subsettools': '2.0.9'}
+Aborting in file </glade/work/gartavanis/parflow/parflow/pfsimulator/amps/common/amps_ffopen.c> line : 253
+AMPS Error
+dec1211.hsn.de.hpc.ucar.edu: rank 0 died from signal 6 and dumped core
+dec1211.hsn.de.hpc.ucar.edu: rank 8 died from signal 15
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+Getting domain for potomac_dry
+DEBUG: RUN_DIR = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac
+DEBUG: input_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: output_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: static_write_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/static
+DEBUG: forcing_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry/forcing
+DEBUG: pf_out_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+Wrote mask.pfb
+Wrote solidfile and mask_vtk with total z of 2000.0 meters
+Wrote slope_x.pfb in specified directory.
+Wrote slope_y.pfb in specified directory.
+Wrote pf_indicator.pfb in specified directory.
+Wrote mannings.pfb in specified directory.
+Wrote pf_flowbarrier.pfb in specified directory.
+Wrote pme.pfb in specified directory.
+Wrote ss_pressure_head.pfb in specified directory.
+copied vegp
+subset vegm
+copied drv_clmin
+edited drv_clmin
+(136, 70)
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+New runname: run provided, a new yaml file will be created
+Climate forcing directory has been changed to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry/forcing  in runscript.
+ComputationalGrid.NY set to 136 and NX to 70
+GeomInput.domaininput.InputType detected as SolidFile, no additional keys to change for subset
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Initial pressure filename changed to ss_pressure_head.pfb
+Depth to bedrock filename changed to pf_flowbarrier.pfb
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Distributing your climate forcing
+Distributed pf_indicator.pfb with NZ 10
+Distributed pme.pfb with NZ 10
+Distributed slope_x.pfb with NZ 1
+Distributed ss_pressure_head.pfb with NZ 10
+Distributed mannings.pfb with NZ 1
+Distributed slope_y.pfb with NZ 1
+Distributed mask.pfb with NZ 1
+Distributed pf_flowbarrier.pfb with NZ 10
+Setting working directory to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Wrote runscript to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry/run
+Loaded run with runname: run
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+Getting domain for potomac_wet
+DEBUG: RUN_DIR = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac
+DEBUG: input_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: output_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: static_write_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/static
+DEBUG: forcing_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet/forcing
+DEBUG: pf_out_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+Wrote mask.pfb
+Wrote solidfile and mask_vtk with total z of 2000.0 meters
+Wrote slope_x.pfb in specified directory.
+Wrote slope_y.pfb in specified directory.
+Wrote pf_indicator.pfb in specified directory.
+Wrote mannings.pfb in specified directory.
+Wrote pf_flowbarrier.pfb in specified directory.
+Wrote pme.pfb in specified directory.
+Wrote ss_pressure_head.pfb in specified directory.
+copied vegp
+subset vegm
+copied drv_clmin
+edited drv_clmin
+Finished writing specific_humidity to folder
+(136, 70)
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+New runname: run provided, a new yaml file will be created
+Climate forcing directory has been changed to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet/forcing  in runscript.
+ComputationalGrid.NY set to 136 and NX to 70
+GeomInput.domaininput.InputType detected as SolidFile, no additional keys to change for subset
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Initial pressure filename changed to ss_pressure_head.pfb
+Depth to bedrock filename changed to pf_flowbarrier.pfb
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Distributing your climate forcing
+Distributed pf_indicator.pfb with NZ 10
+Distributed pme.pfb with NZ 10
+Distributed slope_x.pfb with NZ 1
+Distributed ss_pressure_head.pfb with NZ 10
+Distributed mannings.pfb with NZ 1
+Distributed slope_y.pfb with NZ 1
+Distributed mask.pfb with NZ 1
+Distributed pf_flowbarrier.pfb with NZ 10
+Setting working directory to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Wrote runscript to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet/run
+Loaded run with runname: run
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Getting domain for potomac_average
+DEBUG: RUN_DIR = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac
+DEBUG: input_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: output_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs
+DEBUG: static_write_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/static
+DEBUG: forcing_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average/forcing
+DEBUG: pf_out_dir = /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Wrote mask.pfb
+Wrote solidfile and mask_vtk with total z of 2000.0 meters
+Wrote slope_x.pfb in specified directory.
+Wrote slope_y.pfb in specified directory.
+Wrote pf_indicator.pfb in specified directory.
+Wrote mannings.pfb in specified directory.
+Wrote pf_flowbarrier.pfb in specified directory.
+Wrote pme.pfb in specified directory.
+Wrote ss_pressure_head.pfb in specified directory.
+copied vegp
+subset vegm
+copied drv_clmin
+edited drv_clmin
+Finished writing north_windspeed to folder
+Finished writing precipitation to folder
+Finished writing east_windspeed to folder
+Finished writing air_temp to folder
+Finished writing specific_humidity to folder
+(136, 70)
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+New runname: run provided, a new yaml file will be created
+Climate forcing directory has been changed to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average/forcing  in runscript.
+ComputationalGrid.NY set to 136 and NX to 70
+GeomInput.domaininput.InputType detected as SolidFile, no additional keys to change for subset
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Initial pressure filename changed to ss_pressure_head.pfb
+Depth to bedrock filename changed to pf_flowbarrier.pfb
+Updated runscript written to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Distributing your climate forcing
+Distributed pf_indicator.pfb with NZ 10
+Distributed pme.pfb with NZ 10
+Distributed slope_x.pfb with NZ 1
+Distributed ss_pressure_head.pfb with NZ 10
+Distributed mannings.pfb with NZ 1
+Distributed slope_y.pfb with NZ 1
+Distributed mask.pfb with NZ 1
+Distributed pf_flowbarrier.pfb with NZ 10
+Setting working directory to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+Wrote runscript to /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average/run
+Loaded run with runname: run
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Running year 0 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Solver: Field BinaryOutDir is not part of the expected schema <class 'parflow.tools.database.generated.Solver'>
+: Field run_dir is not part of the expected schema <class 'parflow.tools.core.Run'>
+: Field _run_file is not part of the expected schema <class 'parflow.tools.core.Run'>
+
+# ==============================================================================
+# ParFlow directory
+#  - /glade/work/gartavanis/parflow/parflow
+# ParFlow version
+#  - 3.13.0
+# Working directory
+#  - /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+# ParFlow database
+#  - run.pfidb
+# ==============================================================================
+
+
+# ==============================================================================
+# ParFlow run failed. Contents of error output file:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+# ==============================================================================
+

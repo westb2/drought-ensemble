@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -N potomac_partial_run_8_year_drought
+#PBS -A UPRI0032
+#PBS -q main
+#PBS -m bae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=01:00:00 
+#PBS -l select=4:ncpus=64:mpiprocs=64
+#PBS -j oe
+
+
+module load conda
+conda activate droughts
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs
+source ~/pf_env.sh
+python3 ../run_sequence_on_domain.py potomac /glade/derecho/scratch/bwest/drought-ensemble/run_sequences/partial_run/for_reading.json /glade/derecho/scratch/bwest/drought-ensemble partial_run True
+        

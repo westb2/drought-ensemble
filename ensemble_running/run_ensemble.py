@@ -15,19 +15,20 @@ from classes.Domain import Domain
 
 # these are the input we can change
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
-domain_name = "potomac_without_flow_barrier"
-ensemble_name = "ensemble_1"
+domain_names = [ "republican", "ponca", "potomac2", "wolf2"]
+# domain_names = ["wolf2", "republican"]
+ensemble_name = "25_year_spinup"
 sequences_folder = os.path.join(project_root, "run_sequences", ensemble_name)
 
 sequences = [f"{sequences_folder}/{sequence}" for sequence in os.listdir(sequences_folder)]
 # remove any files that are not json
 sequences = [sequence for sequence in sequences if sequence.endswith(".json")]
-
-for sequence in sequences:
-    sequence_data = json.load(open(sequence))
-    sequence_name = sequence_data["name"]
-    with open("tmp_job.pbs", "w") as f:
-        f.write(
+for domain_name in domain_names:
+    for sequence in sequences:
+        sequence_data = json.load(open(sequence))
+        sequence_name = sequence_data["name"]
+        with open("tmp_job.pbs", "w") as f:
+            f.write(
 f"""#!/bin/bash
 #PBS -N {domain_name}_{ensemble_name}_{sequence_name}
 #PBS -A UPRI0032
@@ -37,13 +38,11 @@ f"""#!/bin/bash
 #PBS -l walltime=12:00:00 
 #PBS -l select=4:ncpus=64:mpiprocs=64
 #PBS -j oe
-
-
 module load conda
 conda activate droughts
 cd {project_root}/ensemble_running/pbs_outputs
 source ~/pf_env.sh
 python3 ../run_sequence_on_domain.py {domain_name} {sequence} {project_root} {ensemble_name} {TESTING}
         """)
-    os.system(f"qsub tmp_job.pbs")
-    # shutil.rmtree(f"{project_root}/ensemble_running/pbs_outputs/tmp_job.pbs", ignore_errors=True)
+        os.system(f"qsub tmp_job.pbs")
+        # shutil.rmtree(f"{project_root}/ensemble_running/pbs_outputs/tmp_job.pbs", ignore_errors=True)

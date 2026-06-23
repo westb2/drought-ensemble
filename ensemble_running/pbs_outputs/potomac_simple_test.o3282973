@@ -1,0 +1,68 @@
+
+The following have been reloaded with a version change:
+  1) craype/2.7.31 => craype/2.7.23
+
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'cfradial1' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'furuno' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'gamic' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'iris' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'odim' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/backends/plugins.py:110: RuntimeWarning: Engine 'rainbow' loading failed:
+No module named 'xarray.core.merge'
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+False
+False
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_dry
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_wet
+/glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/inputs/potomac_average
+Year 0 of the run already exists in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/fc2a5b1d5cf4b8279c7d6a98de84df89f0bc21961f7fd18bac11228fec55ac9c
+Running year 1 of the run in /glade/derecho/scratch/bwest/drought-ensemble/domains/potomac/raw_runs/ed471bc46c1a7fe12cf9d789aa2dc6b8c7791990e89303ef8e539ed7146fcdc4
+Traceback (most recent call last):
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 33, in <module>
+    run_sequence_on_domain(domain_name, sequence_path, project_root, ensemble_name, TESTING)
+  File "/glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs/../run_sequence_on_domain.py", line 22, in run_sequence_on_domain
+    run.run_full_sequence()
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 128, in run_full_sequence
+    sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 110, in get_initial_pressure_file
+    file_path = self.create_initial_pressure_file_from_netcdf(previous_run.run_dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/derecho/scratch/bwest/drought-ensemble/classes/Run.py", line 94, in create_initial_pressure_file_from_netcdf
+    final_pressure = run_output.pressure.isel(time=self.domain.stop_time-1)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/dataarray.py", line 1593, in isel
+    coord_value = coord_value.isel(coord_indexers)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/variable.py", line 1130, in isel
+    return self[key]
+           ~~~~^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/variable.py", line 820, in __getitem__
+    data = indexing.apply_indexer(indexable, indexer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/indexing.py", line 1159, in apply_indexer
+    return indexable[indexer]
+           ~~~~~~~~~^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/indexing.py", line 2006, in __getitem__
+    return self._index_get(indexer, "__getitem__")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/xarray/core/indexing.py", line 1987, in _index_get
+    result = self.array[key]
+             ~~~~~~~~~~^^^^^
+  File "/glade/work/bwest/conda-envs/droughts/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5401, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 8759 is out of bounds for axis 0 with size 73

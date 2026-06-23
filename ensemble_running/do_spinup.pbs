@@ -10,7 +10,7 @@
 
 module load conda
 conda activate droughts
-cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/pbs_outputs
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running
 source ~/pf_env.sh
 python3 do_spinup.py
         

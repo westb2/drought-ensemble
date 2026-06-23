@@ -185,7 +185,17 @@ class Run:
         year_wetness = run_specs["wetness"]
         print(f"Copying domain to run directory {self.run_dir}")
         print(f"Domain base run folder: {self.domain.get_base_run_folder(year_wetness)}")
-        shutil.copytree(f"{self.domain.get_base_run_folder(year_wetness)}", self.run_dir)
+        os.makedirs(self.run_dir, exist_ok=True)
+        for item in os.listdir(self.domain.get_base_run_folder(year_wetness)):
+            src = os.path.join(self.domain.get_base_run_folder(year_wetness), item)
+            dst = os.path.join(self.run_dir, item)
+            if os.path.isfile(src):
+                shutil.copy2(src, dst)
+        # Create a symbolic link to the forcing directory if not already present
+        src_forcing = os.path.join(self.domain.get_base_run_folder(year_wetness), "forcing")
+        dest_forcing = os.path.join(self.run_dir, "forcing")
+        if not os.path.exists(dest_forcing):
+            os.symlink(src_forcing, dest_forcing)
         os.chdir(self.run_dir)
         # Write the sequence to a file
         with open("sequence.json", "w") as f:
@@ -199,8 +209,9 @@ class Run:
         if pumping_rate_fraction > 0.0:
             model = self.add_pumping_to_model(model,
                             pumping_rate_fraction=pumping_rate_fraction, 
-                            irrigation=irrigation, flux_cycling=flux_cycling, 
-                            pumping_layer=pumping_layer, flux_time_series=flux_time_series,
+                            irrigation=irrigation, 
+                            flux_cycling=flux_cycling, 
+                            flux_time_series=flux_time_series,
                             start_time=0, end_time=self.domain.stop_time)
         model.run_dir = os.getcwd()
         model.TimingInfo.DumpInterval = self.domain.dump_interval
@@ -213,7 +224,7 @@ class Run:
             model = self.switch_to_netcdf(model)
             # run.ICPressure.FileFormat = "ParFlowBinary"
         model.write("run", file_format="yaml")
-        model.run()
+        model.run(skip_validation=True)
 
 
 
