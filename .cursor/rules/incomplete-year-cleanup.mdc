@@ -1,0 +1,41 @@
+---
+description: Find and delete incomplete ParFlow year folders before restarting a mid-failed multi-year run (raw_runs, run_log.txt, walltime/quota kills)
+alwaysApply: false
+---
+
+# Incomplete year cleanup before restart
+
+Multi-year runs create one hash folder per year under `domains/<domain>/raw_runs/<sha256>/`. The orchestrator (`classes/Run.py`) **skips any year whose folder already exists**, with no completeness check. A crash mid-year leaves a partial folder that must be deleted or that year will never re-run.
+
+## Active / queued job guard (do this first)
+
+1. Run `qstat -u $USER`. Note jobs in **`R`** (running) vs **`Q`** (queued).
+2. **Never delete** a `raw_runs/<hash>` that an **`R`** job is currently writing (last `run_log.txt` line / PBS log for that job).
+3. **Queued (`Q`) jobs** that will intentionally recreate a tip year are OK to clean *before* they start — still list paths and get user confirmation.
+4. Paths are **per-domain**: `domains/potomac2/raw_runs/<hash>` ≠ `domains/wolf2/raw_runs/<hash>` even when the hash string matches. Delete only the domain you mean (`…/domains/<domain>/raw_runs/<hash>`, not `…/domains/<domain>/<hash>`).
+
+## How to identify the folder to delete
+
+1. **Slurm/PBS logs** in `ensemble_running/` (`*.o<jobid>`): look for `Disk quota exceeded`, `walltime … exceeded`, or other kills. Note the `raw_runs/<hash>` path in the failing I/O line when present.
+2. **Confirm with `run_log.txt`**:  
+   `domains/<domain>/processed_full_runs/<ensemble>/<member>/run_log.txt`  
+   (spinups may nest one more level, e.g. `…/40_year_spinup/spinup/run_log.txt`).  
+   The **last** `Running year N of the run in …/raw_runs/<hash>` line is the incomplete **tip** year. If there is no `Finished running full sequence` line, the sequence did not complete.
+3. **Sanity-check completeness**:
+   - **Tip incomplete (delete):** usually no usable `run.out.00001.nc` / no `processed_output.nc`; job died on this year; **no later year dirs** for this sequence on this domain.
+   - **Mid-sequence with `run.out.00001.nc` but missing `processed_output.nc`:** often ParFlow finished and later years already ran — **do not delete** if downstream year dirs exist (they need this year as IC). Condensation can create `processed_output.nc` later.
+4. **Before deleting a “wrong but complete” year** (e.g. old pumping formula): confirm hash has **no later-year dirs** on that domain for sequences that use it, or you will strand dependents.
+5. **Show the user the exact paths** (and whether each is tip-incomplete vs wrong-rate-complete) **and get confirmation before deleting.**
+
+## What to delete / keep
+
+- **Walltime/quota restart:** delete only the incomplete **tip** year’s `raw_runs/<hash>`.
+- **Keep** prior complete years; they are restart ICs.
+- **Keep** mid-sequence dirs that have ParFlow output when later years already exist.
+- Freeing disk does **not** resume a dead job; restart the sequence after cleanup (and after quota headroom if that was the failure mode).
+
+## Do not rely on
+
+- `file_locations.json` — written after post-processing, not mid-run progress.
+- Folder existence — means “started,” not “finished.”
+- Hash including computed fluxes — hash is wetness / `pumping_rate_fraction` / irrigation only; fixing pumping math does **not** change the hash (must delete bad years to re-run).

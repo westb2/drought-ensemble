@@ -50,7 +50,10 @@ class Run:
         self.processed_output_path = os.path.join(self.output_root, self.processed_output_root, self.ensemble_name, self.sequence["name"])
         os.makedirs(self.processed_output_path, exist_ok=True)
 
-
+    def append_run_log(self, message):
+        log_path = os.path.join(self.processed_output_path, "run_log.txt")
+        with open(log_path, "a") as f:
+            f.write(f"{message}\n")
 
     def get_sequence_file_path(self):
         return os.path.join(self.domain.project_root, "run_sequences", self.sequence)
@@ -140,8 +143,7 @@ class Run:
             sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
             if not sub_run.run_exists():
                 print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
-                with open(os.path.join(self.processed_output_path, "run_log.txt"), "w") as f:
-                    f.write(f"Running year {year} of the run in {sub_run.get_run_folder()}")
+                self.append_run_log(f"Running year {year} of the run in {sub_run.get_run_folder()}")
                 if year>0:
                     sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
                 else:
@@ -149,8 +151,7 @@ class Run:
             else:
                 print(f"Year {year} of the run already exists in {sub_run.get_run_folder()}")
         print(f"Running {self.sequence2string(self.sequence)}")
-        with open(os.path.join(self.processed_output_path, "run_log.txt"), "w") as f:
-            f.write(f"Finished running full sequence with final year output in {self.get_run_folder()}")
+        self.append_run_log(f"Finished running full sequence with final year output in {self.get_run_folder()}")
         
     def switch_to_netcdf(self, model):
         model.NetCDF.WritePressure = True
@@ -258,7 +259,11 @@ class Run:
 
         fluxes = fluxes * irrigation_mask
         pumped_area_fraction = self.calculate_pumped_area_fraction("12")
-        actual_pumping_rate = 1.0 * pumped_area_fraction * pumping_rate_fraction
+        if pumped_area_fraction <= 0.0:
+            raise ValueError("pumped_area_fraction must be > 0 to apply domain-average pumping")
+        # Divide by cropland fraction so domain-average pumping rate is pumping_rate_fraction
+        # (m/h) regardless of how much of the domain is pumped.
+        actual_pumping_rate = pumping_rate_fraction / pumped_area_fraction
         fluxes = fluxes * actual_pumping_rate
         print(f"actual pumping rate: {actual_pumping_rate}")
         if irrigation:

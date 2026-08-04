@@ -12,11 +12,53 @@ from parflow.tools.hydrology import calculate_surface_storage, calculate_subsurf
 
 import xarray
 
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
+from ensemble_running.consolidate_to_interval import (
+    DEFAULT_INTERVAL,
+    consolidate_year,
+    consolidated_path,
+    locations_name,
+)
+from ensemble_running.hourly_year import (
+    STATIC_VARS,
+    hourly_product_ready,
+    hourly_ref_path,
+    remove_invalid_sidecar,
+    write_sidecar_atomic,
+)
+
+
 class RunOutputReader:
-    def __init__(self, run):
+    def __init__(self, run, consolidation_interval=DEFAULT_INTERVAL):
+        """Post-process yearly ParFlow NetCDF output.
+
+        Parameters
+        ----------
+        run : Run
+            Ensemble member run to process.
+        consolidation_interval : int or None
+            If an int (default 219), also write ``processed_output_{interval}h.nc``
+            next to each year directory and ``file_locations_{interval}h.json``.
+            Pass ``None`` to skip consolidation.
+        """
         self.run = run
         self.processed_output_folder = self.run.processed_output_path
+        self.consolidation_interval = consolidation_interval
 
+    def _maybe_consolidate_year(self, hourly_ref):
+        """Write the interval product for one year if consolidation is enabled."""
+        if self.consolidation_interval is None:
+            return
+        out = consolidate_year(
+            hourly_ref,
+            interval=int(self.consolidation_interval),
+            overwrite=False,
+        )
+        if out is not None:
+            print(f"Consolidated {self.consolidation_interval}h output at {out}")
 
     def calculate_subsurface_storage_wrapper(self, porosity, pressure, saturation, specific_storage, dx, dy, mask):
         """Wrapper to make mask a positional argument"""
@@ -32,71 +74,86 @@ class RunOutputReader:
 
     def read_output_netcdf(self, save_to_file=False):
         output_folders = self.run.get_output_folders()
-        datasets = []
         file_list = []
-        # data = xarray.open_mfdataset(file_list, concat_dim="time", combine="by_coords")
         run_input_data = xarray.open_dataset(os.path.join(output_folders[0], f"run.out.00000.nc"))
-        for year,output_folder in enumerate(output_folders):
-            processed_output_path = os.path.join(output_folder, f"processed_output.nc")
-            if os.path.exists(processed_output_path):
-                file_list.append(processed_output_path)
-                print(f"Found processed output for year {year} at {processed_output_path}")
-                continue
-            print(f"Processing year {year} from {output_folder}")
-            raw_output_path = os.path.join(output_folder, f"run.out.00001.nc")
-            data = xarray.open_dataset(raw_output_path)
-        # data_array = xarray.concat(datasets, dim="time", combine_attrs="no_conflicts")
-        
-            data["mask"] = run_input_data.mask.isel(time=0)
-            data["mannings"] = run_input_data.mannings.isel(time=0)
-            data["porosity"] = run_input_data.porosity.isel(time=0)
-            data["specific_storage"] = run_input_data.specific_storage.isel(time=0)
-            data["DZ_Multiplier"] = run_input_data.DZ_Multiplier.isel(time=0)
-            data["slopex"] = run_input_data.slopex.isel(time=0)
-            data["slopey"] = run_input_data.slopey.isel(time=0)
-            data["perm_x"] = run_input_data.perm_x.isel(time=0)
-            data["perm_y"] = run_input_data.perm_y.isel(time=0)
-            data["perm_z"] = run_input_data.perm_z.isel(time=0)
+        try:
+            for year, output_folder in enumerate(output_folders):
+                remove_invalid_sidecar(output_folder)
 
+                if hourly_product_ready(output_folder):
+                    ref = str(hourly_ref_path(output_folder))
+                    file_list.append(ref)
+                    print(f"Found hourly product for year {year} at {ref}")
+                    self._maybe_consolidate_year(ref)
+                    continue
 
-            overland_flow = xr.apply_ufunc(
-                self.calculate_overland_flow_wrapper,
-                data.pressure,           # (time, z, y, x)
-                data.slopex,             # (y, x)
-                data.slopey,             # (y, x)
-                data.mannings,           # (y, x)
-                1000,                    # scalar dx
-                1000,                    # scalar dy
-                data.mask,               # (z, y, x)
-                input_core_dims=[['z', 'y', 'x'], ['y', 'x'], ['y', 'x'], ['y', 'x'], [], [], ['z', 'y', 'x']],
-                output_core_dims=[['y', 'x']],
-                vectorize=True
-            )
-            data["overland_flow"] = overland_flow
+                print(f"Processing year {year} from {output_folder}")
+                raw_output_path = os.path.join(output_folder, f"run.out.00001.nc")
+                data = xarray.open_dataset(raw_output_path)
+                try:
+                    for name in STATIC_VARS:
+                        if name not in run_input_data:
+                            continue
+                        da = run_input_data[name]
+                        if "time" in da.dims:
+                            da = da.isel(time=0)
+                        data[name] = da
 
-            subsurface_storage = xr.apply_ufunc(
-                self.calculate_subsurface_storage_wrapper,
-                data.porosity,           # (z, y, x)
-                data.pressure,           # (time, z, y, x)
-                data.saturation,         # (time, z, y, x)
-                data.specific_storage,   # (z, y, x)
-                1000,                    # scalar dx
-                1000,                    # scalar dy
-                data.mask,               # (z, y, x)
-                input_core_dims=[['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], [], [], ['z', 'y', 'x']],
-                output_core_dims=[['z', 'y', 'x']],  # Changed from ['y', 'x'] to ['z', 'y', 'x']
-                vectorize=True
-            )
-            data["subsurface_storage"] = subsurface_storage
-            processed_output_path = os.path.join(output_folder, f"processed_output.nc")
-            print(f"Saving processed output for year {year} to {processed_output_path}")
-            data.to_netcdf(processed_output_path)
-            file_list.append(processed_output_path)
+                    overland_flow = xr.apply_ufunc(
+                        self.calculate_overland_flow_wrapper,
+                        data.pressure,           # (time, z, y, x)
+                        data.slopex,             # (y, x)
+                        data.slopey,             # (y, x)
+                        data.mannings,           # (y, x)
+                        1000,                    # scalar dx
+                        1000,                    # scalar dy
+                        data.mask,               # (z, y, x)
+                        input_core_dims=[['z', 'y', 'x'], ['y', 'x'], ['y', 'x'], ['y', 'x'], [], [], ['z', 'y', 'x']],
+                        output_core_dims=[['y', 'x']],
+                        vectorize=True
+                    )
+                    data["overland_flow"] = overland_flow
+
+                    subsurface_storage = xr.apply_ufunc(
+                        self.calculate_subsurface_storage_wrapper,
+                        data.porosity,           # (z, y, x)
+                        data.pressure,           # (time, z, y, x)
+                        data.saturation,         # (time, z, y, x)
+                        data.specific_storage,   # (z, y, x)
+                        1000,                    # scalar dx
+                        1000,                    # scalar dy
+                        data.mask,               # (z, y, x)
+                        input_core_dims=[['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], ['z', 'y', 'x'], [], [], ['z', 'y', 'x']],
+                        output_core_dims=[['z', 'y', 'x']],
+                        vectorize=True
+                    )
+                    data["subsurface_storage"] = subsurface_storage
+
+                    print(f"Saving derived hourly sidecar for year {year} to {output_folder}")
+                    ref_path = write_sidecar_atomic(output_folder, data)
+                finally:
+                    data.close()
+
+                ref = str(ref_path)
+                file_list.append(ref)
+                self._maybe_consolidate_year(ref)
+        finally:
+            run_input_data.close()
+
         condensed_output_path = f'{self.run.processed_output_path}'
         json.dump(self.run.sequence, open(os.path.join(condensed_output_path, "sequence.json"), "w"))
         file_locations_file = os.path.join(condensed_output_path, "file_locations.json")
         with open(file_locations_file, "w") as f:
             json.dump(file_list, f)
+        if self.consolidation_interval is not None:
+            interval = int(self.consolidation_interval)
+            interval_list = [str(consolidated_path(p, interval)) for p in file_list]
+            interval_locations_file = os.path.join(
+                condensed_output_path, locations_name(interval)
+            )
+            with open(interval_locations_file, "w") as f:
+                json.dump(interval_list, f)
+            print(f"Saved {interval}h file locations to {interval_locations_file}")
         print(f"Saved condensed output to {condensed_output_path}")
         return condensed_output_path
 

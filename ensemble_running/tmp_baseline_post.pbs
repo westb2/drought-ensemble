@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -N potomac2_droughts_baseline_post
+#PBS -A UPRI0032
+#PBS -q main
+#PBS -m ae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=8:mem=200GB
+#PBS -j oe
+
+# Post-process only: sims already exist. Regenerates missing processed_output.nc
+# (+ 219h) for potomac2 droughts/baseline and writes file_locations*.json.
+
+module load conda
+conda activate droughts
+source ~/pf_env.sh
+
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running
+
+python run_sequence_on_domain.py \
+  potomac2 \
+  /glade/derecho/scratch/bwest/drought-ensemble/run_sequences/droughts/baseline.json \
+  /glade/derecho/scratch/bwest/drought-ensemble \
+  droughts \
+  False

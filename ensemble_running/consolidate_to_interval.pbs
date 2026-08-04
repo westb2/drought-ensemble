@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -N consolidate_219h
+#PBS -A UPRI0032
+#PBS -q main
+#PBS -m ae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=8:mem=200GB
+#PBS -j oe
+
+# Consolidate wolf2 + potomac2 droughts ensemble to 219 h steps.
+# Prefer an interactive node for testing first:
+#   qsub -I -A UPRI0032 -q develop -l select=1:ncpus=8:mem=200GB -l walltime=04:00:00
+# then run the python command below interactively.
+
+module load conda
+conda activate droughts
+source ~/pf_env.sh
+
+cd /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running
+
+python consolidate_to_interval.py \
+  --domains wolf2 potomac2 \
+  --ensembles droughts \
+  --interval 219 \
+  --workers 2

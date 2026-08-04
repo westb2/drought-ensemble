@@ -39,8 +39,12 @@ def add_pumping(run, pumping_rate, run_dir, pumping_rate_fraction=1.,
 
     fluxes = fluxes * irrigation_mask
     pumped_area_fraction = calculate_pumped_area_fraction(run_dir, cropland_index)
-    actual_pumping_rate = pumping_rate * pumped_area_fraction  * pumping_rate_fraction
-    fluxes = fluxes  * actual_pumping_rate
+    if pumped_area_fraction <= 0.0:
+        raise ValueError("pumped_area_fraction must be > 0 to apply domain-average pumping")
+    # Divide by cropland fraction so domain-average pumping rate is pumping_rate * pumping_rate_fraction
+    # (m/h) regardless of how much of the domain is pumped.
+    actual_pumping_rate = pumping_rate * pumping_rate_fraction / pumped_area_fraction
+    fluxes = fluxes * actual_pumping_rate
     print(f"actual pumping rate: {actual_pumping_rate}")
     if irrigation:
         run = add_irrigation(run, actual_pumping_rate)

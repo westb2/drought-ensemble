@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drought-ensemble"
+version = "1.0.0"
+description = "Drought ensemble modeling using ParFlow"
+requires-python = ">=3.9"
+
+[tool.setuptools.package-dir]
+"drought_ensemble" = "."
+"drought_ensemble.classes" = "classes"
+"drought_ensemble.analysis" = "analysis"
+"drought_ensemble.analysis.paper_figures" = "analysis/paper_figures"
+"drought_ensemble.analysis.pre_utils" = "analysis/pre_utils"
+"drought_ensemble.drought_metrics" = "drought_metrics"
+"drought_ensemble.ensemble_running" = "ensemble_running"
+"drought_ensemble.tests" = "tests"
+
+[tool.setuptools]
+packages = [
+    "drought_ensemble",
+    "drought_ensemble.classes",
+    "drought_ensemble.classes.test",
+    "drought_ensemble.analysis",
+    "drought_ensemble.analysis.paper_figures",
+    "drought_ensemble.analysis.pre_utils",
+    "drought_ensemble.drought_metrics",
+    "drought_ensemble.ensemble_running",
+    "drought_ensemble.tests",
+]

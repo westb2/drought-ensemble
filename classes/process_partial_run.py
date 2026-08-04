@@ -8,11 +8,11 @@ from Domain import Domain
 
 
 project_root = "/glade/derecho/scratch/bwest/drought-ensemble"
-domain_name = "potomac_without_flow_barrier"
-sequence_path = "/glade/derecho/scratch/bwest/drought-ensemble/run_sequences/baseline/baseline.json"
+domain_name = "potomac2"
+sequence_path = "/glade/derecho/scratch/bwest/drought-ensemble/run_sequences/short_pumping/spinup.json"
 domain = Domain(config_file=f"{project_root}/domains/{domain_name}/config.ini", project_root=project_root, TESTING=False)
 run = Run(sequence=sequence_path, domain=domain, output_root=None, netcdf_output=True)
-run.run_full_sequence()
+# run.run_full_sequence()
 
 run_output_reader = RunOutputReader(run)
 data = run_output_reader.read_output(save_to_file=True)
