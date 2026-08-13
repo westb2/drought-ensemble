@@ -1,0 +1,16 @@
+---
+description: When the user asks about ensemble runs/jobs/status/restarts, also report watchdog stuck_same_year tombstones
+alwaysApply: true
+---
+
+# Watchdog stuck runs
+
+When the user asks about runs, jobs, queue status, restarts, or whether ensemble members are progressing, also check for watchdog-held failures:
+
+```bash
+python3 ensemble_running/watchdog/restart_watchdog.py --list-stuck
+```
+
+(from `drought-ensemble/` with project config defaults).
+
+If any `stuck_same_year` targets appear, tell the user clearly: those sequences failed twice on the same year tip and will **not** be auto-resubmitted until the sequence tombstone under `domains/<domain>/raw_runs/.watchdog_tombstones/` is cleared (after they inspect the error).

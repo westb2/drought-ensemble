@@ -1,0 +1,271 @@
+{
+    "name": "pumping_1e-5_layer4",
+    "pumping_layer": 4,
+    "years": [
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 1e-05,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 1e-05,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 1e-05,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        }
+    ]
+}

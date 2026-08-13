@@ -92,7 +92,42 @@ python consolidate_to_interval.py \
 Extensible: `--domains`, `--ensembles`, `--members`, `--limit` (smoke), `--indexes-only`, `--overwrite` (default off).
 
 **Disk:** consolidated products are small (wolf ~17 MB/yr, potomac ~50 MB/yr). Full `droughts` wolf2+potomac2 backfill ≈ **7 GB** — negligible vs hourly.
-Legacy full `processed_output.nc` ≈ half of per-year disk; new sidecars are ~7 GB/yr (potomac) without duplicating pressure/saturation.
+
+Per finished year (Aug 2026 measured):
+
+| Layout | wolf2 | potomac2 |
+|--------|------:|---------:|
+| New: raw + `derived_hourly.nc` | **~11 GB** (sidecar ~0.8 GB) | **~34 GB** (sidecar ~2–3 GB est.) |
+| Legacy: raw + full `processed_output.nc` | ~20 GB (full hourly ~9 GB) | ~56–60 GB (full hourly ~28 GB) |
+
+New years must **not** write full `processed_output.nc` (would re-duplicate pressure/saturation already in `run.out.*`).
+
+## Migrate legacy hourly → sidecar (disk reclaim)
+
+After postprocess jobs are idle, convert existing `processed_output.nc` to
+`derived_hourly.nc`, ensure 219h exists, then delete the full hourlies.
+
+```bash
+cd /glade/derecho/scratch/bwest/drought-ensemble
+
+# 1) migrate (dry-run then commit) — start with wolf2
+python ensemble_running/migrate_to_sidecar.py --domains wolf2 --ensembles droughts
+python ensemble_running/migrate_to_sidecar.py --domains wolf2 --ensembles droughts --commit
+
+# 2) spot-check: open_hourly_year → hourly_layout == "raw+sidecar"
+
+# 3) delete legacy (dry-run then commit)
+python ensemble_running/migrate_to_sidecar.py --domains wolf2 --ensembles droughts --delete-legacy
+python ensemble_running/migrate_to_sidecar.py --domains wolf2 --ensembles droughts --delete-legacy --commit
+
+# 4) repeat for potomac2 / other domains
+```
+
+Default is dry-run; `--commit` writes or deletes. Delete gates: valid raw
+(`run.out.00001.nc`, `time==8760`), valid `derived_hourly.nc`, valid
+`processed_output_219h.nc`. Optional `--require-indexed`. Never deletes raw,
+sidecar, or 219h. Use `--limit N` for smoke tests; `--indexes-only` to rewrite
+`file_locations.json` toward sidecar paths without migrating.
 
 ## Analysis helpers
 

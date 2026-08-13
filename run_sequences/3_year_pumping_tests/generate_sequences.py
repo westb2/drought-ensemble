@@ -3,6 +3,7 @@ from pathlib import Path
 
 SPINUP_YEARS = 40
 PUMPING_YEARS = 3
+RECOVERY_YEARS = 10
 PUMPING_RATES = [1e-7, 1e-6, 1e-5, 1e-4]
 
 OUT_DIR = Path(__file__).resolve().parent
@@ -27,6 +28,7 @@ for rate in PUMPING_RATES:
         "years": (
             [year(pumping_rate_fraction=0.0) for _ in range(SPINUP_YEARS)]
             + [year(pumping_rate_fraction=rate) for _ in range(PUMPING_YEARS)]
+            + [year(pumping_rate_fraction=0.0) for _ in range(RECOVERY_YEARS)]
         ),
     }
     out_path = OUT_DIR / f"{name}.json"

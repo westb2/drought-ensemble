@@ -1,0 +1,132 @@
+{
+  "shallow_z0": 6,
+  "shallow_depth_m": 2.0,
+  "domains": {
+    "potomac2": {
+      "1": {
+        "temp_shallow": 62.37669877575384,
+        "temp_deep": 15.23803642155885,
+        "pers_shallow": 13.227143681322467,
+        "pers_deep": 9.983756540860263,
+        "shallow_end": 18.094041780407323,
+        "deep_end": 23.928296715948804,
+        "pct_temp_near_surface": 80.36708315396477,
+        "pct_pers_deep": 43.013224154566636
+      },
+      "3": {
+        "temp_shallow": 74.7317173281184,
+        "temp_deep": 18.2921294414678,
+        "pers_shallow": 26.58365694544241,
+        "pers_deep": 29.096697622061072,
+        "shallow_end": 43.52725145061135,
+        "deep_end": 45.573052217253895,
+        "pct_temp_near_surface": 80.33608577080652,
+        "pct_pers_deep": 52.25666727173226
+      },
+      "10": {
+        "temp_shallow": 80.12507769005683,
+        "temp_deep": 20.133541709329915,
+        "pers_shallow": 33.23057149322589,
+        "pers_deep": 92.84729392140139,
+        "shallow_end": 55.67749364153663,
+        "deep_end": 111.04207204895496,
+        "pct_temp_near_surface": 79.91839322150783,
+        "pct_pers_deep": 73.64281875812077
+      },
+      "50": {
+        "temp_shallow": 81.14457191562751,
+        "temp_deep": 22.52788790655161,
+        "pers_shallow": 34.05419986597625,
+        "pers_deep": 384.6537107485558,
+        "shallow_end": 57.88184796455377,
+        "deep_end": 405.42788919198995,
+        "pct_temp_near_surface": 78.27013273805613,
+        "pct_pers_deep": 91.86683628307968
+      },
+      "pulse_10yr": {
+        "corr_p_shallow": 0.749657782877327,
+        "corr_p_deep": 0.003998087455950885,
+        "wet_d_shallow": 71849882.4651033,
+        "wet_d_deep": -174052.4346065311,
+        "dry_d_shallow": -55188085.66744516,
+        "dry_d_deep": -216800.79985136125,
+        "n_wet": 109,
+        "n_dry": 100
+      }
+    },
+    "wolf2": {
+      "1": {
+        "temp_shallow": 118.05694484515769,
+        "temp_deep": 0.2828545202847445,
+        "pers_shallow": 0.6096371309457209,
+        "pers_deep": 8.97926592873808,
+        "shallow_end": 118.33823251473862,
+        "deep_end": 7.605344055840944,
+        "pct_temp_near_surface": 99.76098107162471,
+        "pct_pers_deep": 93.64226411351557
+      },
+      "3": {
+        "temp_shallow": 122.58158996248471,
+        "temp_deep": 1.8248284859924624,
+        "pers_shallow": 0.8962199416333763,
+        "pers_deep": 26.48956007618346,
+        "shallow_end": 123.22049227568922,
+        "deep_end": 26.663855203393798,
+        "pct_temp_near_surface": 98.53317175371606,
+        "pct_pers_deep": 96.72742590844479
+      },
+      "10": {
+        "temp_shallow": 124.06885482411417,
+        "temp_deep": 4.554124355263793,
+        "pers_shallow": 1.5983589923206134,
+        "pers_deep": 74.91934642736042,
+        "shallow_end": 125.52134417421641,
+        "deep_end": 78.0066755851082,
+        "pct_temp_near_surface": 96.45932291078984,
+        "pct_pers_deep": 97.91112529635592
+      },
+      "50": {
+        "temp_shallow": 124.98541360452896,
+        "temp_deep": 7.879551401352768,
+        "pers_shallow": 2.690296740248541,
+        "pers_deep": 213.60993567567158,
+        "shallow_end": 127.58455858338002,
+        "deep_end": 221.22707301098708,
+        "pct_temp_near_surface": 94.069504025381,
+        "pct_pers_deep": 98.75622105894209
+      },
+      "pulse_10yr": {
+        "corr_p_shallow": 0.6790171235805783,
+        "corr_p_deep": -0.016677798361901718,
+        "wet_d_shallow": 21392264.501689162,
+        "wet_d_deep": -170275.99044156438,
+        "dry_d_shallow": -15905578.316224448,
+        "dry_d_deep": -156647.5819603917,
+        "n_wet": 100,
+        "n_dry": 109
+      }
+    }
+  },
+  "spatial_spearman_10yr": [
+    {
+      "domain": "potomac2",
+      "n": 2401,
+      "rho_f_shallow_f_temp": 0.8481888678426731,
+      "p": NaN,
+      "rho_deep_persistent": 0.9311847911690972,
+      "p_deep": NaN,
+      "rho_shallow_temporary": 0.8441904679253475,
+      "p_shallow": NaN
+    },
+    {
+      "domain": "wolf2",
+      "n": 1426,
+      "rho_f_shallow_f_temp": 0.9873678789341931,
+      "p": NaN,
+      "rho_deep_persistent": 0.991995290190879,
+      "p_deep": NaN,
+      "rho_shallow_temporary": 0.97385003152098,
+      "p_shallow": NaN
+    }
+  ]
+}

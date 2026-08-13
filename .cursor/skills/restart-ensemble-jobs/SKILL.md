@@ -103,6 +103,15 @@ Prefer `--dry-run` when the set is ambiguous. Incomplete tips must already be de
 
 Derecho `cpu`/`main` walltime is typically **12 h max** — long droughts often need multiple restarts; plan remaining years accordingly.
 
+### Optional: automated watchdog
+
+For unattended tip-cleanup + resubmit (narrower than this skill), see
+`ensemble_running/watchdog/README.md` (NCAR cron → Casper → Derecho).
+
+When reporting run status, also run
+`python3 ensemble_running/watchdog/restart_watchdog.py --list-stuck` and mention any
+`stuck_same_year` sequences (failed twice on the same tip year; not auto-resubmitted).
+
 ### 7. Report
 
 Return PBS job IDs and domain/ensemble/sequence mapping. Note anything held for quota.

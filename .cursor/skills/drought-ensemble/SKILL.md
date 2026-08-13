@@ -12,8 +12,11 @@ description: >-
   user-specified rates to USGS water use, screening HUCs for new domains,
   consolidating timesteps, reading processed NetCDF, plotting storage/WTD/
   streamflow, paper figures (domain display names, shared axes, units, drought
-  shading, legend placement), or working with potomac2 / potomac_flow_barrier_* /
-  wolf2 / republican / ponca domains.
+  shading, legend placement, slide heatmap layouts), figure catalog
+  (`analysis/FIGURES_INDEX.md` — update when adding figures), USGS NWIS
+  streamflow validation for potomac2/wolf2
+  (gage choice, cell snap, spinup/drought antecedent effects), or working with
+  potomac2 / potomac_flow_barrier_* / wolf2 / republican / ponca domains.
 ---
 
 # drought-ensemble
@@ -37,6 +40,8 @@ Project root: `/glade/derecho/scratch/bwest/drought-ensemble`
 
 Full conventions: **[plotting.md](plotting.md)**. Apply whenever making or revising analysis/paper plots.
 
+**Figure catalog:** [`analysis/FIGURES_INDEX.md`](../../../analysis/FIGURES_INDEX.md) — **update it whenever you add, rename, replace, or delete a figure.**
+
 **Must follow:**
 
 | Rule | Detail |
@@ -45,13 +50,17 @@ Full conventions: **[plotting.md](plotting.md)**. Apply whenever making or revis
 | Grid | Columns = domains; rows = metrics; `sharex="col"` |
 | Labels | Y-labels + units **left column only**; one `fig.supxlabel`; no duplicate domain labels |
 | Paper title | **No** `fig.suptitle` — legend `loc="outside upper center"` |
-| Fonts | Larger labels/legend (~11–13); leave tick number size alone |
+| Fonts | Labels/legend ~11–13 (line plots); map grids for Word ~13–16 |
 | Storage scale | Plot as 10⁹ / 10⁶ m³; `useOffset=False` to avoid colliding `1e11` text |
 | Drought shade | `axvspan(..., color="C3", alpha=0.08)` + legend `Patch` labeled “drought period” |
 | Anomaly rows | `sharey` across domains so **zero aligns** |
 | Year axis | Integer ticks (`MultipleLocator`); label origin clearly (drought start vs recovery onset) |
+| WTD / deficit maps | Shared colorbar; Stream `#F0E442`; slide maps = per-domain PNG + aspect-filled cells — see [plotting.md](plotting.md) |
+| Index | Update **FIGURES_INDEX.md** when figures change |
 
-Drought-length colors: `{1: "#E8C39E", 3: "#B86B2B", 10: "#4A2410"}`. Figures → `analysis/figures/`.
+Drought-length colors: `{1: "#E8C39E", 3: "#B86B2B", 10: "#4A2410", 50: "#140A05"}`. Figures → `analysis/figures/`.
+
+Overland-as-predictor ≠ Budyko: use `drought_recovery_drainage_*` / covariate figures first ([FIGURES_INDEX.md](../../../analysis/FIGURES_INDEX.md) §2); `budyko_*` is the φ / f_temp framing (§3).
 
 ## Pumping (critical)
 
@@ -129,9 +138,17 @@ Do not use calendar weeks (168 h) for on-disk products — they do not divide 87
 
 ## Scratch space
 
-Run `gladequota` before large submits. Approx full-year `raw_runs` size: wolf2 ~20 GB, potomac2 ~56 GB, republican ~96 GB. Count **unique new hashes** per domain. If free ≪ need, free space or hold large domains before `qsub`.
+Run `gladequota` before large submits. Count **unique new hashes** per domain. If free ≪ need, free space or hold large domains before `qsub`.
 
-Consolidation to 219 h is cheap (~MB/year); ParFlow raw + legacy full `processed_output.nc` dominate quota. New years write thin `derived_hourly.nc` instead of full hourly. Leave ≥~1 TiB headroom when writing many missing Potomac derived products.
+**New years (no storage duplicate):** ParFlow raw + thin `derived_hourly.nc` only — do **not** write full `processed_output.nc`.
+
+| Domain | New year (raw + sidecar) | Legacy year (raw + full hourly) |
+|--------|-------------------------:|--------------------------------:|
+| wolf2 | **~11 GB** | ~20 GB |
+| potomac2 | **~34 GB** (raw+CLM ~31 GB + ~2–3 GB sidecar) | ~56–60 GB |
+| republican / ponca | **~56 GB** (raw+CLM ~54 GB + thin sidecar) | ~100–103 GB |
+
+Legacy full `processed_output.nc` ≈ half of old per-year disk (duplicates pressure/saturation already in `run.out.*`). Consolidation to 219 h is cheap (~MB/year). Leave ≥~0.5–1 TiB headroom when submitting multi-domain packages; reclaim via `migrate_to_sidecar.py` if needed (see [processed-outputs.md](processed-outputs.md)).
 
 ## Runtime estimates (4 nodes × 64 ranks, 12 h)
 
@@ -194,6 +211,14 @@ domains/<d>/processed_full_runs/<ensemble>/<member>/file_locations_219h.json
 - **Processed outputs / analysis:** [processed-outputs.md](processed-outputs.md)
 - **Paper figure / plotting conventions:** [plotting.md](plotting.md)
 - **Catchment / USGS / CONUS context (rates stay user-controlled):** [pumping-rate-context.md](pumping-rate-context.md)
+- **USGS streamflow validation (gages, cell snap, spinup/drought IC lessons):** [usgs-streamflow-validation.md](usgs-streamflow-validation.md)
+  - User summary: `analysis/usgs_streamflow_validation_summary.md`
+  - Notebook: `analysis/average_year_usgs_validation.ipynb`
+- **Persistent storage vs streamflow at 50 yr (no clean baseflow collapse):**  
+  `analysis/persistent_storage_vs_streamflow_50yr.md`
+- **Local Budyko / temp–persist framing → new catchment selection:**  
+  `analysis/budyko_local_framing_handoff.md` (handoff for planning agents);  
+  `analysis/budyko_drought_literature.md`; `analysis/budyko_temp_persistent_summary.md`
 
 ## Do not
 

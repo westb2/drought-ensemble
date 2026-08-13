@@ -1,37 +1,42 @@
-import numpy as np
 import json
+from pathlib import Path
 
-drought_lengths = [1,3,10,50]
-# drought_lengths = [8]
+SPINUP_YEARS = 40
+RECOVERY_YEARS = 10
+DROUGHT_LENGTHS = [1, 3, 10, 50]
+OUT_DIR = Path(__file__).resolve().parent
 
-sequence = []
-sequence_name = "baseline"
-sequence = {"name": sequence_name, "years": []}
-sequence_years = []
-#spinup
-for i in range(40):
-    sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-#drought
-for i in range(50):
-    sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-#recovery
-for i in range(5):
-    sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-sequence["years"] = sequence_years
-json.dump(sequence, open(f"{sequence_name}.json", "w"))
 
-for drought_length in drought_lengths:
-    sequence_name = f"{drought_length}_year_drought"
-    sequence = {"name": sequence_name, "years": []}
-    sequence_years = []
-    #spinup
-    for i in range(40):
-        sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-    #drought
-    for i in range(drought_length):
-        sequence_years.append({"wetness": "dry", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-    #recovery
-    for i in range(5):
-        sequence_years.append({"wetness": "average", "pumping_rate_fraction": 0.0, "irrigation": "False"})
-    sequence["years"] = sequence_years
-    json.dump(sequence, open(f"{sequence_name}.json", "w"))
+def year(wetness="average", pumping_rate_fraction=0.0, irrigation="False"):
+    return {
+        "wetness": wetness,
+        "pumping_rate_fraction": pumping_rate_fraction,
+        "irrigation": irrigation,
+    }
+
+
+# Long all-average baseline matching longest drought + recovery
+baseline = {
+    "name": "baseline",
+    "years": [year() for _ in range(SPINUP_YEARS + 50 + RECOVERY_YEARS)],
+}
+with open(OUT_DIR / "baseline.json", "w") as f:
+    json.dump(baseline, f, indent=4)
+    f.write("\n")
+print(f"wrote baseline.json ({len(baseline['years'])} years)")
+
+for drought_length in DROUGHT_LENGTHS:
+    name = f"{drought_length}_year_drought"
+    sequence = {
+        "name": name,
+        "years": (
+            [year() for _ in range(SPINUP_YEARS)]
+            + [year(wetness="dry") for _ in range(drought_length)]
+            + [year() for _ in range(RECOVERY_YEARS)]
+        ),
+    }
+    out_path = OUT_DIR / f"{name}.json"
+    with open(out_path, "w") as f:
+        json.dump(sequence, f, indent=4)
+        f.write("\n")
+    print(f"wrote {out_path.name} ({len(sequence['years'])} years)")

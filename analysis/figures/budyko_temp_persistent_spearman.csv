@@ -1,0 +1,133 @@
+domain,L,response,predictor,predictor_label,rho,p,n
+potomac2,10,f_temp,phi,Aridity φ (PET/P),0.02833925315276195,nan,3579
+potomac2,10,f_temp,P_mm,Annual P,-0.027863607144677935,nan,3579
+potomac2,10,f_temp,PET_mm,Hamon PET,0.04010107142297266,nan,3579
+potomac2,10,f_temp,participation,Overland participation,-0.1321181909382509,nan,3579
+potomac2,10,f_temp,flow,Mean overland flow,-0.05965228218021775,nan,3579
+potomac2,10,f_temp,R_index,Overland depth / P,-0.06386257350274098,nan,3579
+potomac2,10,f_temp,wtd,Baseline WTD,-0.05893866095713917,nan,3579
+potomac2,10,f_temp,recharge,Local recharge,-0.06924419733959702,nan,3579
+potomac2,10,f_temp,E_proxy,1 − recharge/P,0.08606533936395135,nan,3579
+potomac2,10,f_temp,dist_km,Dist. to stream,0.09879893491491865,nan,3579
+potomac2,10,f_temp,log10_k_top,log₁₀ K (top),0.007705834301827325,nan,3579
+potomac2,10,temporary,phi,Aridity φ (PET/P),0.08977249038082404,nan,3579
+potomac2,10,temporary,P_mm,Annual P,-0.11202147209413213,nan,3579
+potomac2,10,temporary,PET_mm,Hamon PET,0.0701815116001904,nan,3579
+potomac2,10,temporary,participation,Overland participation,-0.32853153498008064,nan,3579
+potomac2,10,temporary,flow,Mean overland flow,-0.2672339560579623,nan,3579
+potomac2,10,temporary,R_index,Overland depth / P,-0.267727473699747,nan,3579
+potomac2,10,temporary,wtd,Baseline WTD,0.012826907277901388,nan,3579
+potomac2,10,temporary,recharge,Local recharge,-0.060723857232953087,nan,3579
+potomac2,10,temporary,E_proxy,1 − recharge/P,0.03645572721428936,nan,3579
+potomac2,10,temporary,dist_km,Dist. to stream,0.0688395368658631,nan,3579
+potomac2,10,temporary,log10_k_top,log₁₀ K (top),0.017102054601023906,nan,3579
+potomac2,10,persistent,phi,Aridity φ (PET/P),0.34264752558402395,nan,3579
+potomac2,10,persistent,P_mm,Annual P,-0.3910526190436036,nan,3579
+potomac2,10,persistent,PET_mm,Hamon PET,0.2568340802956043,nan,3579
+potomac2,10,persistent,participation,Overland participation,-0.4739030081394277,nan,3579
+potomac2,10,persistent,flow,Mean overland flow,-0.4289882481967655,nan,3579
+potomac2,10,persistent,R_index,Overland depth / P,-0.4145552292703583,nan,3579
+potomac2,10,persistent,wtd,Baseline WTD,-0.03214488976017713,nan,3579
+potomac2,10,persistent,recharge,Local recharge,-0.16676739375871175,nan,3579
+potomac2,10,persistent,E_proxy,1 − recharge/P,0.06311957386440624,nan,3579
+potomac2,10,persistent,dist_km,Dist. to stream,-0.2101724466854178,nan,3579
+potomac2,10,persistent,log10_k_top,log₁₀ K (top),-0.04613827267498274,nan,3579
+potomac2,50,f_temp,phi,Aridity φ (PET/P),0.08243259141809506,nan,3594
+potomac2,50,f_temp,P_mm,Annual P,-0.07677190982308743,nan,3594
+potomac2,50,f_temp,PET_mm,Hamon PET,0.09548929187211612,nan,3594
+potomac2,50,f_temp,participation,Overland participation,-0.1354735196483461,nan,3594
+potomac2,50,f_temp,flow,Mean overland flow,-0.057321801516146284,nan,3594
+potomac2,50,f_temp,R_index,Overland depth / P,-0.058576422808981954,nan,3594
+potomac2,50,f_temp,wtd,Baseline WTD,-0.11738240083626082,nan,3594
+potomac2,50,f_temp,recharge,Local recharge,-0.11589772608185035,nan,3594
+potomac2,50,f_temp,E_proxy,1 − recharge/P,0.12816214450286384,nan,3594
+potomac2,50,f_temp,dist_km,Dist. to stream,0.0742768597391917,nan,3594
+potomac2,50,f_temp,log10_k_top,log₁₀ K (top),-0.01062477604861303,nan,3594
+potomac2,50,temporary,phi,Aridity φ (PET/P),0.10299155119050989,nan,3594
+potomac2,50,temporary,P_mm,Annual P,-0.12386227296167765,nan,3594
+potomac2,50,temporary,PET_mm,Hamon PET,0.08432835655528176,nan,3594
+potomac2,50,temporary,participation,Overland participation,-0.3280756395178814,nan,3594
+potomac2,50,temporary,flow,Mean overland flow,-0.2661257458901394,nan,3594
+potomac2,50,temporary,R_index,Overland depth / P,-0.26440559373708533,nan,3594
+potomac2,50,temporary,wtd,Baseline WTD,-0.0059021607895254225,nan,3594
+potomac2,50,temporary,recharge,Local recharge,-0.07035889509552601,nan,3594
+potomac2,50,temporary,E_proxy,1 − recharge/P,0.04464956082637074,nan,3594
+potomac2,50,temporary,dist_km,Dist. to stream,0.06234184901297357,nan,3594
+potomac2,50,temporary,log10_k_top,log₁₀ K (top),0.01014111481990296,nan,3594
+potomac2,50,persistent,phi,Aridity φ (PET/P),0.15015707164571543,nan,3594
+potomac2,50,persistent,P_mm,Annual P,-0.22079040883215167,nan,3594
+potomac2,50,persistent,PET_mm,Hamon PET,0.06245566613057349,nan,3594
+potomac2,50,persistent,participation,Overland participation,-0.47914379571964083,nan,3594
+potomac2,50,persistent,flow,Mean overland flow,-0.4767995004808057,nan,3594
+potomac2,50,persistent,R_index,Overland depth / P,-0.4703659868228043,nan,3594
+potomac2,50,persistent,wtd,Baseline WTD,0.16068132107076452,nan,3594
+potomac2,50,persistent,recharge,Local recharge,0.016302092636048815,nan,3594
+potomac2,50,persistent,E_proxy,1 − recharge/P,-0.10933666886550063,nan,3594
+potomac2,50,persistent,dist_km,Dist. to stream,-0.10093943408157198,nan,3594
+potomac2,50,persistent,log10_k_top,log₁₀ K (top),-0.000952927427183711,nan,3594
+wolf2,10,f_temp,phi,Aridity φ (PET/P),-0.2353736584961107,nan,1426
+wolf2,10,f_temp,P_mm,Annual P,0.23658142388752823,nan,1426
+wolf2,10,f_temp,PET_mm,Hamon PET,-0.17769677567299375,nan,1426
+wolf2,10,f_temp,participation,Overland participation,0.2900901277076889,nan,1426
+wolf2,10,f_temp,flow,Mean overland flow,0.26218793725434286,nan,1426
+wolf2,10,f_temp,R_index,Overland depth / P,0.25220546764724583,nan,1426
+wolf2,10,f_temp,wtd,Baseline WTD,-0.5373550362104597,nan,1426
+wolf2,10,f_temp,recharge,Local recharge,-0.02674652843750034,nan,1426
+wolf2,10,f_temp,E_proxy,1 − recharge/P,0.08774182581869067,nan,1426
+wolf2,10,f_temp,dist_km,Dist. to stream,0.31316914421172953,nan,1426
+wolf2,10,f_temp,log10_k_top,log₁₀ K (top),0.3048473571907174,nan,1426
+wolf2,10,temporary,phi,Aridity φ (PET/P),-0.06542691490794152,nan,1426
+wolf2,10,temporary,P_mm,Annual P,0.08698861639218214,nan,1426
+wolf2,10,temporary,PET_mm,Hamon PET,-0.012033541612685448,nan,1426
+wolf2,10,temporary,participation,Overland participation,-0.3698055403573295,nan,1426
+wolf2,10,temporary,flow,Mean overland flow,-0.17053396752224304,nan,1426
+wolf2,10,temporary,R_index,Overland depth / P,-0.1741528936425181,nan,1426
+wolf2,10,temporary,wtd,Baseline WTD,0.05279404480826155,nan,1426
+wolf2,10,temporary,recharge,Local recharge,-0.5027295425425634,nan,1426
+wolf2,10,temporary,E_proxy,1 − recharge/P,0.6233853010068661,nan,1426
+wolf2,10,temporary,dist_km,Dist. to stream,0.09109305302637359,nan,1426
+wolf2,10,temporary,log10_k_top,log₁₀ K (top),-0.17411567369415282,nan,1426
+wolf2,10,persistent,phi,Aridity φ (PET/P),0.20989023912130464,nan,1426
+wolf2,10,persistent,P_mm,Annual P,-0.1550834678757839,nan,1426
+wolf2,10,persistent,PET_mm,Hamon PET,0.21968485848199906,nan,1426
+wolf2,10,persistent,participation,Overland participation,-0.5388364514023668,nan,1426
+wolf2,10,persistent,flow,Mean overland flow,-0.3396858206387697,nan,1426
+wolf2,10,persistent,R_index,Overland depth / P,-0.3319838612168521,nan,1426
+wolf2,10,persistent,wtd,Baseline WTD,0.5042659227505021,nan,1426
+wolf2,10,persistent,recharge,Local recharge,-0.3423047906768457,nan,1426
+wolf2,10,persistent,E_proxy,1 − recharge/P,0.35043033496143017,nan,1426
+wolf2,10,persistent,dist_km,Dist. to stream,-0.29633745507154646,nan,1426
+wolf2,10,persistent,log10_k_top,log₁₀ K (top),-0.4176079965366495,nan,1426
+wolf2,50,f_temp,phi,Aridity φ (PET/P),-0.06860914600361719,nan,1426
+wolf2,50,f_temp,P_mm,Annual P,0.18375931100057113,nan,1426
+wolf2,50,f_temp,PET_mm,Hamon PET,0.05414234302451084,nan,1426
+wolf2,50,f_temp,participation,Overland participation,0.24901316390821665,nan,1426
+wolf2,50,f_temp,flow,Mean overland flow,0.2996095122956652,nan,1426
+wolf2,50,f_temp,R_index,Overland depth / P,0.2898565781184135,nan,1426
+wolf2,50,f_temp,wtd,Baseline WTD,-0.5174122452243788,nan,1426
+wolf2,50,f_temp,recharge,Local recharge,-0.05393002295881933,nan,1426
+wolf2,50,f_temp,E_proxy,1 − recharge/P,0.10506808423051435,nan,1426
+wolf2,50,f_temp,dist_km,Dist. to stream,0.16422229359655183,nan,1426
+wolf2,50,f_temp,log10_k_top,log₁₀ K (top),0.2109794999050517,nan,1426
+wolf2,50,temporary,phi,Aridity φ (PET/P),-0.08115548406857198,nan,1426
+wolf2,50,temporary,P_mm,Annual P,0.09937118502900619,nan,1426
+wolf2,50,temporary,PET_mm,Hamon PET,-0.02135611237763474,nan,1426
+wolf2,50,temporary,participation,Overland participation,-0.4326611647507763,nan,1426
+wolf2,50,temporary,flow,Mean overland flow,-0.22712856675006565,nan,1426
+wolf2,50,temporary,R_index,Overland depth / P,-0.23014389157962295,nan,1426
+wolf2,50,temporary,wtd,Baseline WTD,0.13992157801573168,nan,1426
+wolf2,50,temporary,recharge,Local recharge,-0.4886224248016289,nan,1426
+wolf2,50,temporary,E_proxy,1 − recharge/P,0.6082871535155786,nan,1426
+wolf2,50,temporary,dist_km,Dist. to stream,0.07511515904373825,nan,1426
+wolf2,50,temporary,log10_k_top,log₁₀ K (top),-0.21743182252821797,nan,1426
+wolf2,50,persistent,phi,Aridity φ (PET/P),0.10549305956490133,nan,1426
+wolf2,50,persistent,P_mm,Annual P,-0.16388827414888052,nan,1426
+wolf2,50,persistent,PET_mm,Hamon PET,0.027172828030668384,nan,1426
+wolf2,50,persistent,participation,Overland participation,-0.4753242346754162,nan,1426
+wolf2,50,persistent,flow,Mean overland flow,-0.3612337084486003,nan,1426
+wolf2,50,persistent,R_index,Overland depth / P,-0.3523246499029644,nan,1426
+wolf2,50,persistent,wtd,Baseline WTD,0.5124181963709206,nan,1426
+wolf2,50,persistent,recharge,Local recharge,-0.3092438342692205,nan,1426
+wolf2,50,persistent,E_proxy,1 − recharge/P,0.3085626148606975,nan,1426
+wolf2,50,persistent,dist_km,Dist. to stream,-0.18146828951131697,nan,1426
+wolf2,50,persistent,log10_k_top,log₁₀ K (top),-0.29819320511439085,nan,1426

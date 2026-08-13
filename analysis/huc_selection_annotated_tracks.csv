@@ -1,0 +1,16 @@
+huc8,name,rsr_lt,n_lt,n_stream_sites,max_drain_mi2,outlet_gage,headwater,tidal_hint,hard_reject,skill_pass,gw_site_sample_n,domain_existing,wtd_p10,wtd_p50,wtd_p90,frac_wtd_2_20,phi_mean,P_mean_mm,source,corridor_contrast,track_label
+02070001,South Branch Potomac (current),0.5225585695950178,7,11,1461.0,01608500,True,False,,True,30,potomac2,0.561983388026224,38.889809463723694,246.15493940384354,0.09793399517037832,0.9027598208861954,792.0670968196039,late_spinup_yrs35-39_condensed,118.98136783883162,neither_deep_like_potomac
+02070008,Middle Potomac-Catoctin,0.22078496631597316,27,39,11560.0,01646502,False,False,corridor (mainstem Potomac),True,30,,,,,,,,,,reject
+02070010,Middle Potomac-Anacostia-Occoquan,0.5054576628277352,19,54,570.0,01657500,True,False,corridor / metro Fall Line,True,30,,,,,,,,,,reject
+02080109,Nanticoke,0.5231522147357548,4,11,75.4,01487000,True,False,tidal Coastal Plain risk,True,30,,,,,,,,,,reject
+02080108,Lynnhaven-Poquoson,4.962557941396506,4,0,,,error,False,Hampton Roads tidal + poor RSR,False,30,,,,,,,,,,reject
+02080208,Hampton Roads,5.577626520458085,3,0,,,error,False,Hampton Roads poor RSR,False,30,,,,,,,,,,reject
+02060002,Chester-Sassafras,1.601495000508968,8,13,51.6,01495000,True,False,,False,30,,,,,,,,,,reject
+02060006,Patuxent,0.5180354331588181,15,21,348.0,01594440,True,False,,True,30,,,,,,,,,,need_wtd_phi
+02060003,Gunpowder-Patapsco,0.6772022656360805,64,86,314.0,01584000,True,True,,False,30,,,,,,,,,,reject
+02080206,Lower James,0.987457606018532,6,7,251.0,02042500,True,False,,False,30,,,,,,,,,,reject
+02060004,Severn,,1,4,8.5,01590000,True,False,,False,30,,,,,,,,,,need_wtd_phi
+02080110,Tangier,1.2977030720997234,3,3,19.5,01486500,True,False,tidal / Tangier,False,30,,,,,,,,,,reject
+02080111,Pocomoke-W. Lower Delmarva,0.5170988941287031,5,5,60.5,01485000,True,False,,True,30,,,,,,,,,,need_wtd_phi
+08010210,Wolf River (wolf2 existing),,,14,788.0,07031740,True,False,,unknown_need_score,30,wolf2,0.0,2.197559173076081,10.509529242472297,0.5078178110129163,0.6267818845716271,1532.292599939762,late_spinup_yrs35-39_condensed,3.9567202126068364,neither_wolf_clone
+10250003,S Fork Republican (republican/ponca existing),,,5,2740.0,06827500,marginal,False,,unknown_need_score,30,republican,1.9683658787047762,20.233497557274802,50.571070153127835,0.3910822108685555,1.2217110163214733,592.5441109645031,ss_pressure_head,,both

@@ -1,0 +1,54 @@
+# Restart watchdog watch list. Edit this before enabling --apply under cron.
+#
+# Cron only submits a Casper job; this file is read on Casper/Derecho where
+# GLADE is mounted. Defaults are safe: dry-run unless the PBS script passes --apply.
+
+project_root: /glade/derecho/scratch/bwest/drought-ensemble
+
+pbs:
+  account: UPRI0032
+  # Peer-schedule onto Derecho when the watchdog itself runs on Casper/cron.
+  queue: main@desched1
+  walltime: "12:00:00"
+  select: "4:ncpus=64:mpiprocs=64"
+  mail: benjaminwest@arizona.edu
+  # Where PBS stdout from the model jobs lands (same as run_ensemble.py).
+  pbs_output_dir: ensemble_running/pbs_outputs
+
+quota:
+  # Abort submits (still report) if scratch free space is below this.
+  min_free_tib: 1.5
+  gb_per_year:
+    wolf2: 20
+    potomac2: 56
+    republican: 96
+    default: 50
+
+safety:
+  # Only tip incompletes: folder exists, missing ParFlow output, no later years
+  # for this sequence. Mid-sequence incompletes are reported, never deleted.
+  delete_tip_incompletes: true
+  # Skip a domain+ensemble+sequence if that exact job is already R or Q.
+  skip_if_queued_or_running: true
+  # If any job is Running on a domain, do not delete raw_runs tips there
+  # (shared year hashes across sequences).
+  no_delete_while_domain_running: true
+  max_submits_per_cycle: 20
+  # Hard stop if more tips than this would be deleted in one cycle.
+  max_deletes_per_cycle: 8
+  # After a tip delete, write domains/<domain>/raw_runs/.watchdog_tombstones/
+  # and refuse peeling earlier years for that sequence (cascade wipe defense).
+  block_backward_tip_deletes: true
+  # Max distinct year indices the watchdog may delete per sequence
+  # without manually clearing the sequence tombstone JSON.
+  max_unique_tip_years_deleted_per_sequence: 10
+  # After this many tip deletes of the *same* year index, stop auto-restart
+  # (likely a repeatable error). Preserve the tip folder for inspection.
+  max_tip_deletes_per_year_index: 1
+
+# What to watch. Omit `sequences` to include every *.json in the ensemble folder.
+watch:
+  - domains: [potomac2, wolf2]
+    ensemble: 3_year_pumping_tests
+  - domains: [potomac2, wolf2]
+    ensemble: 3_year_pumping_tests_layer4

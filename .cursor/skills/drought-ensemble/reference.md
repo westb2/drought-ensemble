@@ -45,17 +45,19 @@ Completed on 0011/002/005 (~8 h total). Useful for barrier sensitivity at 0.01; 
 
 ## Disk per finished year (approx, full `raw_runs` dir)
 
-| Domain | ~GB/year |
-|--------|----------|
-| wolf2 | ~20 |
-| potomac2 | ~56 |
-| republican | ~96 |
+Measured Aug 2026. **Budget new submits with the “new year” column** — postprocess no longer duplicates storage into full `processed_output.nc`.
+
+| Domain | New year (raw + `derived_hourly`) | Legacy (raw + full hourly) |
+|--------|----------------------------------:|---------------------------:|
+| wolf2 | **~11 GB** (measured; sidecar ~0.8 GB) | ~20 GB |
+| potomac2 | **~34 GB** (raw+CLM ~31 GB; sidecar ~2–3 GB est.) | ~56–60 GB |
+| republican / ponca | **~56 GB** (raw+CLM ~54 GB + thin sidecar) | ~100–103 GB |
 
 Check `gladequota` before large resubmits. Unique new hashes across concurrent jobs on one domain share spinup; divergent drought/pumping tails do not.
 
-Missing `processed_output.nc` only (raw already present): potomac2 ≈ **+28 GB/year**. Writing many of these at once (e.g. finishing `droughts/baseline` + `50_year_drought`) can need **~1.5–2 TiB** — confirm free space first.
+Do **not** budget +28 GB/year for missing full hourlies anymore — new postprocess writes the thin sidecar. Migrating legacy → sidecar reclaim ≈ half the year folder (see [processed-outputs.md](processed-outputs.md)).
 
-219 h consolidation: wolf2 ≈ 17 MB/year, potomac2 ≈ 50 MB/year (see [processed-outputs.md](processed-outputs.md)).
+219 h consolidation: wolf2 ≈ 17 MB/year, potomac2 ≈ 50 MB/year.
 
 ## Queued job patterns (Jul 2025 session)
 

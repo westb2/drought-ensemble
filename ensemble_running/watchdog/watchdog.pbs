@@ -1,0 +1,38 @@
+#!/bin/bash
+#PBS -N restart_watchdog
+#PBS -A UPRI0032
+#PBS -q casper
+#PBS -m ae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=01:00:00
+#PBS -l select=1:ncpus=1:mem=4GB
+#PBS -j oe
+
+# Heavy scan + optional tip cleanup + Derecho qsub. Triggered by cron_driver.sh.
+# Apply tip cleanup + Derecho resubmits. Set to 0 to force dry-run reports only.
+
+set -euo pipefail
+
+WATCHDOG_APPLY="${WATCHDOG_APPLY:-1}"
+ROOT="/glade/derecho/scratch/bwest/drought-ensemble"
+WD="${ROOT}/ensemble_running/watchdog"
+LOGDIR="${WD}/logs"
+mkdir -p "${LOGDIR}"
+
+module load conda
+conda activate droughts
+
+stamp="$(date +%Y%m%d_%H%M%S)"
+json_out="${LOGDIR}/summary_${stamp}.json"
+log="${LOGDIR}/watchdog_${stamp}.log"
+
+cd "${WD}"
+
+args=(--config "${WD}/config.yaml" --json-out "${json_out}")
+if [[ "${WATCHDOG_APPLY}" == "1" ]]; then
+  args+=(--apply)
+fi
+
+echo "[$(date -Is)] starting restart_watchdog.py ${args[*]}" | tee -a "${log}"
+python3 "${WD}/restart_watchdog.py" "${args[@]}" 2>&1 | tee -a "${log}"
+echo "[$(date -Is)] done" | tee -a "${log}"

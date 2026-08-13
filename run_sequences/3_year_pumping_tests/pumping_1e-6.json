@@ -215,6 +215,56 @@
             "wetness": "average",
             "pumping_rate_fraction": 1e-06,
             "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
+        },
+        {
+            "wetness": "average",
+            "pumping_rate_fraction": 0.0,
+            "irrigation": "False"
         }
     ]
 }

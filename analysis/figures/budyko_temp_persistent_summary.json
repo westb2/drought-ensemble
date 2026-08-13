@@ -1,0 +1,175 @@
+{
+  "domains": {
+    "potomac2": {
+      "phi_mean": 0.9027598208861954,
+      "phi_p05": 0.6213947640277536,
+      "phi_p95": 1.110413353954575,
+      "P_mm_mean": 792.0670968196039,
+      "PET_mm_mean": 702.7260129919458,
+      "participation_mean": 0.40457740810303194,
+      "stratum_ftemp": {
+        "Stream": {
+          "10": 0.6616443853083879,
+          "50": 0.5662593596245203
+        },
+        "Near-stream": {
+          "10": 0.25614149134821984,
+          "50": 0.18025381861370496
+        },
+        "Mid-landscape": {
+          "10": 0.3384052652105383,
+          "50": 0.22316415568931355
+        },
+        "Upland (deep WTD)": {
+          "10": 0.27351058052859045,
+          "50": 0.14315253902163447
+        }
+      },
+      "stratum_persist_growth_50_over_10": {
+        "Stream": 2.000308041872158,
+        "Near-stream": 2.7092280259151704,
+        "Mid-landscape": 3.2656456164823813,
+        "Upland (deep WTD)": 3.6019301418637966
+      }
+    },
+    "wolf2": {
+      "phi_mean": 0.6361366368633716,
+      "phi_p05": 0.5952596761552453,
+      "phi_p95": 0.6641298844389247,
+      "P_mm_mean": 1532.292599939762,
+      "PET_mm_mean": 973.8925770166495,
+      "participation_mean": 0.546274643099932,
+      "stratum_ftemp": {
+        "Stream": {
+          "10": 0.48883804433627215,
+          "50": 0.4372532263455119
+        },
+        "Near-stream": {
+          "10": 0.6965545674873487,
+          "50": 0.6269366515353344
+        },
+        "Mid-landscape": {
+          "10": 0.7925285356094515,
+          "50": 0.6871738110461971
+        },
+        "Upland (deep WTD)": {
+          "10": 0.5517640276750645,
+          "50": 0.37064714152234024
+        }
+      },
+      "stratum_persist_growth_50_over_10": {
+        "Stream": 1.4478939865013845,
+        "Near-stream": 2.1977786816897846,
+        "Mid-landscape": 2.550733336900721,
+        "Upland (deep WTD)": 3.126217848402466
+      }
+    }
+  },
+  "notes": [],
+  "top_ftemp_predictors": [
+    {
+      "domain": "potomac2",
+      "L": 10,
+      "top": [
+        {
+          "predictor": "participation",
+          "rho": -0.1321181909382509
+        },
+        {
+          "predictor": "dist_km",
+          "rho": 0.09879893491491865
+        },
+        {
+          "predictor": "E_proxy",
+          "rho": 0.08606533936395135
+        },
+        {
+          "predictor": "recharge",
+          "rho": -0.06924419733959702
+        },
+        {
+          "predictor": "R_index",
+          "rho": -0.06386257350274098
+        }
+      ]
+    },
+    {
+      "domain": "potomac2",
+      "L": 50,
+      "top": [
+        {
+          "predictor": "participation",
+          "rho": -0.1354735196483461
+        },
+        {
+          "predictor": "E_proxy",
+          "rho": 0.12816214450286384
+        },
+        {
+          "predictor": "wtd",
+          "rho": -0.11738240083626082
+        },
+        {
+          "predictor": "recharge",
+          "rho": -0.11589772608185035
+        },
+        {
+          "predictor": "PET_mm",
+          "rho": 0.09548929187211612
+        }
+      ]
+    },
+    {
+      "domain": "wolf2",
+      "L": 10,
+      "top": [
+        {
+          "predictor": "wtd",
+          "rho": -0.5373550362104597
+        },
+        {
+          "predictor": "dist_km",
+          "rho": 0.31316914421172953
+        },
+        {
+          "predictor": "log10_k_top",
+          "rho": 0.3048473571907174
+        },
+        {
+          "predictor": "participation",
+          "rho": 0.2900901277076889
+        },
+        {
+          "predictor": "flow",
+          "rho": 0.26218793725434286
+        }
+      ]
+    },
+    {
+      "domain": "wolf2",
+      "L": 50,
+      "top": [
+        {
+          "predictor": "wtd",
+          "rho": -0.5174122452243788
+        },
+        {
+          "predictor": "flow",
+          "rho": 0.2996095122956652
+        },
+        {
+          "predictor": "R_index",
+          "rho": 0.2898565781184135
+        },
+        {
+          "predictor": "participation",
+          "rho": 0.24901316390821665
+        },
+        {
+          "predictor": "log10_k_top",
+          "rho": 0.2109794999050517
+        }
+      ]
+    }
+  ]
+}
