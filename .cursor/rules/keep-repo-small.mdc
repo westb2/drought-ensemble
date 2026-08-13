@@ -1,0 +1,27 @@
+---
+description: When committing, exclude run outputs, caches, logs, and other bulky artifacts so the git repo stays small
+alwaysApply: true
+---
+
+# Keep the git repo small
+
+When staging or committing, **never** add simulation/run products or scratch that would bloat the repo. Prefer source, configs, docs, and small analysis deliverables (scripts, markdown, paper figures).
+
+## Do not commit
+
+- **Run outputs / model binaries:** `*.nc`, `*.pfb`, `*.pfsol`, anything under `domains/` (already gitignored)
+- **Job logs / scratch:** `ensemble_running/*.o*`, `pbs_outputs/`, `qsub_err.txt`, ephemeral `tmp_job.pbs` edits
+- **Caches / temp:** `*_cache/`, `_tmp_*`, `.tmp*`, `analysis/.tmp*/`, `*.broken_*`, `__pycache__/`, `*.egg-info/`
+- **Regenerable bulk HTML** when a PDF or markdown summary already exists (e.g. `analysis/figures/*_summary.html`)
+
+## Do commit (typical)
+
+- Code, tests, run-sequence JSON/generators, Cursor skills/rules
+- Analysis scripts, notebooks, markdown summaries
+- Figure PNGs/PDFs/CSV/JSON and intentional slide decks under `analysis/figures/` (or `analysis/*.pptx`)
+
+## Before every commit
+
+1. Review `git status` / staged paths for the patterns above.
+2. Rely on and extend `.gitignore` when a new bulky class appears — do not force-add ignored run data.
+3. If unsure whether a large binary belongs in git, ask; default is **leave it out**.
