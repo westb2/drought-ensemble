@@ -1,16 +1,28 @@
 ---
-description: When the user asks about ensemble runs/jobs/status/restarts, also report watchdog stuck_same_year tombstones
+description: When the user asks about ensemble runs/jobs/status/restarts, report watchdog health and stuck_same_year tombstones
 alwaysApply: true
 ---
 
-# Watchdog stuck runs
+# Watchdog health and stuck runs
 
-When the user asks about runs, jobs, queue status, restarts, or whether ensemble members are progressing, also check for watchdog-held failures:
+When the user asks about runs, jobs, queue status, restarts, or whether ensemble members are progressing, check the automated watchdog too — not just `qstat`.
+
+From `drought-ensemble/`:
 
 ```bash
+python3 ensemble_running/watchdog/restart_watchdog.py --heartbeat
 python3 ensemble_running/watchdog/restart_watchdog.py --list-stuck
 ```
 
-(from `drought-ensemble/` with project config defaults).
+## Heartbeat
 
-If any `stuck_same_year` targets appear, tell the user clearly: those sequences failed twice on the same year tip and will **not** be auto-resubmitted until the sequence tombstone under `domains/<domain>/raw_runs/.watchdog_tombstones/` is cleared (after they inspect the error).
+`--heartbeat` checks both halves of the pipeline separately:
+
+- **cron decides** (`logs/last_status.txt`, written on the cron host each tick — submit or skip)
+- **completed scans** (`logs/last_cycle.txt`, written by the Casper job)
+
+Cron may **skip** Casper when `logs/wake_state.txt` is clean / still watching queued jobs, so scan age can grow up to `max_idle_scan_hours` (24 h). Cron status must still refresh every few hours. Either half going stale beyond its limit means runs are silently not being restarted. This happened for six days in Aug 2026: cron fired on schedule but every `qsub` failed with `command not found`, so no scan ever ran and nothing surfaced it. **If the heartbeat is unhealthy, tell the user immediately and prominently** — a healthy-looking `qstat` does not mean the watchdog is alive.
+
+## Stuck sequences
+
+If `--list-stuck` reports `stuck_same_year` targets, those failed twice on the same year tip and will **not** be auto-resubmitted until the sequence tombstone under `domains/<domain>/raw_runs/.watchdog_tombstones/` is cleared. Report them, and treat a repeated same-year failure as a likely real bug rather than a transient walltime kill.

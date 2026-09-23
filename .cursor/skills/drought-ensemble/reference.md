@@ -65,6 +65,10 @@ Do **not** budget +28 GB/year for missing full hourlies anymore — new postproc
 - Flow-barrier `3_year_pumping_tests` canceled — would have rerun 40 yr spinup from scratch.
 - `5_year_pumping_tests` @ 1e-6: potomac2 + 4 flow-barrier domains (6828738–6828742).
 
+## Matched-deficit intermediate pumping (Aug 2026)
+
+Four new rates (`2e-6`, `3e-6`, `5e-6`, `6e-6`) on potomac2 + wolf2 to interpolate pumping totals to **10-yr drought** storage deficit (~214 / ~203 ×10⁶ m³). Jobs **7254997–7255004**. Full agent handoff: **[matched-deficit-pumping-runs.md](matched-deficit-pumping-runs.md)**; results table: `analysis/matched_deficit_pumping_runs_summary.md`.
+
 ## Static vs transient spinup
 
 | Type | Location | Forcing |

@@ -1,0 +1,188 @@
+{
+  "targets": {
+    "potomac2": 213.6259632152173,
+    "wolf2": 203.53400999659974
+  },
+  "points": [
+    {
+      "domain": "potomac2",
+      "rate": 1e-07,
+      "member": "pumping_1e-7",
+      "deficit_1e6": 8.525540826721192,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 1e-06,
+      "member": "pumping_1e-6",
+      "deficit_1e6": 84.71333113525391,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 2e-06,
+      "member": "pumping_2e-6",
+      "deficit_1e6": 169.56098047613526,
+      "source": "raw_last_hour"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 3e-06,
+      "member": "pumping_3e-6",
+      "deficit_1e6": 254.61251981176758,
+      "source": "raw_last_hour"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 6e-06,
+      "member": "pumping_6e-6",
+      "deficit_1e6": 510.9209133392334,
+      "source": "raw_last_hour"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 1e-05,
+      "member": "pumping_1e-5",
+      "deficit_1e6": 861.5481121983032,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "potomac2",
+      "rate": 0.0001,
+      "member": "pumping_1e-4",
+      "deficit_1e6": 9422.841321705628,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 1e-07,
+      "member": "pumping_1e-7",
+      "deficit_1e6": 3.117753188446045,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 1e-06,
+      "member": "pumping_1e-6",
+      "deficit_1e6": 31.398857085266112,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 2e-06,
+      "member": "pumping_2e-6",
+      "deficit_1e6": 63.101673331726076,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 3e-06,
+      "member": "pumping_3e-6",
+      "deficit_1e6": 95.01454059030151,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 5e-06,
+      "member": "pumping_5e-6",
+      "deficit_1e6": 159.69568731674195,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 1e-05,
+      "member": "pumping_1e-5",
+      "deficit_1e6": 326.3749579159546,
+      "source": "processed_219h"
+    },
+    {
+      "domain": "wolf2",
+      "rate": 0.0001,
+      "member": "pumping_1e-4",
+      "deficit_1e6": 3691.5078028801577,
+      "source": "processed_219h"
+    }
+  ],
+  "matched": {
+    "potomac2": {
+      "target_1e6": 213.6259632152173,
+      "matched_rate": 2.51822915383953e-06,
+      "method": "log-log between 2e-06 (169.6) and 3e-06 (254.6)",
+      "nearest_grid": {
+        "rate": 3e-06,
+        "deficit_1e6": 254.61251981176758,
+        "err_pct": 19.18613073976332
+      },
+      "curve": [
+        {
+          "rate": 1e-07,
+          "deficit_1e6": 8.525540826721192
+        },
+        {
+          "rate": 1e-06,
+          "deficit_1e6": 84.71333113525391
+        },
+        {
+          "rate": 2e-06,
+          "deficit_1e6": 169.56098047613526
+        },
+        {
+          "rate": 3e-06,
+          "deficit_1e6": 254.61251981176758
+        },
+        {
+          "rate": 6e-06,
+          "deficit_1e6": 510.9209133392334
+        },
+        {
+          "rate": 1e-05,
+          "deficit_1e6": 861.5481121983032
+        },
+        {
+          "rate": 0.0001,
+          "deficit_1e6": 9422.841321705628
+        }
+      ]
+    },
+    "wolf2": {
+      "target_1e6": 203.53400999659974,
+      "matched_rate": 6.325953939999905e-06,
+      "method": "log-log between 5e-06 (159.7) and 1e-05 (326.4)",
+      "nearest_grid": {
+        "rate": 5e-06,
+        "deficit_1e6": 159.69568731674195,
+        "err_pct": -21.538573666676225
+      },
+      "curve": [
+        {
+          "rate": 1e-07,
+          "deficit_1e6": 3.117753188446045
+        },
+        {
+          "rate": 1e-06,
+          "deficit_1e6": 31.398857085266112
+        },
+        {
+          "rate": 2e-06,
+          "deficit_1e6": 63.101673331726076
+        },
+        {
+          "rate": 3e-06,
+          "deficit_1e6": 95.01454059030151
+        },
+        {
+          "rate": 5e-06,
+          "deficit_1e6": 159.69568731674195
+        },
+        {
+          "rate": 1e-05,
+          "deficit_1e6": 326.3749579159546
+        },
+        {
+          "rate": 0.0001,
+          "deficit_1e6": 3691.5078028801577
+        }
+      ]
+    }
+  }
+}

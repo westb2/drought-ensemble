@@ -27,8 +27,30 @@ def hash_prefix(years):
     return hashlib.sha256(sequence2string(years).encode()).hexdigest()
 
 
+PRODUCTION_YEAR_HOURS = 8760
+TESTING_YEAR_HOURS = 24
+
+
+def netcdf_time_len(nc_path: Path):
+    try:
+        from netCDF4 import Dataset
+
+        with Dataset(str(nc_path), "r") as ds:
+            if "time" not in ds.dimensions:
+                return None
+            return int(len(ds.dimensions["time"]))
+    except Exception:
+        return None
+
+
 def year_complete(run_dir: Path) -> bool:
-    return (run_dir / "run.out.00001.nc").exists() or (run_dir / "processed_output.nc").exists()
+    nc = run_dir / "run.out.00001.nc"
+    if nc.exists():
+        ntime = netcdf_time_len(nc)
+        if ntime is None:
+            return False
+        return ntime >= PRODUCTION_YEAR_HOURS or ntime == TESTING_YEAR_HOURS
+    return (run_dir / "processed_output.nc").exists()
 
 
 def main():

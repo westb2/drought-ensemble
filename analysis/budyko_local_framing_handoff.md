@@ -34,7 +34,7 @@ Classical Budyko language is a useful metaphor; mechanistically this is closer t
 
 - Temporary domain totals **saturate** by ~10 yr; persistent keeps growing (50/10 ≈ ×3 in uplands, ×1.4–2 in streams).
 - Within-domain Spearman: **Wolf** temporary fraction ↔ shallow WTD (ρ≈−0.53) and overland (+0.25–0.30); **Potomac** cellwise f_temp weak, but persistent *magnitude* anti-correlates with overland (ρ≈−0.48).
-- **Outlet high flows:** suppressed during drought; **recovery year 1** restores p90/p99/max (Wolf ≈1; Potomac often overshoots); by year 2 ≈ baseline. After 50-yr Potomac only a mild residual mean/p90 (~0.96 / ~0.90), not indefinite peak suppression.
+- **Outlet high flows:** suppressed during drought; **recovery year 1** restores p90/p99/max (Wolf ≈1; Potomac "overshoot" was measured at the near-dry config outlet (66, 135) and is absent at the mainstem (63, 129) — see `persistent_storage_vs_streamflow_50yr.md` caveat); by year 2 ≈ baseline. After 50-yr Potomac only a mild residual mean/p90 (~0.96 / ~0.90), not indefinite peak suppression.
 - Implication: annual Q/P or low-flow non-recovery ≠ failure of the runoff-generating limb; peaks track the temporary limb.
 - **Persistent storage vs Q at 50 yr:** deep persistent grows a lot, but outlet Q plateaus mid-drought and does **not** show a clean baseflow collapse in recovery — full note [`persistent_storage_vs_streamflow_50yr.md`](persistent_storage_vs_streamflow_50yr.md).
 

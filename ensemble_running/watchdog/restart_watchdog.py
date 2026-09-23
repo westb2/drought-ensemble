@@ -27,9 +27,24 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
+# Tip-year NetCDFs are read while ParFlow writes them on Lustre. HDF5 must be
+# told not to take file locks, or the scan can block on the writer. Set before
+# netCDF4/HDF5 is first imported (imports are lazy in netcdf_time_len).
+os.environ.setdefault("HDF5_USE_FILE_LOCKING", "FALSE")
+
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_CONFIG = HERE / "config.yaml"
+LOGS_DIR = HERE / "logs"
+# Written by this script after every completed scan (Casper side).
+CYCLE_HEARTBEAT = LOGS_DIR / "last_cycle.txt"
+# Written by cron_driver.sh after every submit attempt (cron host side).
+CRON_STATUS = LOGS_DIR / "last_status.txt"
+# Written by this script; read by --decide-submit / cron_driver to skip idle Casper jobs.
+WAKE_STATE = LOGS_DIR / "wake_state.txt"
+# --decide-submit exit codes for cron_driver.sh
+DECIDE_SUBMIT = 0
+DECIDE_SKIP = 10
 
 
 # ---------------------------------------------------------------------------
@@ -52,9 +67,61 @@ def hash_years(years: Sequence[dict], pumping_layer: int = 2) -> str:
     return hashlib.sha256(sequence2string(years, pumping_layer).encode()).hexdigest()
 
 
-def year_complete(run_dir: Path) -> bool:
-    """Same criterion as years_to_run.py / incomplete-year-cleanup tip check."""
+# Hourly production year vs TESTING Domain.stop_time.
+PRODUCTION_YEAR_HOURS = 8760
+TESTING_YEAR_HOURS = 24
+_TIME_LEN_RE = re.compile(
+    r"time\s*=\s*UNLIMITED\s*;\s*//\s*\((\d+)\s+currently\)"
+)
+
+
+def output_file_present(run_dir: Path) -> bool:
     return (run_dir / "run.out.00001.nc").exists() or (run_dir / "processed_output.nc").exists()
+
+
+def netcdf_time_len(nc_path: Path) -> Optional[int]:
+    """Header-only time length, or None if the file is unreadable.
+
+    The tip year is often being written by a running ParFlow job, so this must
+    never block on an HDF5 lock and must treat any read failure as "unknown".
+    Unknown reads only ever mark a year incomplete, and deletes are already
+    refused while a job is active on the domain.
+    """
+    try:
+        from netCDF4 import Dataset
+
+        with Dataset(str(nc_path), "r") as ds:
+            if "time" not in ds.dimensions:
+                return None
+            return int(len(ds.dimensions["time"]))
+    except Exception:
+        proc = run_cmd(["ncdump", "-h", str(nc_path)], timeout=120)
+        if proc is None or proc.returncode != 0 or not proc.stdout:
+            return None
+        match = _TIME_LEN_RE.search(proc.stdout)
+        if match:
+            return int(match.group(1))
+        match = re.search(r"\btime\s*=\s*(\d+)\s*;", proc.stdout)
+        if match:
+            return int(match.group(1))
+        return None
+
+
+def year_complete(run_dir: Path, *, check_time: bool = True) -> bool:
+    """Same criterion as years_to_run.py / incomplete-year-cleanup tip check.
+
+    A ``run.out.00001.nc`` that exists but has fewer than a full year of
+    timesteps is truncated (walltime/node kill) and is not complete.
+    """
+    nc = run_dir / "run.out.00001.nc"
+    if nc.exists():
+        if not check_time:
+            return True
+        ntime = netcdf_time_len(nc)
+        if ntime is None:
+            return False
+        return ntime >= PRODUCTION_YEAR_HOURS or ntime == TESTING_YEAR_HOURS
+    return (run_dir / "processed_output.nc").exists()
 
 
 # ---------------------------------------------------------------------------
@@ -71,14 +138,21 @@ def load_config(path: Path) -> dict:
     return json.loads(text)
 
 
-def run_cmd(cmd: Sequence[str], check: bool = False) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        list(cmd),
-        check=check,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+def run_cmd(
+    cmd: Sequence[str], check: bool = False, timeout: Optional[float] = None
+) -> Optional[subprocess.CompletedProcess]:
+    """Run a command; return None if it exceeds ``timeout`` seconds."""
+    try:
+        return subprocess.run(
+            list(cmd),
+            check=check,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        return None
 
 
 class QstatError(RuntimeError):
@@ -341,6 +415,253 @@ def list_stuck_same_year_targets(project_root: Path, config: Optional[dict] = No
                     )
     return stuck
 
+# ---------------------------------------------------------------------------
+# Heartbeat — detect a pipeline that silently stopped running at all
+# ---------------------------------------------------------------------------
+
+
+def _now_epoch() -> int:
+    from datetime import datetime, timezone
+
+    return int(datetime.now(timezone.utc).timestamp())
+
+
+def _utc_stamp() -> str:
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def read_kv_file(path: Path) -> Dict[str, str]:
+    """Parse the simple key=value status files written here and by cron_driver.sh."""
+    out: Dict[str, str] = {}
+    if not path.is_file():
+        return out
+    try:
+        for line in path.read_text().splitlines():
+            if "=" in line:
+                key, _, value = line.partition("=")
+                out[key.strip()] = value.strip()
+    except OSError:
+        return {}
+    return out
+
+
+def write_cycle_heartbeat(*, mode: str, deleted: int, submitted: int, stuck: int) -> None:
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    CYCLE_HEARTBEAT.write_text(
+        f"epoch={_now_epoch()}\n"
+        f"utc={_utc_stamp()}\n"
+        f"mode={mode}\n"
+        f"deleted={deleted}\n"
+        f"submitted={submitted}\n"
+        f"stuck={stuck}\n"
+    )
+
+
+def _job_id_aliases(job_id: str) -> set:
+    """PBS may show 7217032.desched1 or 7217032 — treat both as the same job."""
+    jid = str(job_id).strip()
+    if not jid:
+        return set()
+    return {jid, jid.split(".", 1)[0]}
+
+
+def build_wake_state(
+    *,
+    statuses: Sequence[TargetStatus],
+    deleted: Sequence[str],
+    submitted: Sequence[str],
+    planned_delete_count: int,
+    planned_submit_count: int,
+    apply: bool,
+    quota_blocks: bool,
+    no_submit: bool,
+    max_idle_hours: float,
+) -> Dict[str, str]:
+    """Decide whether the next cron tick must start Casper (dirty) or may wait.
+
+    dirty=0 while watched Derecho jobs are still Q/R — cron rechecks via qstat and
+    only wakes Casper when a watched job leaves the queue (or max idle elapses).
+    """
+    watch_ids: List[str] = []
+    seen: set = set()
+    for st in statuses:
+        jid = (st.active_job or {}).get("id")
+        if jid and jid not in seen:
+            watch_ids.append(str(jid))
+            seen.add(str(jid))
+    for jid in submitted:
+        if jid and jid not in seen:
+            watch_ids.append(str(jid))
+            seen.add(str(jid))
+
+    deletes_pending = planned_delete_count > len(deleted)
+    if apply and planned_submit_count > 0:
+        submits_pending = no_submit or quota_blocks or len(submitted) < planned_submit_count
+    elif not apply and planned_submit_count > 0:
+        submits_pending = True
+    else:
+        submits_pending = False
+    if not apply and planned_delete_count > 0:
+        deletes_pending = True
+
+    actionable = deletes_pending or submits_pending
+    if actionable:
+        reason = "actionable_work"
+    elif watch_ids:
+        reason = "watching_jobs"
+    elif any(st.needs_work for st in statuses):
+        reason = "non_actionable_needs_work"
+    else:
+        reason = "clean"
+
+    return {
+        "dirty": "1" if actionable else "0",
+        "reason": reason,
+        "job_ids": ",".join(watch_ids),
+        "epoch": str(_now_epoch()),
+        "utc": _utc_stamp(),
+        "max_idle_hours": str(max_idle_hours),
+    }
+
+
+def write_wake_state(fields: Dict[str, str], path: Path = WAKE_STATE) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        f"dirty={fields.get('dirty', '1')}",
+        f"reason={fields.get('reason', 'unknown')}",
+        f"job_ids={fields.get('job_ids', '')}",
+        f"epoch={fields.get('epoch', str(_now_epoch()))}",
+        f"utc={fields.get('utc', _utc_stamp())}",
+        f"max_idle_hours={fields.get('max_idle_hours', '24')}",
+    ]
+    path.write_text("\n".join(lines) + "\n")
+
+
+def decide_casper_submit(
+    wake: Dict[str, str],
+    current_job_ids: Optional[Iterable[str]],
+    now: Optional[int] = None,
+) -> Tuple[bool, str]:
+    """Return (should_submit_casper, reason).
+
+    ``current_job_ids is None`` means qstat failed — fail open (submit).
+    """
+    now_epoch = int(now if now is not None else _now_epoch())
+    if not wake:
+        return True, "no_wake_state"
+    if wake.get("dirty") == "1":
+        return True, f"dirty:{wake.get('reason', 'unknown')}"
+    try:
+        max_idle = float(wake.get("max_idle_hours", 24))
+    except ValueError:
+        max_idle = 24.0
+    try:
+        age_h = (now_epoch - int(wake["epoch"])) / 3600.0
+    except (KeyError, ValueError):
+        return True, "bad_wake_epoch"
+    if age_h >= max_idle:
+        return True, f"max_idle:{max_idle:.0f}h"
+
+    watched = [x.strip() for x in wake.get("job_ids", "").split(",") if x.strip()]
+    if not watched:
+        return False, f"skip:{wake.get('reason', 'clean')}"
+
+    if current_job_ids is None:
+        return True, "qstat_unavailable"
+
+    present: set = set()
+    for jid in current_job_ids:
+        present |= _job_id_aliases(str(jid))
+    for jid in watched:
+        if _job_id_aliases(jid).isdisjoint(present):
+            return True, f"job_left_queue:{jid}"
+    return False, "skip:watching_jobs_still_present"
+
+
+def run_decide_submit(
+    *,
+    wake_path: Path = WAKE_STATE,
+    current_job_ids: Optional[Sequence[str]] = None,
+    probe_qstat: bool = True,
+) -> Tuple[int, str]:
+    """CLI helper for cron: exit DECIDE_SUBMIT or DECIDE_SKIP with a one-line reason."""
+    wake = read_kv_file(wake_path)
+    ids: Optional[List[str]]
+    if current_job_ids is not None:
+        ids = list(current_job_ids)
+    elif probe_qstat:
+        try:
+            ids = [j["id"] for j in parse_qstat_jobs() if j.get("id")]
+        except QstatError:
+            ids = None
+    else:
+        ids = []
+    submit, reason = decide_casper_submit(wake, ids)
+    return (DECIDE_SUBMIT if submit else DECIDE_SKIP), reason
+
+
+def check_heartbeat(config: Optional[dict] = None) -> dict:
+    """Report whether cron decides and Casper scans are still happening.
+
+    Cron may skip Casper when wake_state is clean, so completed-scan age is
+    allowed up to ``max_idle_scan_hours`` (forced wake interval). Cron status
+    must still refresh on the shorter ``max_heartbeat_age_hours`` cadence.
+    """
+    max_cron_age_h = 12.0
+    max_cycle_age_h = 24.0
+    if config:
+        safety = config.get("safety") or {}
+        max_cron_age_h = float(safety.get("max_heartbeat_age_hours", 12))
+        max_cycle_age_h = float(
+            safety.get("max_idle_scan_hours", safety.get("max_heartbeat_age_hours", 24))
+        )
+    now = _now_epoch()
+
+    def age_hours(data: Dict[str, str]) -> Optional[float]:
+        try:
+            return (now - int(data["epoch"])) / 3600.0
+        except (KeyError, ValueError):
+            return None
+
+    cron = read_kv_file(CRON_STATUS)
+    cycle = read_kv_file(CYCLE_HEARTBEAT)
+    wake = read_kv_file(WAKE_STATE)
+    cron_age = age_hours(cron)
+    cycle_age = age_hours(cycle)
+
+    problems: List[str] = []
+    if not cron:
+        problems.append(f"no cron status file at {CRON_STATUS} (cron driver never ran?)")
+    else:
+        if cron.get("result") != "ok":
+            problems.append(f"last cron submit FAILED: {cron.get('detail', 'unknown')}")
+        if cron_age is not None and cron_age > max_cron_age_h:
+            problems.append(f"last cron submit was {cron_age:.1f}h ago (>{max_cron_age_h:.0f}h)")
+
+    if not cycle:
+        problems.append(
+            f"no completed scan recorded at {CYCLE_HEARTBEAT} (Casper job never ran?)"
+        )
+    elif cycle_age is not None and cycle_age > max_cycle_age_h:
+        problems.append(
+            f"last completed scan was {cycle_age:.1f}h ago (>{max_cycle_age_h:.0f}h idle max)"
+        )
+
+    return {
+        "healthy": not problems,
+        "problems": problems,
+        "cron": cron,
+        "cron_age_hours": cron_age,
+        "cycle": cycle,
+        "cycle_age_hours": cycle_age,
+        "wake": wake,
+        "max_age_hours": max_cron_age_h,
+        "max_cycle_age_hours": max_cycle_age_h,
+    }
+
+
 def parse_scratch_free_tib(gladequota_text: str) -> Optional[float]:
     """Parse free TiB on /glade/derecho/scratch/<user> from gladequota output."""
     for line in gladequota_text.splitlines():
@@ -427,10 +748,15 @@ def assess_sequence(
         h = hash_years(years_spec[: i + 1], pumping_layer)
         path = raw / h
         exists = path.is_dir()
-        complete = year_complete(path) if exists else False
+        # Cheap file-presence for prefixes; time-length is checked on the tip.
+        complete = output_file_present(path) if exists else False
         year_statuses.append(
             YearStatus(index=i, hash=h, path=path, exists=exists, complete=complete)
         )
+
+    last_existing = next((ys for ys in reversed(year_statuses) if ys.exists), None)
+    if last_existing is not None:
+        last_existing.complete = year_complete(last_existing.path)
 
     tip_incomplete = None
     mid_incomplete: List[YearStatus] = []
@@ -624,13 +950,66 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         action="store_true",
         help="Print sequences blocked by repeated same-year tip failures and exit",
     )
+    parser.add_argument(
+        "--heartbeat",
+        action="store_true",
+        help="Report whether cron submits and Casper scans are still happening, then exit",
+    )
+    parser.add_argument(
+        "--decide-submit",
+        action="store_true",
+        help=(
+            "Cron helper: exit 0 to qsub Casper, 10 to skip. Uses wake_state.txt + "
+            "lightweight qstat (stdlib only; no PyYAML)."
+        ),
+    )
+    parser.add_argument(
+        "--current-job-ids",
+        default=None,
+        help="Comma-separated job ids for --decide-submit (skip live qstat; tests)",
+    )
+    parser.add_argument(
+        "--wake-state",
+        type=Path,
+        default=WAKE_STATE,
+        help="Path to wake_state.txt (default: logs/wake_state.txt)",
+    )
     args = parser.parse_args(argv)
+
+    # Must run before load_config: cron host may lack PyYAML.
+    if args.decide_submit:
+        injected = None
+        if args.current_job_ids is not None:
+            injected = [x.strip() for x in args.current_job_ids.split(",") if x.strip()]
+        code, reason = run_decide_submit(
+            wake_path=args.wake_state,
+            current_job_ids=injected,
+            probe_qstat=injected is None,
+        )
+        print(reason)
+        return code
 
     config = load_config(args.config)
     project_root = Path(config.get("project_root") or HERE.parents[1]).resolve()
     safety = config.get("safety") or {}
     pbs_cfg = config.get("pbs") or {}
     quota_cfg = config.get("quota") or {}
+
+    if args.heartbeat:
+        hb = check_heartbeat(config)
+        if hb["healthy"]:
+            print(
+                f"watchdog healthy: last cron submit {hb['cron_age_hours']:.1f}h ago, "
+                f"last completed scan {hb['cycle_age_hours']:.1f}h ago"
+            )
+        else:
+            print("watchdog UNHEALTHY:")
+            for problem in hb["problems"]:
+                print(f"  - {problem}")
+        if args.json_out:
+            args.json_out.parent.mkdir(parents=True, exist_ok=True)
+            args.json_out.write_text(json.dumps(hb, indent=2))
+        return 0 if hb["healthy"] else 1
 
     if args.list_stuck:
         stuck = list_stuck_same_year_targets(project_root, config)
@@ -705,6 +1084,17 @@ def _main_after_lock(args, config, project_root, safety, pbs_cfg, quota_cfg, tes
     print()
 
     if not qstat_ok:
+        max_idle = float(safety.get("max_idle_scan_hours", 24))
+        write_wake_state(
+            {
+                "dirty": "1",
+                "reason": "qstat_failed",
+                "job_ids": "",
+                "epoch": str(_now_epoch()),
+                "utc": _utc_stamp(),
+                "max_idle_hours": str(max_idle),
+            }
+        )
         if args.json_out:
             args.json_out.parent.mkdir(parents=True, exist_ok=True)
             args.json_out.write_text(
@@ -930,6 +1320,31 @@ def _main_after_lock(args, config, project_root, safety, pbs_cfg, quota_cfg, tes
         args.json_out.parent.mkdir(parents=True, exist_ok=True)
         args.json_out.write_text(json.dumps(summary, indent=2))
         print(f"wrote {args.json_out}")
+
+    write_cycle_heartbeat(
+        mode=summary["mode"],
+        deleted=len(deleted),
+        submitted=len(submitted),
+        stuck=len(list_stuck_same_year_targets(project_root, config)),
+    )
+
+    max_idle = float(safety.get("max_idle_scan_hours", 24))
+    wake = build_wake_state(
+        statuses=statuses,
+        deleted=deleted,
+        submitted=submitted,
+        planned_delete_count=len(deletes),
+        planned_submit_count=len(submits),
+        apply=bool(args.apply),
+        quota_blocks=bool(quota_blocks),
+        no_submit=bool(args.no_submit),
+        max_idle_hours=max_idle,
+    )
+    write_wake_state(wake)
+    print(
+        f"wake_state dirty={wake['dirty']} reason={wake['reason']} "
+        f"job_ids={wake['job_ids'] or '(none)'} max_idle_h={wake['max_idle_hours']}"
+    )
 
     return 0
 

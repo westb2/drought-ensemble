@@ -60,12 +60,19 @@ from analysis.redo_recovery_with_50yr import (  # noqa: E402
     STEPS_PER_YEAR,
     STREAM_COLOR,
     TITLE_FS,
+    _SERIES_CACHE,
     _prepare_map,
     baseline_name,
     condensed_year_path,
+    figure_fidelity,
+    log_figure_fidelity,
     potomac_snapshot_path,
+    sequence_period_legend_handles,
+    shade_sequence_periods,
     storage_deficit_pair,
     stream_mask,
+    time_stride,
+    despine_axes,
 )
 
 ENSEMBLE = "droughts"
@@ -221,24 +228,51 @@ def dry_year_precip_219h(domain_name: str) -> np.ndarray:
 
 def zone_anomaly_year(domain_name: str, member: str, year_index: int, bmem: str):
     """Return (t_frac_in_year, shallow_anom_m3, deep_anom_m3) for one year."""
+    stride = time_stride()
     dpath = condensed_year_path(domain_name, member, year_index)
     bpath = condensed_year_path(domain_name, bmem, year_index)
     with xr.open_dataset(dpath) as dds, xr.open_dataset(bpath) as bds:
-        a = dds["subsurface_storage"] - bds["subsurface_storage"]
+        d_stor = dds["subsurface_storage"].isel(time=slice(None, None, stride))
+        b_stor = bds["subsurface_storage"].isel(time=slice(None, None, stride))
+        a = d_stor - b_stor
         sh = a.isel(z=slice(SHALLOW_Z0, None)).sum(dim=("z", "y", "x")).values
         de = a.isel(z=slice(0, SHALLOW_Z0)).sum(dim=("z", "y", "x")).values
-    t = np.arange(sh.shape[0], dtype=np.float64) / STEPS_PER_YEAR
+    t = (np.arange(sh.shape[0], dtype=np.float64) * stride) / STEPS_PER_YEAR
     return t, sh.astype(np.float64), de.astype(np.float64)
 
 
-def drought_zone_series(domain_name: str, drought_length: int, *, include_recovery: bool = False):
-    """Shallow/deep anomalies from drought start; optionally through recovery."""
+def drought_zone_series(
+    domain_name: str,
+    drought_length: int,
+    *,
+    include_recovery: bool = False,
+    spinup_years: int = 0,
+):
+    """Shallow/deep anomalies from drought start; optionally spinup + recovery."""
+    stride = time_stride()
+    cache = (
+        _SERIES_CACHE
+        / (
+            f"zone_{domain_name}_{drought_length}_spin{spinup_years}"
+            f"_rec{int(include_recovery)}_{figure_fidelity()}_s{stride}.npz"
+        )
+    )
+    if cache.exists():
+        z = np.load(cache)
+        return {
+            "t": z["t"],
+            "shallow": z["shallow"],
+            "deep": z["deep"],
+            "precip": z["precip"],
+            "drought_length": int(z["drought_length"]),
+        }
     member = f"{drought_length}_year_drought"
     t_all, sh_all, de_all, p_all = [], [], [], []
     p_year = dry_year_precip_219h(domain_name)
-    n_years = drought_length + (RECOVERY_YEARS if include_recovery else 0)
-    for k in range(n_years):
-        year = SPINUP_YEARS + k
+    n_after_start = drought_length + (RECOVERY_YEARS if include_recovery else 0)
+    years = range(SPINUP_YEARS - spinup_years, SPINUP_YEARS + n_after_start)
+    for year in years:
+        k = year - SPINUP_YEARS
         # Full baseline for wolf years ≥55; potomac long baseline not condensed.
         if year >= 55:
             if domain_name == "potomac2":
@@ -250,14 +284,24 @@ def drought_zone_series(domain_name: str, drought_length: int, *, include_recove
         t_all.append(k + t)
         sh_all.append(sh)
         de_all.append(de)
-        p_all.append(p_year[: sh.shape[0]])
-    return {
+        p_all.append(p_year[::stride][: sh.shape[0]])
+    out = {
         "t": np.concatenate(t_all),
         "shallow": np.concatenate(sh_all),
         "deep": np.concatenate(de_all),
         "precip": np.concatenate(p_all),
         "drought_length": drought_length,
     }
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(
+        cache,
+        t=out["t"],
+        shallow=out["shallow"],
+        deep=out["deep"],
+        precip=out["precip"],
+        drought_length=np.int32(drought_length),
+    )
+    return out
 
 
 def pulse_stats(series: dict) -> dict:
@@ -294,7 +338,7 @@ def fig_aggregate_partition(zone_pairs: dict):
     fig, axes = plt.subplots(
         1,
         len(DOMAINS),
-        figsize=(4.2 * len(DOMAINS), 4.2),
+        figsize=(4.2 * len(DOMAINS), 4.6),
         sharey=False,
         constrained_layout=True,
     )
@@ -303,9 +347,16 @@ def fig_aggregate_partition(zone_pairs: dict):
 
     x = np.arange(len(lengths), dtype=float)
     width = 0.36
+    # Blue = temporary, purple = persistent; lighter = near-surface, saturated = deep.
+    temp_shallow = "#C6DBEF"
+    temp_deep = "#2171B5"
+    pers_shallow = "#DCCCE5"
+    pers_deep = "#7B3294"
     legend_handles = [
-        Patch(facecolor=SHALLOW_COLOR, edgecolor="0.2", label="Near-surface (top 2 m)"),
-        Patch(facecolor=DEEP_COLOR, edgecolor="0.2", label="Deep (>2 m)"),
+        Patch(facecolor=temp_shallow, edgecolor="0.2", label="Near-surface (top 2 m)"),
+        Patch(facecolor=temp_deep, edgecolor="0.2", label="Deep (>2 m)"),
+        Line2D([0], [0], color="none", label="T = temporary (recovered in yr 1)"),
+        Line2D([0], [0], color="none", label="P = persistent (remaining after yr 1)"),
     ]
 
     for ax, domain_name in zip(axes, DOMAINS):
@@ -323,20 +374,29 @@ def fig_aggregate_partition(zone_pairs: dict):
             pers_sh.append(tot["pers_shallow"] / DS_SCALE)
             pers_de.append(tot["pers_deep"] / DS_SCALE)
 
+        # Deep below near-surface; left = temporary (blue), right = persistent (purple).
         ax.bar(
             x - width / 2,
-            temp_sh,
+            temp_de,
             width,
-            color=SHALLOW_COLOR,
+            color=temp_deep,
             edgecolor="0.2",
             linewidth=0.6,
         )
         ax.bar(
             x - width / 2,
-            temp_de,
+            temp_sh,
             width,
-            bottom=temp_sh,
-            color=DEEP_COLOR,
+            bottom=temp_de,
+            color=temp_shallow,
+            edgecolor="0.2",
+            linewidth=0.6,
+        )
+        ax.bar(
+            x + width / 2,
+            pers_de,
+            width,
+            color=pers_deep,
             edgecolor="0.2",
             linewidth=0.6,
         )
@@ -344,21 +404,44 @@ def fig_aggregate_partition(zone_pairs: dict):
             x + width / 2,
             pers_sh,
             width,
-            color=SHALLOW_COLOR,
+            bottom=pers_de,
+            color=pers_shallow,
             edgecolor="0.2",
             linewidth=0.6,
-            alpha=0.95,
         )
-        ax.bar(
-            x + width / 2,
-            pers_de,
-            width,
-            bottom=pers_sh,
-            color=DEEP_COLOR,
-            edgecolor="0.2",
-            linewidth=0.6,
-            alpha=0.95,
+
+        ymax = max(
+            max(a + b for a, b in zip(temp_de, temp_sh)),
+            max(a + b for a, b in zip(pers_de, pers_sh)),
+            1.0,
         )
+        label_pad = 0.03 * ymax
+        for i in range(len(lengths)):
+            h_t = temp_de[i] + temp_sh[i]
+            h_p = pers_de[i] + pers_sh[i]
+            if h_t > 0:
+                ax.text(
+                    x[i] - width / 2,
+                    h_t + label_pad,
+                    "T",
+                    ha="center",
+                    va="bottom",
+                    fontsize=10,
+                    color="0.25",
+                    fontweight="semibold",
+                )
+            if h_p > 0:
+                ax.text(
+                    x[i] + width / 2,
+                    h_p + label_pad,
+                    "P",
+                    ha="center",
+                    va="bottom",
+                    fontsize=10,
+                    color="0.25",
+                    fontweight="semibold",
+                )
+        ax.set_ylim(0.0, ymax * 1.10)
 
         ax.set_xticks(x)
         ax.set_xticklabels([str(L) for L in lengths])
@@ -366,43 +449,19 @@ def fig_aggregate_partition(zone_pairs: dict):
         ax.ticklabel_format(axis="y", style="plain", useOffset=False)
         ax.axhline(0.0, color="0.5", lw=0.6)
 
-        # annotate bar groups
-        ymax = ax.get_ylim()[1]
-        for i in range(len(lengths)):
-            ax.text(
-                x[i] - width / 2,
-                temp_sh[i] + temp_de[i] + 0.02 * ymax,
-                "T",
-                ha="center",
-                va="bottom",
-                fontsize=9,
-                color="0.3",
-            )
-            ax.text(
-                x[i] + width / 2,
-                pers_sh[i] + pers_de[i] + 0.02 * ymax,
-                "P",
-                ha="center",
-                va="bottom",
-                fontsize=9,
-                color="0.3",
-            )
-
     axes[0].set_ylabel(r"Storage deficit ($10^6$ m$^3$)", fontsize=LABEL_FS)
     fig.supxlabel("Drought length (years)", fontsize=LABEL_FS)
     fig.legend(
-        handles=legend_handles
-        + [
-            Line2D([0], [0], color="none", label="T = temporary (recovered in yr 1)"),
-            Line2D([0], [0], color="none", label="P = persistent (remaining after yr 1)"),
-        ],
-        loc="outside upper center",
-        ncol=2,
+        handles=legend_handles,
+        loc="outside lower center",
+        bbox_to_anchor=(0.5, -0.06),
+        ncol=4,
         frameon=False,
         fontsize=LEGEND_FS,
     )
     out = FIG_DIR / "shallow_deep_temp_persist_partition.png"
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    despine_axes(fig)
+    fig.savefig(out, dpi=150, bbox_inches="tight", pad_inches=0.12)
     plt.close(fig)
     print("wrote", out)
 
@@ -553,31 +612,36 @@ def fig_spatial_10yr(zone_pairs: dict, landscape: dict, col_pairs: dict):
 
 def fig_mid_drought_regen(
     series_by_domain: dict,
-    pulse_by_domain: dict,
+    pulse_by_domain: dict | None = None,
     *,
     outfile: str = "shallow_deep_mid_drought_regen.png",
     include_recovery: bool = False,
+    spinup_years: int = 0,
+    figsize: tuple[float, float] | None = None,
+    legend_loc: str = "outside upper center",
 ):
     """Drought-course near-surface vs deep storage anomalies."""
+    log_figure_fidelity()
     fig, axes = plt.subplots(
         2,
         len(DOMAINS),
-        figsize=(4.4 * len(DOMAINS), 5.6),
+        figsize=figsize or (4.4 * len(DOMAINS), 5.6),
         sharex="col",
         constrained_layout=True,
     )
     if len(DOMAINS) == 1:
         axes = axes.reshape(2, 1)
 
-    drought_patch = Patch(facecolor="C3", alpha=0.25, edgecolor="none", label="drought period")
-    recovery_patch = Patch(
-        facecolor="#9ECAE1", alpha=0.35, edgecolor="none", label="recovery"
-    )
     line_handles = [
         Line2D([0], [0], color=COLORS[L], lw=1.8, label=f"{L}-yr drought")
         for L in DROUGHT_LENGTHS
         if any(L in series_by_domain[d] for d in DOMAINS)
     ]
+    include_spinup = spinup_years > 0 or any(
+        float(np.min(ser["t"])) < -0.05
+        for d in DOMAINS
+        for ser in series_by_domain[d].values()
+    )
 
     for col, domain_name in enumerate(DOMAINS):
         ax_sh = axes[0, col]
@@ -585,17 +649,25 @@ def fig_mid_drought_regen(
 
         for L, ser in series_by_domain[domain_name].items():
             t = ser["t"]
-            ax_sh.plot(t, ser["shallow"] / DS_SCALE, color=COLORS[L], lw=1.3, alpha=0.95)
-            ax_de.plot(t, ser["deep"] / DS_SCALE, color=COLORS[L], lw=1.3, alpha=0.95)
+            ax_sh.plot(
+                t, ser["shallow"] / DS_SCALE, color=COLORS[L], lw=1.3, alpha=0.95, zorder=3
+            )
+            ax_de.plot(
+                t, ser["deep"] / DS_SCALE, color=COLORS[L], lw=1.3, alpha=0.95, zorder=3
+            )
 
         Lmax = max(series_by_domain[domain_name])
+        t_left = -float(spinup_years) if spinup_years else 0.0
+        t_right = float(Lmax + (RECOVERY_YEARS if include_recovery else 0))
         for ax in (ax_sh, ax_de):
-            ax.axvspan(0, Lmax, color="C3", alpha=0.08)
+            shade_sequence_periods(ax, Lmax, t_left, t_right)
             if include_recovery:
-                ax.axvspan(Lmax, Lmax + RECOVERY_YEARS, color="#9ECAE1", alpha=0.12)
-                ax.axvline(Lmax, color="0.35", ls=":", lw=0.9)
-            ax.axhline(0.0, color="0.55", lw=0.7)
-            ax.xaxis.set_major_locator(MultipleLocator(2 if not include_recovery else 2))
+                ax.axvline(Lmax, color="0.35", ls=":", lw=0.9, zorder=2)
+            if include_spinup:
+                ax.axvline(0.0, color="k", ls="--", lw=0.9, zorder=2)
+            ax.axhline(0.0, color="0.55", lw=0.7, zorder=2)
+            ax.xaxis.set_major_locator(MultipleLocator(5 if include_spinup else 2))
+            ax.xaxis.set_minor_locator(MultipleLocator(1))
             ax.ticklabel_format(axis="y", style="plain", useOffset=False)
 
         ax_sh.set_title(DOMAIN_LABELS[domain_name], fontsize=TITLE_FS)
@@ -609,18 +681,26 @@ def fig_mid_drought_regen(
             axes[1, 1].sharey(axes[1, 0])
 
     fig.supxlabel("Year (from drought start)", fontsize=LABEL_FS)
-    legend_handles = line_handles + [drought_patch]
-    if include_recovery:
-        legend_handles.append(recovery_patch)
-    fig.legend(
+    period_handles = sequence_period_legend_handles(
+        include_spinup=include_spinup, include_recovery=include_recovery
+    )
+    # One drought length: the line is the only series, so skip it in the legend.
+    legend_handles = (
+        period_handles if len(line_handles) <= 1 else line_handles + period_handles
+    )
+    legend_kw = dict(
         handles=legend_handles,
-        loc="outside upper center",
-        ncol=5,
+        loc=legend_loc,
+        ncol=min(5, max(len(legend_handles), 1)),
         frameon=False,
         fontsize=LEGEND_FS,
     )
+    if "lower" in legend_loc:
+        legend_kw["bbox_to_anchor"] = (0.5, -0.08)
+    fig.legend(**legend_kw)
     out = FIG_DIR / outfile
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    despine_axes(fig)
+    fig.savefig(out, dpi=150, bbox_inches="tight", pad_inches=0.14)
     plt.close(fig)
     print("wrote", out)
 

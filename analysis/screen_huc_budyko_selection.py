@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Broader (not fully national) HUC8 screen for Budyko Track A/B selection.
 
-Scope: eastern US headwaters (HUC2 01–08) + selected Interior plains/mountain
-source basins (HUC2 10, 11, 13, 14, 16, 17). Disk-safe: tiny CSVs only; no get_domain.
+Scope: eastern US headwaters (HUC2 01–08) + Interior plains/mountain sources
+(HUC2 10–11) + western headwaters (HUC2 12–18). Disk-safe: tiny CSVs only; no get_domain.
 
 Method (matches pumping-rate-context Jul 2026 recipe):
   - CONUS2 baseline monthly streamflow WY2003 mean at USGS gage cells
@@ -127,6 +127,61 @@ CANDIDATES: dict[str, str] = {
     "16010101": "Upper Bear",
     "17040201": "Snake Headwaters",
     "17040202": "Gros Ventre",
+    # --- Western US headwaters (Track B priority; Track A where intermediate WTD) ---
+    # HUC2 12 — Texas-Gulf
+    "12030106": "Upper Guadalupe",
+    "12040101": "Upper Colorado (TX)",
+    "12050101": "Upper Brazos",
+    "12050201": "Double Mountain Fork Brazos",
+    "12070102": "Upper Nueces",
+    "12090301": "Upper Trinity",
+    "12100201": "Upper Sabine",
+    # HUC2 13 — Rio Grande
+    "13010101": "Upper Rio Grande-Elephant Butte",
+    "13010201": "Red (NM headwaters)",
+    "13020101": "Rio Chama",
+    "13020201": "Upper Pecos",
+    "13020202": "Hondo-Sacramento",
+    "13030101": "Jemez",
+    "13050101": "Mimbres",
+    # HUC2 14 — Upper Colorado
+    "14010002": "Gunnison Headwaters",
+    "14010003": "Upper Colorado-Dolores",
+    "14010005": "Upper San Juan",
+    "14020003": "Upper White",
+    "14020004": "Upper Yampa",
+    "14050002": "Blacks Fork",
+    "14060001": "Lower Green",
+    # HUC2 15 — Lower Colorado
+    "15010001": "Upper Colorado (LC region)",
+    "15010002": "Paria",
+    "15010003": "Upper Virgin",
+    "15020001": "Lower Colorado-Little Colorado headwaters",
+    "15030101": "Upper Gila",
+    "15030201": "Upper Salt",
+    "15030301": "Upper Verde",
+    # HUC2 16 — Great Basin
+    "16010201": "Upper Humboldt",
+    "16030001": "Upper Carson",
+    "16050101": "Walker",
+    "16060102": "Owens Valley",
+    "16060103": "Upper Owens",
+    "16060107": "Upper Owens headwaters",
+    # HUC2 17 — Pacific Northwest
+    "17010101": "Upper Klamath",
+    "17050101": "Upper John Day",
+    "17060101": "Upper Deschutes",
+    "17070101": "Upper Willamette",
+    "17080101": "Upper Rogue",
+    "17090101": "Upper Umpqua",
+    # HUC2 18 — California
+    "18010201": "Upper Sacramento",
+    "18010202": "McCloud-Pit",
+    "18020101": "Upper San Joaquin",
+    "18020104": "Upper Merced",
+    "18020107": "Upper Kings",
+    "18020110": "Upper Kern",
+    "18070101": "Upper Salinas",
 }
 
 HARD_REJECT = {
@@ -826,6 +881,8 @@ def main():
             "region": (
                 "eastern"
                 if huc.startswith(("01", "02", "03", "04", "05", "06", "07", "08"))
+                else "western"
+                if huc.startswith(("12", "13", "14", "15", "16", "17", "18"))
                 else "interior"
             ),
         }

@@ -22,7 +22,7 @@ Multi-year runs create one hash folder per year under `domains/<domain>/raw_runs
    (spinups may nest one more level, e.g. `…/40_year_spinup/spinup/run_log.txt`).  
    The **last** `Running year N of the run in …/raw_runs/<hash>` line is the incomplete **tip** year. If there is no `Finished running full sequence` line, the sequence did not complete.
 3. **Sanity-check completeness**:
-   - **Tip incomplete (delete):** usually no usable `run.out.00001.nc` / no `processed_output.nc`; job died on this year; **no later year dirs** for this sequence on this domain.
+   - **Tip incomplete (delete):** no usable full-year `run.out.00001.nc` (missing, or time length short of 8760 production / 24 testing hours) / no `processed_output.nc`; job died on this year; **no later year dirs** for this sequence on this domain. A truncated NetCDF still counts as incomplete — folder existence is not enough.
    - **Mid-sequence with `run.out.00001.nc` but missing `processed_output.nc`:** often ParFlow finished and later years already ran — **do not delete** if downstream year dirs exist (they need this year as IC). Condensation can create `processed_output.nc` later.
 4. **Before deleting a “wrong but complete” year** (e.g. old pumping formula): confirm hash has **no later-year dirs** on that domain for sequences that use it, or you will strand dependents.
 5. **Show the user the exact paths** (and whether each is tip-incomplete vs wrong-rate-complete) **and get confirmation before deleting.**

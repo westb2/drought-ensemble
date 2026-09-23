@@ -10,13 +10,20 @@ drought_metrics/data/
 ensemble_running/output.nc
 ensemble_running/pbs_outputs/
 ensemble_running/*.o[0-9]*
+ensemble_running/watchdog/*.o[0-9]*
+ensemble_running/watchdog/logs/
+*.o[0-9]*
 ensemble_running/qsub_err.txt
 
 # Caches, scratch, and temp analysis artifacts
-.tmp*/
-**/.tmp*/
+.tmp*
+**/.tmp*
 **/_tmp_*
 **/_cache/
 analysis/figures/_pumping_*_cache/
 analysis/figures/_tmp_*
+analysis/figures/_scratch/
 analysis/*.broken_*
+analysis/*.bak*
+*.bak*
+*.log

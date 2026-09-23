@@ -9,13 +9,22 @@ description: >-
   loaders/plotting (storage snapshot vs flow mean/sum). Use when submitting
   ensemble jobs, creating run sequences, estimating 12h walltime capacity,
   checking spinup reuse / hash collisions, debugging pumping, comparing
-  user-specified rates to USGS water use, screening HUCs for new domains,
+  user-specified rates to USGS water use, screening HUCs for new domains
+  (Casper job `screen_huc_budyko_selection.pbs`; status/results under
+  `analysis/huc_selection_job_status.md` and `huc_selection_screen_summary.json`),
   consolidating timesteps, reading processed NetCDF, plotting storage/WTD/
   streamflow, paper figures (domain display names, shared axes, units, drought
   shading, legend placement, slide heatmap layouts), figure catalog
-  (`analysis/FIGURES_INDEX.md` — update when adding figures), USGS NWIS
+  (`analysis/FIGURES_INDEX.md` — update when adding figures), condensed drought
+  story deck (`drought_story_deck_summary.md`), condensed pumping story set
+  (`pumping_story_set_summary.md` / `make_pumping_final_figures.py`; catalog
+  1e-7/1e-6/1e-5), and drought-vs-matched comparison set
+  (`comparison_story_set_summary.md` / `make_comparison_figures.py`; matched
+  rates 8.64e-7 Potomac / 2.49e-6 Wolf; overland color=domain dash=stress), USGS NWIS
   streamflow validation for potomac2/wolf2
-  (gage choice, cell snap, spinup/drought antecedent effects), or working with
+  (gage choice, cell snap, spinup/drought antecedent effects), interpreting
+  matched-deficit intermediate pumping runs (2e-6…6e-6 vs 10-yr drought totals;
+  see matched-deficit-pumping-runs.md), or working with
   potomac2 / potomac_flow_barrier_* / wolf2 / republican / ponca domains.
 ---
 
@@ -52,13 +61,33 @@ Full conventions: **[plotting.md](plotting.md)**. Apply whenever making or revis
 | Paper title | **No** `fig.suptitle` — legend `loc="outside upper center"` |
 | Fonts | Labels/legend ~11–13 (line plots); map grids for Word ~13–16 |
 | Storage scale | Plot as 10⁹ / 10⁶ m³; `useOffset=False` to avoid colliding `1e11` text |
-| Drought shade | `axvspan(..., color="C3", alpha=0.08)` + legend `Patch` labeled “drought period” |
+| Drought shade | Three-period fill on courses: orange spinup / C3 drought / blue recovery, flush to axes; `despine_axes` (no top/right spines) |
 | Anomaly rows | `sharey` across domains so **zero aligns** |
 | Year axis | Integer ticks (`MultipleLocator`); label origin clearly (drought start vs recovery onset) |
 | WTD / deficit maps | Shared colorbar; Stream `#F0E442`; slide maps = per-domain PNG + aspect-filled cells — see [plotting.md](plotting.md) |
 | Index | Update **FIGURES_INDEX.md** when figures change |
 
-Drought-length colors: `{1: "#E8C39E", 3: "#B86B2B", 10: "#4A2410", 50: "#140A05"}`. Figures → `analysis/figures/`.
+Drought-length colors: `{1: "#E8C39E", 3: "#B86B2B", 10: "#4A2410", 50: "#140A05"}` (sequential browns). One visual channel per factor — see [plotting.md](plotting.md) and the `paper-figures` skill. Figures → `analysis/figures/`.
+
+**Condensed talk deck** (`figures/decks/drought_story_slides.pptx`, 7 figures + title): authoritative handoff
+[`analysis/drought_story_deck_summary.md`](../../../analysis/drought_story_deck_summary.md);
+PNGs via `make_story_figures.py` (and related). Deck pumping uses
+**purple** `STORY_PUMP_COLORS` in `make_story_figures.py` (not canonical brown pumping colors).
+Default figure rebuilds are **draft** (`FIGURE_FIDELITY`); ask for **final** before shipping.
+**Do not rebuild any `*.pptx` unless the user explicitly asks** — regenerate PNGs only so
+figures stay easy to open in the editor; run `make_drought_story_slides.py` /
+`make_drought_narrative_slides.py` / other slide builders only on request.
+When discussing story slides, always list all 8 with PNG links (see that handoff).
+
+**Condensed pumping story set** (`figures/pumping_final/`, catalog
+`1e-7`/`1e-6`/`1e-5` only):
+[`analysis/pumping_story_set_summary.md`](../../../analysis/pumping_story_set_summary.md);
+builder `make_pumping_final_figures.py`. **Comparison set** (`figures/comparison/`,
+3 PNGs; matched vs 10-yr drought):
+[`analysis/comparison_story_set_summary.md`](../../../analysis/comparison_story_set_summary.md);
+builder `make_comparison_figures.py`. When discussing either set, list all PNGs
+with links. Do not mix matched into `pumping_final` or catalog rates into
+`comparison`. Do not move `story_pumping_*` out of `drought_final`.
 
 Overland-as-predictor ≠ Budyko: use `drought_recovery_drainage_*` / covariate figures first ([FIGURES_INDEX.md](../../../analysis/FIGURES_INDEX.md) §2); `budyko_*` is the φ / f_temp framing (§3).
 
@@ -76,6 +105,7 @@ fluxes[pumping_layer, :, :] = (-1.0 / dz[pumping_layer]) * actual_pumping_rate  
 - ParFlow EvapTrans expects T⁻¹ = (depth flux) / `dz` — the `/dz` factor is correct.
 - Old runs with the multiply bug need re-run; sequence values tuned for the old formula must be recalculated.
 - **Hash does not include computed flux** — after fixing the formula, delete the pumping-year `raw_runs` hashes (keep shared spinup) or the job will skip and keep bad rates.
+- **`pumping_layer` must be copied onto every sub-year sequence** in `run_full_sequence` / `get_output_folders` / IC lookup. If omitted, sub-runs default to layer 2, collide with L2 hashes, and skip (or overwrite) instead of writing `_pumping_layer_4` years.
 
 **Recalibrating sequence values:** target flux in `fluxes_on.pfb` = `(pumping_rate_fraction / f) / dz`.
 
@@ -95,7 +125,7 @@ Year folders hash from the **full prefix** of wetness/rate/irrigation strings (`
 
 | Ensemble folder | Structure |
 |-----------------|-----------|
-| `3_year_pumping_tests` | **40** yr average spinup + **3** yr pumping (name = pumping block) |
+| `3_year_pumping_tests` | **40** yr average spinup + **3** yr pumping + **10** yr recovery; rates `1e-7…1e-4` plus intermediate **`2e-6, 3e-6, 5e-6, 6e-6`** (matched-deficit campaign, Aug 2026 — see **[matched-deficit-pumping-runs.md](matched-deficit-pumping-runs.md)**) |
 | `5_year_pumping_tests` | **5** yr spinup + **3** yr pumping |
 | `40_year_spinup` | 40 yr average, no pump |
 | `25_year_spinup` | **20** yr average (folder name is misleading) |
@@ -124,8 +154,14 @@ Default PBS: 4 nodes × 64 MPI ranks, 12 h walltime, queue `main`, project `UPRI
 | Plot quantity | Use |
 |---------------|-----|
 | Storage / WTD / pressure | Snapshot fields (`total_storage`, `wtd`, …) |
-| Streamflow / flux **rate** | Window **mean** |
+| Streamflow / flux **rate** | Window **mean** via `analysis/outlet_flow.py` |
 | Streamflow / flux **volume** | `*_sum` (= mean × 219) |
+
+**Outlet Q (required):** `analysis/outlet_flow.py` — Potomac mainstem `(63, 129)`
+not config `(66, 135)`; true window means (catalog 10-yr pumping years 43–49
+are snapshots despite a "mean" tag — rebuilt from `derived_hourly.nc`); draft
+**block-averages**, never `q[::stride]`. Details: [plotting.md](plotting.md),
+[`analysis/potomac_sensitivity_attribution_handoff.md`](../../../analysis/potomac_sensitivity_attribution_handoff.md).
 
 Do not use calendar weeks (168 h) for on-disk products — they do not divide 8760. Full rules, backfill commands, and loader notes: [processed-outputs.md](processed-outputs.md).
 
@@ -206,10 +242,12 @@ domains/<d>/processed_full_runs/<ensemble>/<member>/file_locations_219h.json
 ## Related skills / rules
 
 - **Restart after failure:** `.cursor/skills/restart-ensemble-jobs/SKILL.md`
+- **Auto restart watchdog (cron → Casper):** `ensemble_running/watchdog/README.md`
 - **Delete partial years:** `.cursor/rules/incomplete-year-cleanup.mdc`
 - **Deep reference:** [reference.md](reference.md)
 - **Processed outputs / analysis:** [processed-outputs.md](processed-outputs.md)
 - **Paper figure / plotting conventions:** [plotting.md](plotting.md)
+- **Condensed drought story deck (8 slides):** [`analysis/drought_story_deck_summary.md`](../../../analysis/drought_story_deck_summary.md)
 - **Catchment / USGS / CONUS context (rates stay user-controlled):** [pumping-rate-context.md](pumping-rate-context.md)
 - **USGS streamflow validation (gages, cell snap, spinup/drought IC lessons):** [usgs-streamflow-validation.md](usgs-streamflow-validation.md)
   - User summary: `analysis/usgs_streamflow_validation_summary.md`
@@ -219,6 +257,33 @@ domains/<d>/processed_full_runs/<ensemble>/<member>/file_locations_219h.json
 - **Local Budyko / temp–persist framing → new catchment selection:**  
   `analysis/budyko_local_framing_handoff.md` (handoff for planning agents);  
   `analysis/budyko_drought_literature.md`; `analysis/budyko_temp_persistent_summary.md`
+- **HUC Track A/B screen (Casper, disk-safe):** see [HUC selection screen](#huc-selection-screen-casper) below; plan `analysis/budyko_huc_selection_plan.md`
+
+## HUC selection screen (Casper)
+
+Broader eastern + selected Interior HUC8 RSR + WTD/φ screen for Budyko Track A (intermediate WTD) / Track B (arid ribbons). **No `get_domain`.** Run on **Casper**, not Derecho login or `main`.
+
+| Item | Path |
+|------|------|
+| Script | `analysis/screen_huc_budyko_selection.py` |
+| PBS | `analysis/screen_huc_budyko_selection.pbs` (1 CPU, 16 GB, 8 h, account `UPRI0032`) |
+| Submit | `qsub -q casper@casper-pbs analysis/screen_huc_budyko_selection.pbs` |
+| Job status | `analysis/huc_selection_job_status.md` (**read this first** when user asks for results) |
+| Cache / resume | `analysis/.tmp_huc_screen/` (`sites_*`, `obs_lt_*`, `sim_da*`, `wtd_phi_*`) |
+| Live log | `analysis/.tmp_huc_screen/screen.log` (symlink to stamped log) |
+| PBS oe | `analysis/.tmp_huc_screen/pbs_huc_screen.out` |
+
+**Results deliverables:**
+
+| File | Contents |
+|------|----------|
+| `analysis/huc_selection_screen_summary.json` | Ranked Top A / Top B |
+| `analysis/huc_selection_annotated_tracks.csv` | Labels + φ + WTD metrics |
+| `analysis/huc8_headwater_streamflow_rsr.csv` | RSR (incremental during run) |
+| `analysis/huc8_headwater_streamflow_sites.csv` | Per-gage sim/obs |
+| `analysis/budyko_huc_selection_recommendation.md` | Human gate writeup (update after screen if picks change) |
+
+Do **not** run the screen overnight on Derecho/Casper login nodes. Kill any login copy before `qsub`. Caches make restart safe. Scratch was ~89% when screening started — keep outputs to tiny CSVs/JSON only.
 
 ## Do not
 

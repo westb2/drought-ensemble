@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -N psa_extract
+#PBS -A UPRI0032
+#PBS -q casper
+#PBS -l walltime=06:00:00
+#PBS -l select=1:ncpus=16:mem=64GB
+#PBS -j oe
+#PBS -o /glade/derecho/scratch/bwest/drought-ensemble/analysis/.tmp_psa/pbs_psa_extract.out
+
+# Slim per-year extraction (219 h + CLM window means) for
+# potomac_sensitivity_attribution.py. Resume-safe (skips cached hashes).
+# Submit from Derecho login: qsub -q casper@casper-pbs analysis/psa_extract.pbs
+
+set -eo pipefail
+module load conda
+conda activate /glade/work/bwest/conda-envs/droughts
+set -u
+cd /glade/derecho/scratch/bwest/drought-ensemble
+python -u analysis/psa_extract.py --workers 16

@@ -9,11 +9,19 @@ Baseline handling
   Spatial WTD/storage at years 89/90/94 use raw-derived snapshots under
   ``processed_full_runs/droughts/baseline/snapshots/`` (long baseline 219h
   not fully condensed for potomac2).
+
+Figure fidelity
+---------------
+``FIGURE_FIDELITY`` defaults to ``draft`` (every 4th 219 h step, ~36 days)
+so iterating on story course plots stays cheap. Series are cached under
+``analysis/.tmp_figure_cache/``. Set ``FIGURE_FIDELITY=final`` (or ask for
+the high-fidelity / final version) to plot every condensed step.
 """
 from __future__ import annotations
 
 import csv
 import json
+import os
 import sys
 from collections import deque
 from math import erfc, sqrt
@@ -33,6 +41,7 @@ from matplotlib.ticker import MultipleLocator
 ROOT = Path("/glade/derecho/scratch/bwest/drought-ensemble")
 sys.path.insert(0, str(ROOT))
 
+from analysis import outlet_flow as OF  # noqa: E402
 from analysis.paper_figures import utils  # noqa: E402
 from classes import Domain  # noqa: E402
 
@@ -49,8 +58,46 @@ STREAM_FLOW_PERCENTILE = 97.0
 CELL_AREA_M2 = 1_000_000.0
 STREAM_COLOR = "#F0E442"
 
-FIG_DIR = ROOT / "analysis" / "figures"
+# Draft skips 219 h steps for fast iteration; final uses every condensed step.
+# Override with FIGURE_FIDELITY=final (env) or when the user asks for the
+# high-fidelity / final version of the figures.
+FIGURE_FIDELITY = os.environ.get("FIGURE_FIDELITY", "draft").strip().lower()
+DRAFT_TIME_STRIDE = 4  # 219 h × 4 ≈ 36 days; 10 points / year
+_SERIES_CACHE = ROOT / "analysis" / ".tmp_figure_cache"
+
+from analysis.figure_paths import FIG_DIR, FIG_ROOT, fig_path, resolve_figure  # noqa: E402
+
+# Back-compat alias: absolute figures root (category subdirs live underneath).
+FIG_DIR_ROOT = FIG_ROOT
 FIG_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def figure_fidelity() -> str:
+    fid = FIGURE_FIDELITY
+    if fid not in ("draft", "final"):
+        raise ValueError(f"FIGURE_FIDELITY must be 'draft' or 'final', got {fid!r}")
+    return fid
+
+
+def time_stride() -> int:
+    return 1 if figure_fidelity() == "final" else DRAFT_TIME_STRIDE
+
+
+def log_figure_fidelity() -> None:
+    print(
+        f"FIGURE_FIDELITY={figure_fidelity()} (time stride={time_stride()})",
+        flush=True,
+    )
+
+
+def despine_axes(fig) -> None:
+    """Hide top and right spines on plot axes; leave colorbars boxed."""
+    for ax in fig.axes:
+        if ax.get_label() == "<colorbar>":
+            continue
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.tick_params(which="both", top=False, right=False)
 
 COLORS = {
     1: "#E8C39E",
@@ -63,6 +110,71 @@ PERSIST_COLOR = "#5C3317"
 LABEL_FS, LEGEND_FS, TITLE_FS = 12, 11, 13
 S_SCALE = 1e9
 DS_SCALE = 1e6
+
+# Sequence period backgrounds (story course + mid-drought regen).
+# Okabe–Ito orange = spinup (not olive/green: unsafe next to drought red),
+# C3 pink = drought, sky blue = recovery.
+COURSE_SPINUP_YEARS = 3
+PERIOD_SPINUP_FACE = "#E69F00"
+PERIOD_DROUGHT_FACE = "C3"
+PERIOD_RECOVERY_FACE = "#9ECAE1"
+PERIOD_SPINUP_ALPHA = 0.18
+PERIOD_DROUGHT_ALPHA = 0.08
+PERIOD_RECOVERY_ALPHA = 0.14
+
+
+def shade_sequence_periods(ax, drought_length: float, t_left: float, t_right: float) -> None:
+    """Fill spinup / drought / recovery flush to the axis frame (no white x-margin)."""
+    bleed = 1.0
+    spans = (
+        (-np.inf, 0.0, PERIOD_SPINUP_FACE, PERIOD_SPINUP_ALPHA),
+        (0.0, drought_length, PERIOD_DROUGHT_FACE, PERIOD_DROUGHT_ALPHA),
+        (drought_length, np.inf, PERIOD_RECOVERY_FACE, PERIOD_RECOVERY_ALPHA),
+    )
+    for a, b, color, alpha in spans:
+        lo = max(a, t_left)
+        hi = min(b, t_right)
+        if hi <= lo:
+            continue
+        if lo <= t_left:
+            lo = t_left - bleed
+        if hi >= t_right:
+            hi = t_right + bleed
+        ax.axvspan(lo, hi, color=color, alpha=alpha, lw=0, zorder=0)
+    ax.set_xlim(t_left, t_right)
+    ax.margins(x=0)
+    ax.autoscale(enable=False, axis="x")
+
+
+def sequence_period_legend_handles(*, include_spinup: bool = True, include_recovery: bool = True):
+    handles = []
+    if include_spinup:
+        handles.append(
+            Patch(
+                facecolor=PERIOD_SPINUP_FACE,
+                alpha=0.40,
+                edgecolor="none",
+                label="spinup",
+            )
+        )
+    handles.append(
+        Patch(
+            facecolor=PERIOD_DROUGHT_FACE,
+            alpha=0.25,
+            edgecolor="none",
+            label="drought period",
+        )
+    )
+    if include_recovery:
+        handles.append(
+            Patch(
+                facecolor=PERIOD_RECOVERY_FACE,
+                alpha=0.35,
+                edgecolor="none",
+                label="recovery",
+            )
+        )
+    return handles
 
 POTOMAC_SNAP = (
     ROOT
@@ -89,8 +201,7 @@ def baseline_member(domain_name: str) -> str:
 def outlets_for_domains():
     out = {}
     for d in DOMAINS:
-        dom = Domain(d, full_config_file_path_given=False)
-        out[d] = (dom.outlet_x, dom.outlet_y)
+        out[d] = OF.analysis_outlet(d)
         print(d, "outlet", out[d], "baseline_member", baseline_member(d))
     return out
 
@@ -99,6 +210,23 @@ OUTLETS = outlets_for_domains()
 
 
 def read_condensed_series(domain_name, member, start_year=0):
+    stride = time_stride()
+    cache = (
+        _SERIES_CACHE
+        / (
+            f"condensed_{domain_name}_{member}_y{start_year}_{figure_fidelity()}_s{stride}"
+            f"_o{OUTLETS[domain_name][0]}-{OUTLETS[domain_name][1]}_{OF.FLOW_TAG}.npz"
+        )
+    )
+    if cache.exists():
+        z = np.load(cache)
+        return xr.Dataset(
+            {
+                "storage": ("time", z["storage"]),
+                "outlet_flow": ("time", z["outlet_flow"]),
+            },
+            coords={"time": z["time"]},
+        )
     ox, oy = OUTLETS[domain_name]
     files = utils._file_locations(
         ENSEMBLE, member, domain_name, start_year, interval=INTERVAL
@@ -119,23 +247,27 @@ def read_condensed_series(domain_name, member, start_year=0):
                     .sum(dim=("x", "y", "z"), skipna=True)
                     .values.astype(np.float64)
                 )
-            flow = np.asarray(
-                ds["overland_flow"].isel(x=ox, y=oy).values, dtype=np.float64
-            )
-        n = stor.shape[0]
+        flow = OF.block_mean(OF.window_mean_outlet_flow(path, ox, oy), stride)
+        orig_n = stor.shape[0]
+        stor = stor[::stride]
         times.append(
             start_year
             + year_offset
-            + np.arange(n, dtype=np.float64) / STEPS_PER_YEAR
+            + np.arange(0, orig_n, stride, dtype=np.float64) / STEPS_PER_YEAR
         )
         storage.append(stor)
         outlet.append(flow)
+    time = np.concatenate(times)
+    storage_a = np.concatenate(storage)
+    outlet_a = np.concatenate(outlet)
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(cache, time=time, storage=storage_a, outlet_flow=outlet_a)
     return xr.Dataset(
         {
-            "storage": ("time", np.concatenate(storage)),
-            "outlet_flow": ("time", np.concatenate(outlet)),
+            "storage": ("time", storage_a),
+            "outlet_flow": ("time", outlet_a),
         },
-        coords={"time": np.concatenate(times)},
+        coords={"time": time},
     )
 
 
@@ -706,16 +838,17 @@ def fig_fractional_storage(series):
 
 
 def fig_drought_course(series, drought_length: int, outfile: str):
+    log_figure_fidelity()
     member = f"{drought_length}_year_drought"
     drought_end = SPINUP_YEARS + drought_length
     plot_end = drought_end + RECOVERY_YEARS
-    plot_start = SPINUP_YEARS - 3
+    plot_start = SPINUP_YEARS - COURSE_SPINUP_YEARS
     color = COLORS[drought_length]
 
     fig, axes = plt.subplots(
-        2, 2, figsize=(10, 6.5), sharex="col", constrained_layout=True
+        2, 2, figsize=(10, 6.9), sharex="col", constrained_layout=True
     )
-    fig.set_constrained_layout_pads(h_pad=0.06, w_pad=0.04, hspace=0.08, wspace=0.04)
+    fig.set_constrained_layout_pads(h_pad=0.06, w_pad=0.06, hspace=0.10, wspace=0.06)
 
     for col, domain_name in enumerate(DOMAINS):
         baseline = series[domain_name]["_baseline"]
@@ -735,35 +868,43 @@ def fig_drought_course(series, drought_length: int, outfile: str):
                 color="0.65",
                 lw=1.0,
                 label="baseline",
+                zorder=3,
             )
-        ax_q.plot(t, q, color=color, lw=1.4, label=f"{drought_length}-year drought")
-        ax_s.plot(t, s, color=color, lw=1.4, label=f"{drought_length}-year drought")
+        ax_q.plot(t, q, color=color, lw=1.4, label=f"{drought_length}-year drought", zorder=3)
+        ax_s.plot(t, s, color=color, lw=1.4, label=f"{drought_length}-year drought", zorder=3)
+        t_left = float(plot_start - SPINUP_YEARS)
+        t_right = float(plot_end - SPINUP_YEARS)
         for ax in (ax_q, ax_s):
-            ax.axvline(0, color="k", ls="--", lw=0.9)
-            ax.axvline(drought_length, color="k", ls=":", lw=0.9)
-            ax.axvspan(0, drought_length, color="C3", alpha=0.08)
+            shade_sequence_periods(ax, drought_length, t_left, t_right)
+            ax.axvline(0, color="k", ls="--", lw=0.9, zorder=2)
+            ax.axvline(drought_length, color="k", ls=":", lw=0.9, zorder=2)
             ax.grid(True, alpha=0.3)
             ax.ticklabel_format(axis="y", style="plain", useOffset=False)
+            ax.xaxis.set_major_locator(MultipleLocator(5))
+            ax.xaxis.set_minor_locator(MultipleLocator(1))
         ax_q.set_title(DOMAIN_LABELS[domain_name], fontsize=TITLE_FS)
         if col == 0:
             ax_q.set_ylabel("Outlet flow (m³/h)", fontsize=LABEL_FS)
             ax_s.set_ylabel("Total storage (10⁹ m³)", fontsize=LABEL_FS)
 
     fig.supxlabel("Year (from drought start)", fontsize=LABEL_FS)
+    # Single drought length: the line color is already the only series, so the
+    # legend is just baseline + period fills.
     handles = [
-        Line2D([0], [0], color=color, lw=1.4, label=f"{drought_length}-year drought"),
         Line2D([0], [0], color="0.65", lw=1.0, label="baseline"),
-        Patch(facecolor="C3", alpha=0.25, edgecolor="none", label="drought period"),
+        *sequence_period_legend_handles(include_spinup=True, include_recovery=True),
     ]
     fig.legend(
         handles=handles,
-        loc="outside upper center",
-        ncol=3,
+        loc="outside lower center",
+        bbox_to_anchor=(0.5, -0.08),
+        ncol=4,
         fontsize=LEGEND_FS,
         frameon=False,
     )
     out = FIG_DIR / outfile
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    despine_axes(fig)
+    fig.savefig(out, dpi=150, bbox_inches="tight", pad_inches=0.14)
     plt.close(fig)
     print("wrote", out)
 

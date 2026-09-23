@@ -1,0 +1,68 @@
+# Figure category membership for analysis/figures/
+#
+# "final" = selected for a condensed story deck (not fidelity).
+# "exploratory" = everything else worth keeping.
+#
+# Only list overrides / finals here. Unlisted basenames are classified by
+# analysis/figure_paths.py inference (prefix + extension rules).
+#
+# pumping_final = pumping-only story (catalog 1e-7/1e-6/1e-5; never matched).
+# comparison = drought vs domain-matched pumping (3 condensed figures).
+# Do not list drought_final's story_pumping_* names under pumping_final —
+# those stay in the drought deck.
+
+drought_final:
+  # Condensed drought story deck (make_drought_story_slides.py), including
+  # mixed / pumping-parity slides that live in that deck.
+  - ten_year_drought_streamflow_storage.png
+  - story_recovery_storage_and_wtd_maps.png
+  - story_recovery_flow_anomaly_combined.png
+  - story_overland_controls_persistence.png
+  - shallow_deep_temp_persist_partition.png
+  - story_mid_drought_regen_10yr.png
+  - story_pumping_recovery_storage_and_wtd_maps.png
+
+pumping_final:
+  - ten_year_pumping_streamflow_storage.png
+  - ten_year_pumping_streamflow_storage_by_rate.png
+  - ten_year_pumping_recovery_storage_and_wtd_maps.png
+  - ten_year_pumping_recovery_flow_anomaly.png
+  - story_mid_pump_regen_10yr.png
+
+comparison:
+  - compare_drought_pump_recovery_flow_anomaly.png
+  - compare_drought_pump_overland_controls.png
+  - compare_drought_pump_temp_persist_bars.png
+
+psa_final:
+  # Potomac sensitivity attribution manuscript figures (make_psa_paper_figures.py)
+  - psa_paper_flow_normalization.png
+  - psa_paper_flow_per_deficit.png
+  - psa_paper_flow_high_low.png
+  - psa_paper_flow_high_low_abs.png
+  - psa_paper_perched_maps.png
+  - psa_paper_recovery_budgets.png
+  - psa_paper_volume_normalized.png
+  - psa_paper_pumping_loss_frac.png
+  - psa_paper_drought_loss_frac.png
+  - psa_paper_drought_sf_per_storage.png
+  - psa_paper_recovery_mass_balance.png
+  - psa_paper_pumping_rates_recovery_flux.png
+  - psa_paper_storage_recovered.png
+
+# Optional explicit exploratory overrides (normally inferred).
+drought_exploratory:
+  # potomac_sensitivity_attribution.py (mixes drought + matched pumping)
+  - psa_flow_normalization.png
+  - psa_trait_distributions.png
+  - psa_export_attribution.png
+  - psa_ns_persistence_maps.png
+  - psa_hypothesis_bins.png
+  - psa_composition_vs_behavior.png
+  - psa_class_column_budgets.png
+  - psa_pumping_capture.png
+  # potomac_perched_lens.py (psa workstream B)
+  - psa_lens_structure.png
+  - psa_lens_drought.png
+  - psa_lens_sensitivity.png
+# pumping_exploratory: []

@@ -105,12 +105,19 @@ Derecho `cpu`/`main` walltime is typically **12 h max** — long droughts often 
 
 ### Optional: automated watchdog
 
-For unattended tip-cleanup + resubmit (narrower than this skill), see
-`ensemble_running/watchdog/README.md` (NCAR cron → Casper → Derecho).
+Unattended tip-cleanup + resubmit: `ensemble_running/watchdog/README.md`
+(NCAR cron → Casper → Derecho). Cron PATH, conda `set -u`, heartbeats, tombstones,
+and migrate coexistence are documented there — do not rediscover from memory.
 
-When reporting run status, also run
-`python3 ensemble_running/watchdog/restart_watchdog.py --list-stuck` and mention any
-`stuck_same_year` sequences (failed twice on the same tip year; not auto-resubmitted).
+When reporting run status:
+
+```bash
+python3 ensemble_running/watchdog/restart_watchdog.py --heartbeat
+python3 ensemble_running/watchdog/restart_watchdog.py --list-stuck
+```
+
+Unhealthy heartbeat is urgent (Aug 2026: cron fired, `qsub` missing, no scans).
+`stuck_same_year` = failed twice on the same tip year; not auto-resubmitted.
 
 ### 7. Report
 

@@ -8,11 +8,11 @@ No recovery years on disk yet — metrics are **during pumping** only.
 
 ## Figures
 
-- [pumping_streamflow_q_ratio.png](figures/pumping_streamflow_q_ratio.png)
-- [pumping_streamflow_q_ratio_bars.png](figures/pumping_streamflow_q_ratio_bars.png)
-- [pumping_streamflow_q_ratio_by_year.png](figures/pumping_streamflow_q_ratio_by_year.png)
-- [pumping_streamflow_dq_vs_ds.png](figures/pumping_streamflow_dq_vs_ds.png)
-- Existing context: [pumping_during_totals_and_anomalies.png](figures/pumping_during_totals_and_anomalies.png), [pumping_course_streamflow_storage.png](figures/pumping_course_streamflow_storage.png)
+- [pumping_streamflow_q_ratio.png](figures/pumping_exploratory/pumping_streamflow_q_ratio.png)
+- [pumping_streamflow_q_ratio_bars.png](figures/pumping_exploratory/pumping_streamflow_q_ratio_bars.png)
+- [pumping_streamflow_q_ratio_by_year.png](figures/pumping_exploratory/pumping_streamflow_q_ratio_by_year.png)
+- [pumping_streamflow_dq_vs_ds.png](figures/pumping_exploratory/pumping_streamflow_dq_vs_ds.png)
+- Existing context: [pumping_during_totals_and_anomalies.png](figures/pumping_exploratory/pumping_during_totals_and_anomalies.png), [pumping_course_streamflow_storage.png](figures/pumping_exploratory/pumping_course_streamflow_storage.png)
 
 ## Mean outlet Q / baseline by pump year
 

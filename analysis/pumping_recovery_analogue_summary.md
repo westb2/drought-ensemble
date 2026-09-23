@@ -17,12 +17,12 @@
 
 ## Figures
 
-- [pumping_during_totals_and_anomalies.png](figures/pumping_during_totals_and_anomalies.png)
-- [pumping_by_rate_fractional_storage.png](figures/pumping_by_rate_fractional_storage.png)
-- [pumping_course_streamflow_storage.png](figures/pumping_course_streamflow_storage.png)
-- [pumping_wtd_anomaly_maps.png](figures/pumping_wtd_anomaly_maps.png)
-- [pumping_early_buildup_storage_deficit_maps.png](figures/pumping_early_buildup_storage_deficit_maps.png)
-- [pumping_early_buildup_deficit_bars.png](figures/pumping_early_buildup_deficit_bars.png)
+- [pumping_during_totals_and_anomalies.png](figures/pumping_exploratory/pumping_during_totals_and_anomalies.png)
+- [pumping_by_rate_fractional_storage.png](figures/pumping_exploratory/pumping_by_rate_fractional_storage.png)
+- [pumping_course_streamflow_storage.png](figures/pumping_exploratory/pumping_course_streamflow_storage.png)
+- [pumping_wtd_anomaly_maps.png](figures/pumping_exploratory/pumping_wtd_anomaly_maps.png)
+- [pumping_early_buildup_storage_deficit_maps.png](figures/pumping_exploratory/pumping_early_buildup_storage_deficit_maps.png)
+- [pumping_early_buildup_deficit_bars.png](figures/pumping_exploratory/pumping_early_buildup_deficit_bars.png)
 
 ### Domain totals (10⁶ m³) — early / buildup
 

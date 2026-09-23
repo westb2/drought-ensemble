@@ -61,7 +61,7 @@ from analysis.shallow_deep_shielding import (  # noqa: E402
     spearmanr,
 )
 
-FIG_DIR = ROOT / "analysis" / "figures"
+from analysis.figure_paths import FIG_DIR, FIG_ROOT, fig_path, resolve_figure  # noqa: E402
 CACHE_DIR = FIG_DIR / "_pumping_zone_219h_cache"
 SUMMARY_MD = ROOT / "analysis" / "pumping_shallow_deep_proxies_summary.md"
 DS_SCALE = 1e6
@@ -165,7 +165,41 @@ def baseline_zone_year(domain_name: str, year_index: int) -> dict[str, np.ndarra
 
 
 def pump_zone_year(domain_name: str, rate: float, year_index: int) -> dict:
-    """Year index in [SPINUP_YEARS, SPINUP_YEARS+PUMP_YEARS)."""
+    """Year index in [SPINUP_YEARS, SPINUP_YEARS+PUMP_YEARS).
+
+    Prefer consolidated ``processed_output_219h.nc`` (has z-storage + mask). Fall
+    back to building a slim zone cache from hourly derived products when needed.
+    """
+    files_219 = utils._file_locations(
+        PUMP_ENSEMBLE, _resolve_member(rate), domain_name, 0, interval=INTERVAL
+    )
+    path_219 = Path(files_219[year_index])
+    if path_219.exists() and path_219.name.startswith("processed_output_219h"):
+        with xr.open_dataset(path_219) as ds:
+            stor = ds["subsurface_storage"]
+            mask = ds["mask"]
+            if "time" in mask.dims:
+                mask = mask.isel(time=0)
+            active = mask.any(dim="z") > 0 if "z" in mask.dims else mask > 0
+            stor = stor.where(active)
+            sh = (
+                stor.isel(z=slice(SHALLOW_Z0, None))
+                .sum(dim=("z", "y", "x"))
+                .values.astype(np.float64)
+            )
+            de = (
+                stor.isel(z=slice(0, SHALLOW_Z0))
+                .sum(dim=("z", "y", "x"))
+                .values.astype(np.float64)
+            )
+            end = stor.isel(time=-1)
+            return {
+                "shallow": sh,
+                "deep": de,
+                "shallow_map": end.isel(z=slice(SHALLOW_Z0, None)).sum(dim="z").load(),
+                "deep_map": end.isel(z=slice(0, SHALLOW_Z0)).sum(dim="z").load(),
+            }
+
     hourly = pumping_hourly_files(domain_name, rate)
     path = build_zone_219h_from_hourly(domain_name, hourly[year_index])
     with xr.open_dataset(path) as ds:
@@ -357,7 +391,7 @@ def fig_pulse_year(series_by_domain: dict, rate: float = FOCUS_RATE):
         sharex="col",
         constrained_layout=True,
     )
-    mid = 1.0  # pump year 2 of 3
+    mid = float(PUMP_YEARS // 2)  # middle pump year (0-based start)
     for col, domain_name in enumerate(DOMAINS):
         ser = series_by_domain[domain_name][rate]
         m = (ser["t"] >= mid) & (ser["t"] < mid + 1.0)
@@ -398,7 +432,7 @@ def fig_pulse_year(series_by_domain: dict, rate: float = FOCUS_RATE):
 
 
 def fig_depth_partition_bars(end_totals: dict):
-    """Stacked near-surface vs deep end-pump deficits by rate (early yr1 / end yr3)."""
+    """Stacked near-surface vs deep end-pump deficits by rate (yr1 / end stress)."""
     fig, axes = plt.subplots(
         1,
         len(DOMAINS),
@@ -414,7 +448,7 @@ def fig_depth_partition_bars(end_totals: dict):
     ]
 
     for ax, domain_name in zip(axes, DOMAINS):
-        for offset, which, alpha in ((-width / 2, "yr1", 1.0), (width / 2, "yr3", 0.95)):
+        for offset, which, alpha in ((-width / 2, "yr1", 1.0), (width / 2, "end", 0.95)):
             sh, de = [], []
             for rate in RATES:
                 tot = end_totals[domain_name][rate][which]
@@ -447,7 +481,15 @@ def fig_depth_partition_bars(end_totals: dict):
         ymax = ax.get_ylim()[1]
         for i in range(len(RATES)):
             ax.text(x[i] - width / 2, ymax * 0.02, "Y1", ha="center", va="bottom", fontsize=8, color="0.35")
-            ax.text(x[i] + width / 2, ymax * 0.02, "Y3", ha="center", va="bottom", fontsize=8, color="0.35")
+            ax.text(
+                x[i] + width / 2,
+                ymax * 0.02,
+                f"Y{PUMP_YEARS}",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                color="0.35",
+            )
 
     axes[0].set_ylabel(r"Storage deficit ($10^6$ m$^3$)", fontsize=LABEL_FS)
     fig.supxlabel("Pumping rate (m/h domain-avg)", fontsize=LABEL_FS)
@@ -455,7 +497,7 @@ def fig_depth_partition_bars(end_totals: dict):
         handles=legend_handles
         + [
             Line2D([0], [0], color="none", label="Y1 = end pump year 1"),
-            Line2D([0], [0], color="none", label="Y3 = end pump year 3"),
+            Line2D([0], [0], color="none", label=f"Y{PUMP_YEARS} = end of pumping"),
         ],
         loc="outside upper center",
         ncol=4,
@@ -667,7 +709,7 @@ def write_summary(summary: dict):
     for domain_name in DOMAINS:
         for rate in RATES:
             y1 = summary["end_totals"][domain_name][str(rate)]["yr1"]
-            y3 = summary["end_totals"][domain_name][str(rate)]["yr3"]
+            y3 = summary["end_totals"][domain_name][str(rate)]["end"]
             tot1 = y1["shallow"] + y1["deep"]
             tot3 = y3["shallow"] + y3["deep"]
             pct1 = 100.0 * y1["deep"] / max(tot1, 1e-9)
@@ -758,13 +800,14 @@ def main():
             )
 
             end_totals[domain_name][rate] = {}
-            for which, k in (("yr1", 0), ("yr3", 2)):
+            end_k = PUMP_YEARS - 1
+            for which, k in (("yr1", 0), ("end", end_k)):
                 mp = end_deficit_maps(domain_name, rate, k)
                 sh = float(np.nansum(np.maximum(mp["shallow"].values, 0.0))) * CELL_AREA_M2
                 de = float(np.nansum(np.maximum(mp["deep"].values, 0.0))) * CELL_AREA_M2
                 end_totals[domain_name][rate][which] = {"shallow": sh, "deep": de}
             if rate == FOCUS_RATE:
-                maps_focus[domain_name] = end_deficit_maps(domain_name, rate, 2)
+                maps_focus[domain_name] = end_deficit_maps(domain_name, rate, end_k)
 
     fig_mid_pump_regen(series_by_domain)
     fig_pulse_year(series_by_domain, FOCUS_RATE)
@@ -784,16 +827,16 @@ def main():
         )
         pcts = [
             100.0
-            * end_totals[domain_name][r]["yr3"]["deep"]
+            * end_totals[domain_name][r]["end"]["deep"]
             / max(
-                end_totals[domain_name][r]["yr3"]["shallow"]
-                + end_totals[domain_name][r]["yr3"]["deep"],
+                end_totals[domain_name][r]["end"]["shallow"]
+                + end_totals[domain_name][r]["end"]["deep"],
                 1e-9,
             )
             for r in RATES
         ]
         takeaways.append(
-            f"**{DOMAIN_LABELS[domain_name]}** end-yr3 deficit is "
+            f"**{DOMAIN_LABELS[domain_name]}** end-of-pump deficit is "
             f"{min(pcts):.0f}–{max(pcts):.0f}% deep across rates "
             "(extraction at layer 2; contrast drought where temporary ≈ near-surface)."
         )

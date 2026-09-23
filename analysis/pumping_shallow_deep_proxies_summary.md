@@ -24,11 +24,11 @@ fast-loss stand-in until recovery years exist.
 
 ## Figures
 
-- [pumping_shallow_deep_mid_pump_regen.png](figures/pumping_shallow_deep_mid_pump_regen.png)
-- [pumping_shallow_deep_mid_pump_year_pulse.png](figures/pumping_shallow_deep_mid_pump_year_pulse.png)
-- [pumping_shallow_deep_end_deficit_partition.png](figures/pumping_shallow_deep_end_deficit_partition.png)
-- [pumping_fast_regen_vs_deep_drawdown.png](figures/pumping_fast_regen_vs_deep_drawdown.png)
-- [pumping_shallow_deep_spatial_end_yr3.png](figures/pumping_shallow_deep_spatial_end_yr3.png)
+- [pumping_shallow_deep_mid_pump_regen.png](figures/pumping_exploratory/pumping_shallow_deep_mid_pump_regen.png)
+- [pumping_shallow_deep_mid_pump_year_pulse.png](figures/pumping_exploratory/pumping_shallow_deep_mid_pump_year_pulse.png)
+- [pumping_shallow_deep_end_deficit_partition.png](figures/pumping_exploratory/pumping_shallow_deep_end_deficit_partition.png)
+- [pumping_fast_regen_vs_deep_drawdown.png](figures/pumping_exploratory/pumping_fast_regen_vs_deep_drawdown.png)
+- [pumping_shallow_deep_spatial_end_yr3.png](figures/pumping_exploratory/pumping_shallow_deep_spatial_end_yr3.png)
 
 ## End-of-pump depth partition (% of deficit in deep)
 

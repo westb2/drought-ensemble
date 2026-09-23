@@ -8,6 +8,7 @@ and the prior early-pumping chat.
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
@@ -15,8 +16,13 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.util import Inches, Pt
 
-FIG = Path("/glade/derecho/scratch/bwest/drought-ensemble/analysis/figures")
-OUT = FIG / "pumping_vs_drought_storage_slides.pptx"
+ROOT = Path("/glade/derecho/scratch/bwest/drought-ensemble")
+sys.path.insert(0, str(ROOT))
+
+from analysis.figure_paths import FIG_ROOT, fig_path, resolve_figure  # noqa: E402
+
+FIG = FIG_ROOT
+OUT = fig_path("pumping_vs_drought_storage_slides.pptx")
 
 W, H = Inches(13.333), Inches(7.5)
 MARGIN = Inches(0.4)
@@ -83,7 +89,7 @@ def add_picture_fit(slide, path: Path, top=Inches(0.85), bottom_margin=Inches(0.
 def slide_figure(prs, title: str, filename: str):
     slide = blank_slide(prs)
     add_title_bar(slide, title)
-    add_picture_fit(slide, FIG / filename)
+    add_picture_fit(slide, resolve_figure(filename))
     return slide
 
 
@@ -277,8 +283,23 @@ def main():
     )
     slide_figure(
         prs,
-        "Pumping course (spinup → 3 yr pump)",
+        "Pumping course (spinup → 3 yr pump → 10 yr recovery)",
         "pumping_course_streamflow_storage.png",
+    )
+    slide_figure(
+        prs,
+        "Recovery after pumping: storage & flow by rate",
+        "pumping_recovery_totals_and_anomalies.png",
+    )
+    slide_figure(
+        prs,
+        "Fraction of end-pump storage deficit remaining",
+        "pumping_recovery_fractional_storage.png",
+    )
+    slide_figure(
+        prs,
+        "Temporary vs persistent (recovery year 1 on ΔS)",
+        "pumping_temp_persist_definition.png",
     )
     slide_figure(
         prs,
@@ -396,29 +417,123 @@ def main():
     )
     slide_bullets(
         prs,
-        "Outlet Q / baseline (mean)",
+        "Outlet Q / baseline (219 h mean, during pumping)",
         [
             "Low rates (1e-7): Q ≈ baseline in both domains",
             "Potomac 1e-5: yr1=0.97 → yr3=0.80; 1e-4 collapses to yr3=0.23 (p50≈0)",
             "Wolf 1e-5: yr1=0.98 → yr3=0.91; 1e-4 → yr3=0.76",
             "Unlike mid-drought, mean Q keeps falling as deep ΔS grows — capture couples storage to flow",
-            "Suppression is strongest on the body/high flows (p90 still near 1 at 1e-5); peaks are hit harder at 1e-4",
+            "219 h ratios overweight dry windows; annualized (yearly volume) is milder — next slides",
         ],
+    )
+    slide_figure(
+        prs,
+        "Annualized Q through pumping + 10-yr recovery",
+        "pumping_annualized_q_course.png",
+    )
+    slide_figure(
+        prs,
+        "Annualized Q / baseline, origin at recovery start",
+        "pumping_annualized_q_ratio_recovery.png",
+    )
+    slide_figure(
+        prs,
+        "Annualized Q / baseline at pump and recovery milestones",
+        "pumping_annualized_q_milestones.png",
+    )
+    slide_bullets(
+        prs,
+        "Annualized Q / baseline (yearly volume)",
+        [
+            "Potomac 1e-5: pump 0.99→0.89; rec yr1=0.86 then 0.92 / 0.95 at yr5 / yr10 — slow partial rebound",
+            "Potomac 1e-4: pump yr3=0.54; rec yr1–yr10 stays ~0.49 — no Q recovery in 10 years",
+            "Wolf 1e-5: 0.99→0.98 then back to 0.99 by yr10; 1e-4 residual ~0.94 through recovery",
+            "Q nadir is rec yr1, not pump-end — capture keeps biting after wells shut off",
+            "Wolf annualized Q is much more buffered than Potomac at the same domain-avg rate",
+        ],
+        footer="See pumping_annualized_q_summary.md",
+    )
+
+    # ----- Deficit type contrast -----
+    slide_section(
+        prs,
+        "7. No drought-style temporary pool",
+        "Same 3-year stress; temporary = recovered in recovery year 1",
+    )
+    slide_figure(
+        prs,
+        "Temporary vs persistent volume, and temporary fraction",
+        "pumping_vs_drought_temp_persist_bars.png",
+    )
+    slide_figure(
+        prs,
+        "Fraction of end-stress deficit remaining in recovery",
+        "pumping_vs_drought_fractional_recovery.png",
+    )
+    slide_figure(
+        prs,
+        "ΔS through recovery: drought rebounds in year 1; pumping does not",
+        "pumping_vs_drought_ds_recovery.png",
+    )
+    slide_figure(
+        prs,
+        "Where the deficit sits: drought near-surface temporary vs pumping deep persistent",
+        "pumping_vs_drought_depth_partition.png",
+    )
+    slide_bullets(
+        prs,
+        "Pumping deficits are not drought deficits",
+        [
+            "Drought has a large year-1 temporary limb (Wolf f_temp=0.82; Potomac 0.59)",
+            "Pumping 1e-5 f_temp=0.12 in both domains — little of the loss comes back in year 1",
+            "Drought deficit drops in recovery yr1 then plateaus; pumping stays near the end-stress deficit",
+            "Drought temporary mass is the top 2 m (esp. Wolf); pumping leftover is deep (layer-2 extraction)",
+            "Higher rates make this worse: 1e-4 leaves f_temp≈0.05",
+        ],
+        footer="See pumping_vs_drought_deficits_summary.md",
+    )
+    slide_figure(
+        prs,
+        "Persistent mass vs overland rank: drought concentrates, pumping does not",
+        "pumping_drainage_deficit_concentration.png",
+    )
+    slide_figure(
+        prs,
+        "Pumping 1e-5: mean persist vs log overland and vs stream distance",
+        "pumping_drainage_threshold_bins.png",
+    )
+    slide_figure(
+        prs,
+        "Mean persist vs log overland, scaled by domain mean",
+        "pumping_vs_drought_mean_persist_overland.png",
+    )
+    slide_bullets(
+        prs,
+        "Overland no longer locates the persistent mass",
+        [
+            "Drought: lowest-flow 20% of cells hold 60% (Potomac) / 40% (Wolf) of persist mass",
+            "Pumping 1e-5: those same cells hold 23% / 29% — near uniform (20%)",
+            "Potomac pumping persist even leans slightly toward higher-flow cells (ρ=+0.10)",
+            "Wolf keeps a weak low-flow slope, but the mass is not stacked in dry uplands the way drought is",
+            "Layer-2 extraction writes memory off the overland ranking that organizes drought persistence",
+        ],
+        footer="See pumping_overland_persist_summary.md",
     )
 
     # ----- Takeaways -----
-    slide_section(prs, "7. Takeaways", "What differs — and what to check with recovery")
+    slide_section(prs, "8. Takeaways", "What differs — storage type, depth, and Q")
     slide_bullets(
         prs,
         "Preliminary conclusions",
         [
-            "Pumping storage losses sit deep (≈86–100% by yr3) — opposite of drought temporary losses",
-            "Near-surface still regenerates on precip pulses; that pool is tiny vs the deep ratchet",
-            "Unlike drought, outlet Q keeps declining as deep storage builds (esp. Potomac ≥1e-5)",
-            "Shielding / Q–storage decoupling weakens when extraction is at layer 2",
-            "Next: recovery years (and layer-4 tests) for true temporary/persistent and Q rebound",
+            "Pumping has no drought-style temporary pool: year-1 recovery is a thin sliver",
+            "Pumping persist is not the drought overland pattern: near-uniform in flow rank",
+            "Losses sit deep (layer 2) even in cells that would pay drought with a near-surface skin",
+            "Unlike drought, outlet Q declines as deep storage builds — capture couples S to Q",
+            "After shutoff: Potomac 1e-5 slowly rebounds; 1e-4 Q stays ~half of baseline for 10 yr",
+            "Wolf annualized Q is weakly affected; storage memory is still mostly persistent",
         ],
-        footer="Scripts: pumping_streamflow_impact.py · pumping_shallow_deep_proxies.py · redo_pumping_recovery_analogues.py",
+        footer="Scripts: pumping_vs_drought_deficits.py · pumping_annualized_q.py · pumping_shallow_deep_proxies.py",
     )
 
     prs.save(OUT)

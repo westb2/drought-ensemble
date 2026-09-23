@@ -1,0 +1,87 @@
+#!/bin/bash
+#PBS -N huc_budyko_screen
+#PBS -A UPRI0032
+#PBS -q casper
+#PBS -m ae
+#PBS -M benjaminwest@arizona.edu
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=1:mem=16GB
+#PBS -j oe
+#PBS -o /glade/derecho/scratch/bwest/drought-ensemble/analysis/.tmp_huc_screen/pbs_huc_screen.out
+
+# Disk-safe Budyko Track A/B HUC8 screen (RSR + WTD/φ). No get_domain.
+# Resume-safe via caches under analysis/.tmp_huc_screen/.
+# Submit from Derecho login: qsub -q casper@casper-pbs analysis/screen_huc_budyko_selection.pbs
+
+set -euo pipefail
+
+ROOT="/glade/derecho/scratch/bwest/drought-ensemble"
+OUT="${ROOT}/analysis"
+CACHE="${OUT}/.tmp_huc_screen"
+mkdir -p "${CACHE}"
+
+export PATH="/glade/work/bwest/conda-envs/droughts/bin:${PATH}"
+export HF_DATA="${CACHE}/hydrodata_cache"
+mkdir -p "${HF_DATA}"
+
+stamp="$(date +%Y%m%d_%H%M%S)"
+status="${OUT}/huc_selection_job_status.md"
+log="${CACHE}/screen_${stamp}.log"
+# Keep a stable latest pointer for agents / later chats
+ln -sfn "screen_${stamp}.log" "${CACHE}/screen.log"
+
+{
+  echo "# HUC Budyko selection screen — job status"
+  echo
+  echo "| Field | Value |"
+  echo "|-------|-------|"
+  echo "| Started | $(date -Is) |"
+  echo "| Host | $(hostname) |"
+  echo "| PBS_JOBID | ${PBS_JOBID:-local} |"
+  echo "| Script | \`analysis/screen_huc_budyko_selection.py\` |"
+  echo "| Log | \`.tmp_huc_screen/screen_${stamp}.log\` |"
+  echo "| State | **RUNNING** |"
+  echo
+  echo "## Deliverables (written as the job finishes)"
+  echo
+  echo "- \`analysis/huc8_headwater_streamflow_rsr.csv\` (incremental during RSR pass)"
+  echo "- \`analysis/huc8_headwater_streamflow_sites.csv\`"
+  echo "- \`analysis/huc_selection_annotated_tracks.csv\`"
+  echo "- \`analysis/huc_selection_screen_summary.json\` (Top A/B picks)"
+  echo "- Plan / gate docs: \`analysis/budyko_huc_selection_plan.md\`,"
+  echo "  \`analysis/budyko_huc_selection_recommendation.md\` (update after job if needed)"
+} >"${status}"
+
+cd "${OUT}"
+echo "[$(date -Is)] starting screen_huc_budyko_selection.py" | tee -a "${log}"
+set +e
+python -u "${OUT}/screen_huc_budyko_selection.py" >>"${log}" 2>&1
+rc=$?
+set -e
+echo "[$(date -Is)] exit_code=${rc}" | tee -a "${log}"
+
+{
+  echo "# HUC Budyko selection screen — job status"
+  echo
+  echo "| Field | Value |"
+  echo "|-------|-------|"
+  echo "| Finished | $(date -Is) |"
+  echo "| Host | $(hostname) |"
+  echo "| PBS_JOBID | ${PBS_JOBID:-local} |"
+  echo "| Exit code | ${rc} |"
+  echo "| Log | \`.tmp_huc_screen/screen_${stamp}.log\` (also \`screen.log\` symlink) |"
+  if [[ "${rc}" -eq 0 ]]; then
+    echo "| State | **DONE** |"
+  else
+    echo "| State | **FAILED** (exit ${rc}) — check log; caches allow resume |"
+  fi
+  echo
+  echo "## Where to read results"
+  echo
+  echo "1. \`huc_selection_screen_summary.json\` — ranked Track A/B tops"
+  echo "2. \`huc_selection_annotated_tracks.csv\` — full labels + WTD/φ"
+  echo "3. \`huc8_headwater_streamflow_rsr.csv\` — RSR table"
+  echo "4. PBS stdout: \`.tmp_huc_screen/pbs_huc_screen.out\`"
+} >"${status}"
+
+exit "${rc}"

@@ -1,7 +1,7 @@
-# Restart watchdog watch list. Edit this before enabling --apply under cron.
-#
-# Cron only submits a Casper job; this file is read on Casper/Derecho where
-# GLADE is mounted. Defaults are safe: dry-run unless the PBS script passes --apply.
+# Restart watchdog watch list. Cron only submits a Casper job; this file is
+# read on Casper/Derecho where GLADE is mounted.
+# Apply vs dry-run is WATCHDOG_APPLY in watchdog.pbs (currently 1 = apply).
+# Full behavior: ensemble_running/watchdog/README.md
 
 project_root: /glade/derecho/scratch/bwest/drought-ensemble
 
@@ -45,6 +45,11 @@ safety:
   # After this many tip deletes of the *same* year index, stop auto-restart
   # (likely a repeatable error). Preserve the tip folder for inspection.
   max_tip_deletes_per_year_index: 1
+  # --heartbeat: cron status older than this is unhealthy (cron still fires every 3h).
+  max_heartbeat_age_hours: 12
+  # Force a Casper scan at least this often even when wake_state is clean / watching.
+  # Completed-scan heartbeat uses this ceiling (cron may skip Casper while jobs run).
+  max_idle_scan_hours: 24
 
 # What to watch. Omit `sequences` to include every *.json in the ensemble folder.
 watch:
@@ -52,3 +57,12 @@ watch:
     ensemble: 3_year_pumping_tests
   - domains: [potomac2, wolf2]
     ensemble: 3_year_pumping_tests_layer4
+  - domains: [potomac2, wolf2]
+    ensemble: 10_year_pumping_tests
+  # Domain-matched rates only — do not cross-submit both JSONs on both domains.
+  - domains: [potomac2]
+    ensemble: 10_year_pumping_and_drought
+    sequences: [pumping_8.64e-7_drought_10]
+  - domains: [wolf2]
+    ensemble: 10_year_pumping_and_drought
+    sequences: [pumping_2.49e-6_drought_10]

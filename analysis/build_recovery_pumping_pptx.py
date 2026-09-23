@@ -3,17 +3,20 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
-FIG_DIR = Path("/glade/derecho/scratch/bwest/drought-ensemble/analysis/figures")
-OUT = Path(
-    "/glade/derecho/scratch/bwest/drought-ensemble/analysis/"
-    "recovery_and_pumping_figures.pptx"
-)
+ROOT = Path("/glade/derecho/scratch/bwest/drought-ensemble")
+sys.path.insert(0, str(ROOT))
+
+from analysis.figure_paths import FIG_ROOT, fig_path, resolve_figure  # noqa: E402
+
+FIG_DIR = FIG_ROOT
+OUT = ROOT / "analysis" / "recovery_and_pumping_figures.pptx"
 
 # (section title, slides: (title, filename, notes))
 SECTIONS = [
@@ -199,7 +202,7 @@ def main():
     for section_title, slides in SECTIONS:
         add_section_slide(prs, section_title)
         for title, fname, notes in slides:
-            path = FIG_DIR / fname if fname else None
+            path = resolve_figure(fname) if fname else None
             if path is not None and not path.exists():
                 missing.append(str(path))
                 add_figure_slide(prs, title + " (missing)", None, f"Missing file: {path.name}\n\n{notes}")

@@ -33,29 +33,29 @@ Temporary saturates by ~10 years. Persistent keeps growing through 50 years (esp
 
 ### Recovery timeseries (by length)
 
-- [drought_recovery_totals_and_anomalies.png](figures/drought_recovery_totals_and_anomalies.png) — storage, ΔS, outlet flow, ΔQ over 5-year recovery (1/3/10/50)
-- [drought_recovery_by_length_fractional_storage.png](figures/drought_recovery_by_length_fractional_storage.png) — fraction of initial storage deficit remaining
+- [drought_recovery_totals_and_anomalies.png](figures/drought_exploratory/drought_recovery_totals_and_anomalies.png) — storage, ΔS, outlet flow, ΔQ over 5-year recovery (1/3/10/50)
+- [drought_recovery_by_length_fractional_storage.png](figures/drought_exploratory/drought_recovery_by_length_fractional_storage.png) — fraction of initial storage deficit remaining
 
 ### Drought course (+ recovery)
 
-- [ten_year_drought_streamflow_storage.png](figures/ten_year_drought_streamflow_storage.png) — last 3 spinup years → 10-year drought → recovery
-- [fifty_year_drought_streamflow_storage.png](figures/fifty_year_drought_streamflow_storage.png) — same layout for 50-year (new)
+- [ten_year_drought_streamflow_storage.png](figures/drought_final/ten_year_drought_streamflow_storage.png) — last 3 spinup years → 10-year drought → recovery
+- [fifty_year_drought_streamflow_storage.png](figures/drought_exploratory/fifty_year_drought_streamflow_storage.png) — same layout for 50-year (new)
 
 ### Spatial WTD / storage deficits
 
-- [drought_recovery_wtd_anomaly_maps.png](figures/drought_recovery_wtd_anomaly_maps.png) — ΔWTD at recovery start, +1 yr, +5 yr (rows = 1/3/10/50)
-- [drought_recovery_temp_persistent_storage_deficit_maps.png](figures/drought_recovery_temp_persistent_storage_deficit_maps.png) — temporary vs persistent storage (m water equiv.)
-- [drought_recovery_temp_persistent_wtd_deficit_maps.png](figures/drought_recovery_temp_persistent_wtd_deficit_maps.png) — same split for ΔWTD
+- [drought_recovery_wtd_anomaly_maps.png](figures/drought_exploratory/drought_recovery_wtd_anomaly_maps.png) — ΔWTD at recovery start, +1 yr, +5 yr (rows = 1/3/10/50)
+- [drought_recovery_temp_persistent_storage_deficit_maps.png](figures/drought_exploratory/drought_recovery_temp_persistent_storage_deficit_maps.png) — temporary vs persistent storage (m water equiv.)
+- [drought_recovery_temp_persistent_wtd_deficit_maps.png](figures/drought_exploratory/drought_recovery_temp_persistent_wtd_deficit_maps.png) — same split for ΔWTD
 
 ### Totals by drought length
 
-- [drought_recovery_temp_persistent_deficit_bars.png](figures/drought_recovery_temp_persistent_deficit_bars.png) — map-based domain totals
-- [drought_recovery_temp_persistent_deficit_bars_spike.png](figures/drought_recovery_temp_persistent_deficit_bars_spike.png) — fast-spike vs persistent (slow branch projected to \(t=0\))
-- [drought_recovery_temp_spike_correction.csv](figures/drought_recovery_temp_spike_correction.csv) — breakpoint fits / spike magnitudes
+- [drought_recovery_temp_persistent_deficit_bars.png](figures/drought_exploratory/drought_recovery_temp_persistent_deficit_bars.png) — map-based domain totals
+- [drought_recovery_temp_persistent_deficit_bars_spike.png](figures/drought_exploratory/drought_recovery_temp_persistent_deficit_bars_spike.png) — fast-spike vs persistent (slow branch projected to \(t=0\))
+- [drought_recovery_temp_spike_correction.csv](figures/_data/drought_recovery_temp_spike_correction.csv) — breakpoint fits / spike magnitudes
 
 ### Machine-readable totals
 
-- [drought_recovery_50yr_totals.json](figures/drought_recovery_50yr_totals.json)
+- [drought_recovery_50yr_totals.json](figures/_data/drought_recovery_50yr_totals.json)
 
 ---
 

@@ -7,9 +7,10 @@
 #PBS -l walltime=01:00:00
 #PBS -l select=1:ncpus=1:mem=4GB
 #PBS -j oe
+#PBS -o /glade/derecho/scratch/bwest/drought-ensemble/ensemble_running/watchdog/logs/
 
 # Heavy scan + optional tip cleanup + Derecho qsub. Triggered by cron_driver.sh.
-# Apply tip cleanup + Derecho resubmits. Set to 0 to force dry-run reports only.
+# Set WATCHDOG_APPLY=0 to force dry-run reports only.
 
 set -euo pipefail
 
@@ -19,8 +20,12 @@ WD="${ROOT}/ensemble_running/watchdog"
 LOGDIR="${WD}/logs"
 mkdir -p "${LOGDIR}"
 
+# The droughts env has activation hooks that reference unbound variables, so
+# `set -u` kills the job before any scan happens.
+set +u
 module load conda
 conda activate droughts
+set -u
 
 stamp="$(date +%Y%m%d_%H%M%S)"
 json_out="${LOGDIR}/summary_${stamp}.json"
@@ -34,5 +39,19 @@ if [[ "${WATCHDOG_APPLY}" == "1" ]]; then
 fi
 
 echo "[$(date -Is)] starting restart_watchdog.py ${args[*]}" | tee -a "${log}"
+
+# tee would otherwise mask a non-zero exit (e.g. the fail-closed qstat path),
+# leaving a job that looks successful while nothing was checked.
+set +e
 python3 "${WD}/restart_watchdog.py" "${args[@]}" 2>&1 | tee -a "${log}"
-echo "[$(date -Is)] done" | tee -a "${log}"
+rc=${PIPESTATUS[0]}
+set -e
+
+echo "[$(date -Is)] done rc=${rc}" | tee -a "${log}"
+
+if (( rc != 0 )); then
+  mail -s "drought-ensemble watchdog scan FAILED (rc=${rc})" benjaminwest@arizona.edu \
+    <"${log}" 2>/dev/null || echo "could not send failure mail" | tee -a "${log}"
+fi
+
+exit "${rc}"

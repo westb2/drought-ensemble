@@ -10,8 +10,15 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
-FIG = Path("/glade/derecho/scratch/bwest/drought-ensemble/analysis/figures")
-OUT = FIG / "drought_narrative_slides.pptx"
+import sys
+
+ROOT = Path("/glade/derecho/scratch/bwest/drought-ensemble")
+sys.path.insert(0, str(ROOT))
+
+from analysis.figure_paths import FIG_ROOT, fig_path, resolve_figure  # noqa: E402
+
+FIG = FIG_ROOT
+OUT = fig_path("drought_narrative_slides.pptx")
 
 # 16:9
 W, H = Inches(13.333), Inches(7.5)
@@ -76,7 +83,7 @@ def add_picture_fit(slide, path: Path, top=Inches(0.85), bottom_margin=Inches(0.
 def slide_figure(prs, title: str, filename: str):
     slide = blank_slide(prs)
     add_title_bar(slide, title)
-    add_picture_fit(slide, FIG / filename)
+    add_picture_fit(slide, resolve_figure(filename))
     return slide
 
 

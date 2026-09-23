@@ -3,9 +3,10 @@
 
 Ensemble design differences vs ``droughts``
 -------------------------------------------
-``3_year_pumping_tests``: 40 yr average spinup + **3 yr pumping** (no post-pump
-recovery years). Members vary by **rate** (``pumping_1e-7`` … ``1e-4``), not
-stress duration.
+``3_year_pumping_tests``: 40 yr average spinup + **3 yr pumping** + 10 yr
+recovery (native 219 h). This script's *during-pumping* figures still use the
+pump window only. Full pump+recovery courses live in
+``pumping_recovery_timeseries.py``.
 
 Figure mapping
 --------------
@@ -13,7 +14,7 @@ Figure mapping
 |----------------------------------------|-------------------------------------------------------|
 | Recovery totals/anomalies by length    | During-pumping totals/anomalies by **rate**           |
 | Fractional storage recovery            | Fraction of end-of-pump-yr1 deficit remaining         |
-| Drought course (10/50 yr)              | Pumping course (last 3 spinup + 3 pump years)         |
+| Drought course (10/50 yr)              | See ``pumping_recovery_timeseries.py`` (pump + 10-yr recovery) |
 | WTD maps start / +1 yr / +5 yr         | WTD maps end spinup / end pump yr1 / end pump yr3     |
 | Temp vs persist (recovery yr1 split)   | Early (end yr1) vs buildup (yr3−yr1) storage deficit  |
 
@@ -61,7 +62,9 @@ CELL_AREA_M2 = 1_000_000.0
 STREAM_COLOR = "#F0E442"
 DZ_M = np.array([1.0, 0.5, 0.25, 0.125, 0.05, 0.025, 0.005, 0.003, 0.0015, 0.0005]) * 200.0
 
-FIG_DIR = ROOT / "analysis" / "figures"
+from analysis.figure_paths import FIG_DIR, FIG_ROOT, fig_path, resolve_figure  # noqa: E402
+
+FIG_DIR_ROOT = FIG_ROOT
 CACHE_DIR = FIG_DIR / "_pumping_219h_cache"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -118,7 +121,13 @@ def pumping_hourly_files(domain_name: str, rate: float) -> list[str]:
         / _resolve_member(rate)
         / "file_locations.json"
     )
-    return json.loads(meta.read_text())
+    files = json.loads(meta.read_text())
+    need = SPINUP_YEARS + PUMP_YEARS
+    if len(files) < need:
+        raise RuntimeError(
+            f"{domain_name}/{_resolve_member(rate)}: need {need} years, got {len(files)}"
+        )
+    return files[:need]
 
 
 def baseline_219h_files(domain_name: str) -> list[str]:
@@ -493,11 +502,14 @@ def fig_course(series):
 
 
 def fig_wtd_maps(paths, landscape):
-    col_keys = ("pre", "yr1", "yr3")
+    i_pre = SPINUP_YEARS - 1
+    i_yr1 = SPINUP_YEARS
+    i_end = SPINUP_YEARS + PUMP_YEARS - 1
+    col_keys = ("pre", "yr1", "end")
     col_titles = {
         "pre": "End of spinup\n(pre-pumping)",
         "yr1": "End pump year 1",
-        "yr3": "End pump year 3",
+        "end": f"End pump year {PUMP_YEARS}",
     }
     anoms = {}
     for d in DOMAINS:
@@ -505,11 +517,10 @@ def fig_wtd_maps(paths, landscape):
         bpaths = baseline_219h_files(d)
         for rate in RATES:
             pp = paths[d][rate]
-            # pre = year 39 last; yr1 = year 40; yr3 = year 42
             trip = {
-                "pre": read_wtd(pp[39]) - read_wtd(Path(bpaths[39])),
-                "yr1": read_wtd(pp[40]) - read_wtd(Path(bpaths[40])),
-                "yr3": read_wtd(pp[42]) - read_wtd(Path(bpaths[42])),
+                "pre": read_wtd(pp[i_pre]) - read_wtd(Path(bpaths[i_pre])),
+                "yr1": read_wtd(pp[i_yr1]) - read_wtd(Path(bpaths[i_yr1])),
+                "end": read_wtd(pp[i_end]) - read_wtd(Path(bpaths[i_end])),
             }
             anoms[d][rate] = trip
             print(f"WTD {d} {RATE_LABELS[rate]} done", flush=True)
@@ -520,7 +531,7 @@ def fig_wtd_maps(paths, landscape):
     all_vals = []
     for d in DOMAINS:
         streams, active = landscape[d]
-        sample = anoms[d][RATES[0]]["yr3"].values
+        sample = anoms[d][RATES[0]]["end"].values
         align = sample.shape[0] > sample.shape[1]
         prepared = {}
         for rate in RATES:
@@ -530,7 +541,7 @@ def fig_wtd_maps(paths, landscape):
                 )
                 v = prepared[(rate, key)][0]
                 all_vals.append(v[np.isfinite(v)])
-        z0, _ = prepared[(RATES[0], "yr3")]
+        z0, _ = prepared[(RATES[0], "end")]
         prep[d] = {"maps": prepared, "aspect": z0.shape[1] / max(z0.shape[0], 1)}
 
     vmax = float(np.nanpercentile(np.abs(np.concatenate(all_vals)), 98))
@@ -583,16 +594,22 @@ def fig_wtd_maps(paths, landscape):
 
 
 def early_buildup_pair(domain_name: str, paths_rate: list[Path], bpaths: list[str]):
-    """Early = deficit end yr1; buildup = additional by end yr3."""
-    d1 = read_col_storage_m(paths_rate[40])
-    b1 = read_col_storage_m(Path(bpaths[40]))
-    d3 = read_col_storage_m(paths_rate[42])
-    b3 = read_col_storage_m(Path(bpaths[42]))
+    """Early = deficit end yr1; buildup = additional by end of pumping."""
+    i1 = SPINUP_YEARS
+    i_end = SPINUP_YEARS + PUMP_YEARS - 1
+    d1 = read_col_storage_m(paths_rate[i1])
+    b1 = read_col_storage_m(Path(bpaths[i1]))
+    d_end = read_col_storage_m(paths_rate[i_end])
+    b_end = read_col_storage_m(Path(bpaths[i_end]))
     def1 = b1 - d1
-    def3 = b3 - d3
+    def_end = b_end - d_end
     early = xr.apply_ufunc(np.maximum, def1, 0.0)
-    buildup = xr.apply_ufunc(np.maximum, def3 - def1, 0.0)
-    return {"early": early, "buildup": buildup, "total": xr.apply_ufunc(np.maximum, def3, 0.0)}
+    buildup = xr.apply_ufunc(np.maximum, def_end - def1, 0.0)
+    return {
+        "early": early,
+        "buildup": buildup,
+        "total": xr.apply_ufunc(np.maximum, def_end, 0.0),
+    }
 
 
 def fig_early_buildup_maps(paths, landscape):
@@ -610,7 +627,7 @@ def fig_early_buildup_maps(paths, landscape):
     col_keys = ("early", "buildup")
     col_titles = {
         "early": "Early deficit\n(end of pump year 1)",
-        "buildup": "Buildup\n(additional by end year 3)",
+        "buildup": f"Buildup\n(additional by end year {PUMP_YEARS})",
     }
     nrows = len(RATES)
     n_map_cols = len(DOMAINS) * len(col_keys)
@@ -723,7 +740,7 @@ def main():
     landscape = {d: stream_mask(d) for d in DOMAINS}
     fig_totals_and_anomalies(series)
     fig_fractional(series)
-    fig_course(series)
+    # Course with 10-yr recovery is owned by pumping_recovery_timeseries.py
     fig_wtd_maps(paths, landscape)
     deficits = fig_early_buildup_maps(paths, landscape)
     fig_early_buildup_bars(deficits)

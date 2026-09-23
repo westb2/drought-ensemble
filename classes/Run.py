@@ -64,8 +64,10 @@ class Run:
         for year in range(self.number_of_years):
             sub_sequence = {
                 "name": self.sequence["name"],
-                "years": self.sequence["years"][:year+1]
+                "years": self.sequence["years"][:year+1],
             }
+            if self.pumping_layer != 2:
+                sub_sequence["pumping_layer"] = self.pumping_layer
             run_folder = self.get_run_folder_from_sequence(sub_sequence)
             output_folders.append(run_folder)
         return output_folders
@@ -77,13 +79,20 @@ class Run:
         return sequence
 
 
+    def _pumping_layer_for(self, sequence):
+        """Prefer the sequence dict so sub-year hashes match the parent run."""
+        if isinstance(sequence, dict) and "pumping_layer" in sequence:
+            return int(sequence["pumping_layer"])
+        return int(self.pumping_layer)
+
     def sequence2string(self, sequence):
         years = sequence["years"]
         sequence_string = "_".join([f"{year['wetness']}_{year['pumping_rate_fraction']}_{year['irrigation']}" for year in years])
-        if self.pumping_layer != 2:
+        pumping_layer = self._pumping_layer_for(sequence)
+        if pumping_layer != 2:
             exists_pumping_in_run = sum(1 for year in years if year["pumping_rate_fraction"] > 0.0) > 0
             if exists_pumping_in_run:
-                sequence_string = sequence_string + f"_pumping_layer_{self.pumping_layer}"
+                sequence_string = sequence_string + f"_pumping_layer_{pumping_layer}"
         return sequence_string
 
 
@@ -105,7 +114,51 @@ class Run:
         return self.output_reader
 
     def run_exists(self):
-        return os.path.exists(self.get_run_folder_from_sequence(self.sequence))   
+        return os.path.exists(self.get_run_folder_from_sequence(self.sequence))
+
+    def year_output_complete(self):
+        """True when this year's ParFlow NetCDF has a full stop_time of hours."""
+        run_dir = self.get_run_folder_from_sequence(self.sequence)
+        nc = os.path.join(run_dir, "run.out.00001.nc")
+        if os.path.exists(nc):
+            try:
+                from netCDF4 import Dataset
+
+                with Dataset(nc, "r") as ds:
+                    ntime = len(ds.dimensions["time"]) if "time" in ds.dimensions else 0
+                return ntime >= int(self.domain.stop_time)
+            except Exception:
+                return False
+        return os.path.exists(os.path.join(run_dir, "processed_output.nc"))
+
+    def _is_safe_year_dir(self, path):
+        """Guard for rmtree: only ever a raw_runs/<sha256> folder of this domain."""
+        path = os.path.normpath(path)
+        expected_parent = os.path.normpath(os.path.join(self.output_root, "raw_runs"))
+        name = os.path.basename(path)
+        return (
+            os.path.dirname(path) == expected_parent
+            and len(name) == 64
+            and all(c in "0123456789abcdef" for c in name)
+        )
+
+    def _later_year_exists(self, year):
+        for later in range(year + 1, self.number_of_years):
+            later_sequence = {
+                "name": self.sequence["name"],
+                "years": self.sequence["years"][: later + 1],
+            }
+            if self.pumping_layer != 2:
+                later_sequence["pumping_layer"] = self.pumping_layer
+            later_run = Run(
+                sequence=later_sequence,
+                domain=self.domain,
+                output_root=self.output_root,
+                netcdf_output=self.netcdf_output,
+            )
+            if later_run.run_exists():
+                return True
+        return False 
 
     def create_initial_pressure_file_from_netcdf(self, previous_run_dir):
         run_output = xarray.open_dataset(os.path.join(previous_run_dir, f"run.out.00001.nc"))
@@ -119,8 +172,10 @@ class Run:
         # Create a sub-sequence with all years except the last one
         previous_sequence = {
             "name": self.sequence["name"],
-            "years": self.sequence["years"][:-1]
+            "years": self.sequence["years"][:-1],
         }
+        if self.pumping_layer != 2:
+            previous_sequence["pumping_layer"] = self.pumping_layer
         previous_run = Run(sequence=previous_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
         # left justify to get the last timestamp with up to 4 0s
         ending_timestamp = str(int(self.domain.num_output_files)).zfill(5)
@@ -137,19 +192,35 @@ class Run:
             # Create a sub-sequence with only the years up to the current year
             sub_sequence = {
                 "name": self.sequence["name"],
-                # "pumping_layer": self.pumping_layer,
-                "years": self.sequence["years"][:year+1]
+                "years": self.sequence["years"][:year+1],
             }
+            if self.pumping_layer != 2:
+                sub_sequence["pumping_layer"] = self.pumping_layer
             sub_run = Run(sequence=sub_sequence, domain=self.domain, output_root=self.output_root, netcdf_output=self.netcdf_output)
-            if not sub_run.run_exists():
-                print(f"Running year {year} of the run in {sub_run.get_run_folder()}")
-                self.append_run_log(f"Running year {year} of the run in {sub_run.get_run_folder()}")
-                if year>0:
-                    sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
-                else:
-                    sub_run.run_year()
+            run_folder = sub_run.get_run_folder()
+            if sub_run.run_exists():
+                if sub_run.year_output_complete():
+                    print(f"Year {year} of the run already exists in {run_folder}")
+                    continue
+                # A later year can only exist if this year once read back a full
+                # pressure series, so leave it alone rather than stranding it.
+                if self._later_year_exists(year):
+                    print(f"Year {year} is incomplete but later years exist; leaving {run_folder}")
+                    self.append_run_log(
+                        f"Year {year} incomplete but later years exist: {run_folder}"
+                    )
+                    continue
+                if not self._is_safe_year_dir(run_folder):
+                    raise RuntimeError(f"refusing to delete unexpected year path {run_folder}")
+                print(f"Year {year} is incomplete; removing {run_folder} and re-running")
+                self.append_run_log(f"Removing incomplete year {year} in {run_folder}")
+                shutil.rmtree(run_folder)
+            print(f"Running year {year} of the run in {run_folder}")
+            self.append_run_log(f"Running year {year} of the run in {run_folder}")
+            if year>0:
+                sub_run.run_year(INITIAL_PRESSURE_FILE = sub_run.get_initial_pressure_file())
             else:
-                print(f"Year {year} of the run already exists in {sub_run.get_run_folder()}")
+                sub_run.run_year()
         print(f"Running {self.sequence2string(self.sequence)}")
         self.append_run_log(f"Finished running full sequence with final year output in {self.get_run_folder()}")
         

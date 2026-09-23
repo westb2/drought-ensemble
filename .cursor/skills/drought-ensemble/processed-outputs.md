@@ -37,6 +37,14 @@ domains/<domain>/processed_full_runs/<ensemble>/<member>/
 
 Legacy notebooks often used `isel(time=slice(None, None, 219))` or `168` — those are **snapshots**, not window means/sums. Prefer on-disk consolidation.
 
+**Lying aggregation tags (verified 22 Sep 2026):** catalog
+`10_year_pumping_tests/pumping_1e-{7,6,5,4}` years **43–49** store end-of-window
+`overland_flow` **snapshots** while the variable attribute still says window
+mean. Matched rates and all drought/baseline/3-yr files are true means.
+Do **not** trust the attribute alone — use `analysis/outlet_flow.window_mean_outlet_flow`
+(rebuilds from `derived_hourly.nc` when needed) or re-run
+`analysis/.tmp_psa/detect_snapshots.py` → `figures/_data/overland_flow_aggregation_audit.json`.
+
 ## Aggregation rules (in `processed_output_219h.nc`)
 
 | Variables | Op | Notes |

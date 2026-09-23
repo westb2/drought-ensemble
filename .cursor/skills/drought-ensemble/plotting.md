@@ -1,8 +1,16 @@
 # Paper figure conventions (drought-ensemble)
 
 Canonical analysis notebook: `analysis/drought_recovery_comparison.ipynb`  
-Figure output dir: `analysis/figures/`  
-Prefer **219 h** condensed products (`interval=219`, `file_locations_219h.json`).
+Figure output dir: `analysis/figures/` with category subfolders (`drought_final/`,
+`pumping_final/`, `comparison/`, `psa_final/`, `drought_exploratory/`, `pumping_exploratory/`,
+plus `decks/`, `_data/`, `_reports/`, `_cache/`, `_scratch/`).  
+**Membership:** `analysis/FIGURE_CATEGORIES.yaml` + `analysis/figure_paths.py`
+(`FIG_DIR / "name.png"` to write, `resolve_figure("name.png")` to read).  
+`pumping_final/` = catalog-rate pumping story (`make_pumping_final_figures.py`);
+`comparison/` = drought vs matched (`make_comparison_figures.py`). See
+`analysis/pumping_story_set_summary.md` and
+`analysis/comparison_story_set_summary.md`. Prefer **219 h**
+condensed products (`interval=219`, `file_locations_219h.json`).
 
 ## Domain display names
 
@@ -81,22 +89,30 @@ ax.ticklabel_format(axis="y", style="plain", useOffset=False)
 
 ## Colors and drought annotations
 
-Drought-length colors (longest = darkest / driest):
+Drought-length colors (longest = darkest / driest) — a **sequential** brown
+scale for an ordered factor. Use this family for 1 / 3 / 10 / 50 yr; do **not**
+swap the longest length to an unrelated categorical color (e.g. pure black or
+purple) when comparing drought lengths:
 
 ```python
 COLORS = {1: "#E8C39E", 3: "#B86B2B", 10: "#4A2410", 50: "#140A05"}
 ```
 
-- Baseline on absolute panels: grey (`"0.65"` / `"0.75"`)
-- Drought window shading (match earlier 4-panel style):  
-  `ax.axvspan(t0, t1, color="C3", alpha=0.08)`
-- Mark drought start/end with vertical lines (`ls="--"`, `ls=":"`)
-- Include a legend patch for the shade:
+**Encoding (see also `paper-figures` skill):** vary **one** channel per factor.
+Same marker (and linestyle) across drought lengths; distinguish lengths with
+the brown sequence above. Use a categorical hue (e.g. purple
+`STORY_PUMP_COLORS` / `#7B3294`) only when the series is a different *type*
+(matched pumping vs drought), not as a step on the drought-length scale.
 
-```python
-from matplotlib.patches import Patch
-Patch(facecolor="C3", alpha=0.25, edgecolor="none", label="drought period")
-```
+- Baseline on absolute panels: grey (`"0.65"` / `"0.75"`)
+- Drought window shading on **course** plots is the three-period fill
+  (`shade_sequence_periods`): Okabe–Ito orange spinup `#E69F00`, C3 pink
+  drought, sky blue recovery `#9ECAE1`. Do **not** use olive/khaki for spinup
+  (unsafe next to red under deuteranopia).
+- Fills must run **flush to the axis frame** (no white x-margin).
+- Mark drought start/end with vertical lines (`ls="--"`, `ls=":"`)
+- Include a legend patch for each shaded period
+- Hide **top and right** spines (`despine_axes`); leave colorbars boxed
 
 On streamflow “course” plots it is OK to **omit baseline on flow** while keeping baseline on storage, when the user wants that emphasis.
 
@@ -214,11 +230,178 @@ Shared `YlOrBr` scale. Stream overlay same as other map grids.
 Deck: `make_drought_narrative_slides.py` → `drought_narrative_slides.pptx`  
 Order: **1 Results → 2 Overland covariates → 3 Local Budyko → 4 Depth mechanism**.
 
+## Condensed story deck (learned Aug 2026)
+
+Short talk version: **7 figures + title** (drought + pumping parity).
+PNGs: `make_story_figures.py` (etc.) → `figures/drought_final/`.
+Deck file: `figures/decks/drought_story_slides.pptx` via `make_drought_story_slides.py`.
+**Authoritative handoff:** [`drought_story_deck_summary.md`](../../../analysis/drought_story_deck_summary.md)
+(slide numbering, colors, layout params, reproduce commands).
+
+### Decks: only on request
+
+**Never rebuild PowerPoint decks automatically** after regenerating PNGs.
+Stop at the PNG (and index/YAML updates). Run `make_drought_story_slides.py`,
+`make_drought_narrative_slides.py`, `make_pumping_vs_drought_slides.py`, or other
+`*.pptx` builders **only when the user explicitly asks** to update / rebuild the
+deck. Prefer linking and discussing the PNGs in-editor.
+
+- Half the deck **reuses canonical PNGs unchanged** (slide 2 course; slide 6 partition
+  uses `fig_aggregate_partition` with **deck-specific** blue/purple + T/P styling).
+- Merged figures get `story_*.png` files. Do not duplicate plotting code — import loaders
+  from canonical scripts so numbers cannot drift.
+- **Deck-only pumping colors** in `make_story_figures.py` (`STORY_PUMP_COLORS` purple
+  sequential). Do **not** reuse `pumping_recovery_timeseries.COLORS` (same browns as drought).
+- **Every reply about story slides** must include a numbered 8-slide list with PNG links
+  (see the handoff).
+- **Draft vs final:** `FIGURE_FIDELITY` defaults to `draft` (stride 4). User “final /
+  high-fidelity” → `FIGURE_FIDELITY=final`. Draft misses Q peaks — slide 4 yearly-mean
+  Q must be rebuilt at final. Cache: `analysis/.tmp_figure_cache/`. Rebuilding PNGs at
+  final fidelity still does **not** imply rebuilding the pptx unless asked.
+- **Spines:** `despine_axes` / `_save_fig` hide top and right on plot axes.
+- **Legends at the bottom** of story-deck figures (`_legend_bottom` /
+  `loc="outside lower center"`). Domain / panel **titles stay on top**.
+  Single-length courses (slides 2, 7) omit the drought-length line from the
+  legend (period fills + baseline only).
+
+### Slides 2 & 7 — period backgrounds
+
+- Orange spinup (3 yr) / pink drought / blue recovery via `shade_sequence_periods`.
+- Slide 7 uses `spinup_years=COURSE_SPINUP_YEARS` so the orange band is visible.
+- Flush to xlim; no white buffer at the axis edges.
+- Legend under the plots; no “10-year drought” handle (only one line).
+
+### Slide 4 — flow anomaly lines
+
+- `fig_recovery_flow_anomaly_combined` uses **`_plot_recovery_flow_on_axes`** /
+  **`_plot_pumping_flow_on_axes`** (yearly-mean % anomaly; markers via
+  `_length_marker_style` / `_rate_marker_style`).
+- Drought row: years 1–5. Pumping row: years 1–10.
+- Explicit `fig.subplots_adjust` + **dual bottom legends**; inter-row x-label in axis gap.
+- Catalog `story_recovery_flow_anomaly.png` remains the drought-only line plot.
+
+### Slides 3 & 8 — storage + map composites
+
+```python
+STORAGE_MAPS_FIG_H = 7.4
+STORAGE_MAPS_BAND_Y = (0.78, 4.05)
+STORAGE_MAPS_DS_BOTTOM = (STORAGE_MAPS_BAND_Y[1] + 0.38) / STORAGE_MAPS_FIG_H
+STORAGE_MAPS_DS_HEIGHT = 0.32
+```
+
+- `_domain_band_map_grid(..., col_titles_at_bottom=True, stream_legend_pos="below")`.
+- ΔS temp/persist labels in axis **top corners** (white bbox), not on lines.
+- Series legend at figure bottom (`bbox_to_anchor=(0.47, 0.01)`); titles on ΔS axes.
+- Slide 8 pumping ΔS: focus rate **1e-5 only** on top panel.
+
+### Slide 6 — partition bars (`fig_aggregate_partition`)
+
+- **Deep bottom, near-surface top.** Blue = temporary (left), purple = persistent (right).
+- **T / P** above bars; legend: depth swatches + T/P definitions at figure bottom.
+- Colors: temp `#C6DBEF`/`#2171B5`, persist `#DCCCE5`/`#7B3294`.
+
+### Overlap policy
+
+User requires **no overlapping text/figures**. After layout edits, visually check PNGs
+or bbox-test legends vs axis titles. Prefer inch-based layout over `constrained_layout`
+when placing `fig.text` or stacked outside legends.
+
+### Pitfalls hit here
+
+- **Shared y-axis clipping.** `axes[1,1].sharey(axes[1,0])` silently clipped
+  Wolf's −11% flow-anomaly points off the bottom. When sharing an anomaly row
+  across domains, set an explicit range from **all** plotted values.
+- **`ax.set_title` does not clear a `twiny` label.** Either put the title on the
+  twin axes (`ax2.set_title`) or drop the twin axis label and let a coloured tick
+  scale plus the legend identify the curve.
+- **Overland-vs-persist figures need `flow > 0`.** `drought_recovery_drainage_*`
+  have **no surviving source script**; rebuild from
+  `wtd_threshold_vs_overland.load_bundle_lean` + `cell_table` and exclude cells
+  with zero baseline overland flow, which reproduces the published **54% / 42%**
+  lowest-quintile mass shares (keeping them gives 65% for Potomac).
+- **Sub-annual ΔQ is storm-peak noise.** For "streamflow recovered but storage
+  did not", use **yearly-mean Q as % of baseline** (`_annual_flow_anomaly`).
+  (The old "Potomac yr 1 overshoots by ~21–25%" was the near-dry config outlet cell.)
+- **Outlet flow: use `analysis/outlet_flow.py`.** `analysis_outlet(d)` (Potomac
+  mainstem (63, 129), not config (66, 135)); `window_mean_outlet_flow(path, x, y)`
+  (catalog `10_year_pumping_tests` years 43–49 store snapshots despite a "mean"
+  tag — rebuilt from `derived_hourly.nc`; audit in
+  `figures/_data/overland_flow_aggregation_audit.json`); `block_mean(q, stride)`
+  for draft. Never subsample flux series or rebuild Q from pressure snapshots.
+- **Flow legend ↔ markers** (line catalog figures): use `_length_marker_style` /
+  `_rate_marker_style` for plotted points and legend handles.
+- **Map column headers above Potomac** overlapped ΔS panels — use
+  `col_titles_at_bottom=True`.
+- **Stream legend in Wolf ΔS panel** — use `stream_legend_pos="below"`.
+- **Pumping ΔS composite:** plot **focus rate only** on top panel; 1e-4 crushes y.
+- **Olive/green spinup next to drought red** fails CVD — use Okabe–Ito orange `#E69F00`.
+- **Draft time-stride** block-averages Q (yearly means exact); hydrograph peaks are smoothed — use final for slide 2.
+- **`_save_fig` recursion:** the helper must call `fig.savefig`, not `_save_fig`.
+
+## Condensed pumping story set (learned Sep 2026)
+
+Pumping-only figures in `figures/pumping_final/` (**no pptx** until asked).
+**Authoritative handoff:**
+[`pumping_story_set_summary.md`](../../../analysis/pumping_story_set_summary.md).
+
+Builder: `analysis/make_pumping_final_figures.py`.
+
+### Focus science
+
+- **All panels** use catalog **`1e-7` / `1e-6` / `1e-5`**.
+- **Never** plot domain-matched rates here — those belong in `comparison/`.
+- Courses / mid-regen / recovery windows use **5 recovery years**.
+- WTD map band on the recovery composite stays at **`1e-6`** (ΔS shows all rates).
+
+### Style
+
+| Series | Style |
+|--------|--------|
+| `1e-6` / catalog rates | Purple `STORY_PUMP_COLORS`, **solid**, `lw=1.5` |
+
+### Naming / membership
+
+- Write via `FIG_DIR` with basenames listed under `pumping_final` in
+  `FIGURE_CATEGORIES.yaml`.
+- **Never** reassign `story_pumping_*` into `pumping_final`.
+
+### When discussing
+
+Numbered list of all **5** `pumping_final` PNGs with links (see handoff).
+
+### Pitfalls
+
+- Rate labels: explicit map — `f"{r:.0e}"` rounds `8.64e-7` → `9e-7`.
+- `make_10yr_pumping_story_figures.py` is stress-only; prefer
+  `make_pumping_final_figures.py` for the condensed set.
+
+## Comparison set (drought vs matched pumping)
+
+`figures/comparison/` — condensed **3 figures** (flow anomaly, overland,
+temp/persist bars). Matched rates only (Potomac `8.64e-7`, Wolf `2.49e-6`) vs
+`droughts/10_year_drought`. **Handoff:**
+[`comparison_story_set_summary.md`](../../../analysis/comparison_story_set_summary.md).
+Builder: `make_comparison_figures.py`.
+
+### Style
+
+| Figure | Encoding |
+|--------|----------|
+| Flow + bars | Domain browns drought / purple `#7B3294` matched |
+| Overland | **Color = domain** (`#009E73` Potomac / `#56B4E9` Wolf); **dash = stress** (solid drought / dashed matched); no markers on cumulative curves; circles on bin panel |
+
+Do **not** put catalog `1e-6` on comparison panels. Do **not** flip overland to
+color=stress unless the user asks (tried and reverted Sep 22).
+
+### When discussing
+
+Numbered list of all **3** `comparison/` PNGs with links (see handoff).
+
 ## Figure index (required)
 
 Canonical catalog: **`analysis/FIGURES_INDEX.md`**.
 
-**Whenever you create, rename, replace, or delete a figure under `analysis/figures/`, update `FIGURES_INDEX.md` in the same turn** (filename, one-line description, script if known, deck section if any). Look up the index before regenerating analyses that may already exist.
+**Whenever you create, rename, replace, or delete a figure under `analysis/figures/`, update `FIGURES_INDEX.md` in the same turn** (filename, one-line description, script if known, deck section if any). If it belongs in a condensed deck, also add the basename under the right key in `FIGURE_CATEGORIES.yaml`. Look up the index before regenerating analyses that may already exist.
 
 ## Checklist before saving
 
@@ -228,10 +411,12 @@ Canonical catalog: **`analysis/FIGURES_INDEX.md`**.
 4. No `suptitle` for paper figures; legend outside top (paper maps: Stream above cbar; slide maps: Stream at bottom)
 5. Labels/legend larger than tick numbers (larger still for Word/doc map figures)
 6. Storage scaled; no colliding offset text
-7. Drought shade + legend patch when a drought window is shown
-8. Anomaly-row zeros aligned across domains when comparison matters
-9. Write under `analysis/figures/` at dpi≈150–160
-10. **Update `analysis/FIGURES_INDEX.md`**
+7. Drought / spinup / recovery shade + legend patches when a sequence window is shown  
+8. Anomaly-row zeros aligned across domains when comparison matters  
+9. Top/right spines off (`despine_axes`); colorbars keep their box  
+10. Write via `analysis.figure_paths.FIG_DIR / "name.png"` (lands in the right category) at dpi≈150–160  
+11. One visual channel per factor; drought lengths use the sequential brown `COLORS` (not categorical jumps)  
+12. **Update `analysis/FIGURES_INDEX.md`** (and `FIGURE_CATEGORIES.yaml` if final)
 
 ## Reference figures (short list)
 
